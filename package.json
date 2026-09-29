@@ -1,0 +1,18 @@
+{
+  "name": "zhong-art",
+  "private": true,
+  "workspaces": ["apps/web", "apps/admin", "apps/server"],
+  "scripts": {
+    "infra:up": "docker compose up -d --wait",
+    "infra:down": "docker compose down",
+    "db:migrate": "npm run db:migrate --workspace @zhong-art/server",
+    "db:seed": "npm run db:seed --workspace @zhong-art/server",
+    "dev": "concurrently -n api,web,admin -c blue,green,magenta \"npm run dev --workspace @zhong-art/server\" \"npm run dev --workspace @zhong-art/web\" \"npm run dev --workspace @zhong-art/admin\"",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "keycloak:validate": "./infra/keycloak/validate.sh"
+    ,"smoke:integration": "npm run smoke:integration --workspace @zhong-art/server"
+  },
+  "devDependencies": { "concurrently": "^9.2.1" }
+}

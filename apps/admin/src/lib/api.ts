@@ -1,0 +1,2 @@
+const baseUrl=(import.meta.env.VITE_API_URL||'http://localhost:4000').replace(/\/$/,'')
+export async function adminRequest<T>(path:string,token:string,init?:RequestInit):Promise<T>{const response=await fetch(`${baseUrl}${path}`,{...init,headers:{'content-type':'application/json',authorization:`Bearer ${token}`,...init?.headers}});if(!response.ok){const body=await response.json().catch(()=>({})) as {error?:string};throw new Error(body.error||`HTTP ${response.status}`)}return response.status===204?undefined as T:response.json() as Promise<T>}
