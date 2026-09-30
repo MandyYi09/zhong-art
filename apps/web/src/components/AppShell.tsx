@@ -1,31 +1,36 @@
-import { Link, useRouterState } from '@tanstack/react-router'
-import { BookHeart, Box, Languages, Menu, Sparkles, UserRound, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { Link, useLocation } from '@tanstack/react-router'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getKeycloak, initializeAuth } from '@/lib/auth'
-import { Button } from './ui'
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const { t, i18n } = useTranslation()
-  const path = useRouterState({ select: (state) => state.location.pathname })
-  const [open, setOpen] = useState(false)
-  const [authenticated, setAuthenticated] = useState(false)
-  useEffect(() => { initializeAuth().then(setAuthenticated).catch(() => setAuthenticated(false)) }, [])
-  useEffect(() => { document.documentElement.lang = i18n.language === 'en' ? 'en' : 'zh-Hant' }, [i18n.language])
-  const toggleLanguage = () => { const next = i18n.language === 'en' ? 'zh-TW' : 'en'; void i18n.changeLanguage(next); localStorage.setItem('zhong-locale', next) }
-  const links = [{ to: '/', label: t('draw'), icon: Sparkles }, { to: '/collection', label: t('collection'), icon: BookHeart }, { to: '/create', label: t('create'), icon: Box }]
+  const { i18n } = useTranslation()
+  const pathname = useLocation({ select: location => location.pathname })
+  const en = i18n.language === 'en'
+  useEffect(() => { document.documentElement.lang = en ? 'en' : 'zh-Hans' }, [en])
+  const toggleLanguage = () => {
+    const next = en ? 'zh-TW' : 'en'
+    void i18n.changeLanguage(next)
+    localStorage.setItem('zhong-locale', next)
+  }
+  const navigation = [
+    { to: '/' as const, zh: '首页', en: 'Home', shortEn: 'Home', active: pathname === '/' },
+    { to: '/draw' as const, zh: '每日抽卡', en: 'Daily Draw', shortEn: 'Draw', active: pathname === '/draw' },
+    { to: '/collection' as const, zh: '原画画册', en: 'Atlas', shortEn: 'Atlas', active: pathname === '/collection' || pathname.startsWith('/card/') },
+    { to: '/create' as const, zh: '重新构图', en: 'Compose', shortEn: 'Compose', active: pathname === '/create' },
+    { to: '/about' as const, zh: '关于作品', en: 'About', shortEn: 'About', active: pathname === '/about' },
+  ]
+
   return <div className="app-shell">
     <header className="site-header">
-      <Link to="/" className="wordmark" aria-label={t('brand')}><span className="seal">吉</span><span><strong>{t('brand')}</strong><small>{t('tagline')}</small></span></Link>
-      <nav className="desktop-nav" aria-label="Primary">{links.map(({ to, label, icon: Icon }) => <Link key={to} to={to} className={path === to ? 'nav-link active' : 'nav-link'}><Icon size={16}/>{label}</Link>)}</nav>
-      <div className="header-actions">
-        <Button variant="ghost" onClick={toggleLanguage} aria-label={t('language')}><Languages size={17}/>{i18n.language === 'en' ? '繁中' : 'EN'}</Button>
-        <Button variant="outline" onClick={() => authenticated ? void getKeycloak().logout({ redirectUri: `${location.origin}/` }) : void getKeycloak().login({ redirectUri: `${location.origin}/` })}><UserRound size={16}/>{authenticated ? t('signOut') : t('signIn')}</Button>
-        <Button variant="ghost" className="menu-button" onClick={() => setOpen(!open)} aria-label={t('menu')}>{open ? <X/> : <Menu/>}</Button>
-      </div>
+      <Link to="/" className="wordmark" aria-label={en ? 'Yitang, home' : '吉光，首页'}>
+        <span className="wordmark-seal">吉</span><span>YITANG <small>水陆画的另一种看法</small></span>
+      </Link>
+      <nav className="site-nav" aria-label={en ? 'Main navigation' : '主导航'}>
+        {navigation.map(item => <Link key={item.to} to={item.to} className={`site-nav-link${item.active ? ' is-active' : ''}`} aria-current={item.active ? 'page' : undefined}><span className="nav-full-label">{en ? item.en : item.zh}</span><span className="nav-mobile-label">{en ? item.shortEn : item.zh}</span></Link>)}
+      </nav>
+      <button className="language-button" type="button" onClick={toggleLanguage} aria-label={en ? 'Switch to Chinese' : 'Switch to English'}>{en ? '中' : 'EN'}</button>
     </header>
-    {open && <nav className="mobile-nav">{links.map(({ to, label, icon: Icon }) => <Link key={to} to={to} onClick={() => setOpen(false)}><Icon size={18}/>{label}</Link>)}</nav>}
     <main>{children}</main>
-    <footer><div><span className="seal small">吉</span><p>{t('footer')}</p></div><small>{t('rights')}</small></footer>
+    <footer className="site-footer"><span>YITANG · 2026</span><span>{en ? 'A way into Water-and-Land paintings' : '从一张画，开始看'}</span></footer>
   </div>
 }

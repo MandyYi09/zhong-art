@@ -1,11 +1,23 @@
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
-import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { createFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { GuardianCarousel } from '@/components/GuardianCarousel'
-import { GuardianArtwork } from '@/components/GuardianArtwork'
-import { Badge, Button } from '@/components/ui'
-import { api } from '@/lib/api'
-import type { GuardianCard } from '@/lib/types'
+import { GuardianGallery } from '@/components/GuardianGallery'
+
 export const Route = createFileRoute('/')({ component: HomePage })
-function HomePage() { const { t,i18n }=useTranslation(); const navigate=useNavigate(); const locale=i18n.language==='en'?'en':'zh-TW'; const[cards,setCards]=useState<GuardianCard[]>([]); const[error,setError]=useState(''); const[drawing,setDrawing]=useState(false); useEffect(()=>{api.cards().then(setCards).catch(()=>setError(t('loadFailed')))},[t]); const preview=cards.length?cards[Number(new Date().toISOString().slice(0,10).replaceAll('-',''))%cards.length]:null; const draw=async()=>{setDrawing(true);setError('');try{const{card}=await api.draw();void navigate({to:'/card/$cardId',params:{cardId:card.id}})}catch{setError(t('loadFailed'))}finally{setDrawing(false)}}; return <><section className="hero page-width"><div className="hero-copy"><Badge><Sparkles size={13}/>{t('heroEyebrow')}</Badge><h1>{t('heroTitle')}</h1><p>{t('heroBody')}</p><Button className="draw-button" onClick={draw} disabled={drawing||!preview}>{drawing?t('loading'):t('drawNow')}<ArrowRight size={18}/></Button><span className="trust-note"><CheckCircle2 size={15}/>{t('curatedNote')}</span>{error&&<p className="form-error" role="alert">{error}</p>}</div><GuardianCarousel/></section>{preview&&<section className="preview-band"><div className="page-width preview-grid"><div><span className="section-kicker">{t('todayGuardian')}</span><h2>{preview.epithet[locale]}</h2><p>「{preview.blessing[locale]}」</p></div><div className="mini-card"><GuardianArtwork card={preview}/><div><small>NO. {String(preview.number).padStart(2,'0')}</small><strong>{preview.name[locale]}</strong><span>{preview.keywords[locale].join(' · ')}</span></div></div><Link to="/card/$cardId" params={{cardId:preview.id}} className="text-link">{t('readStory')}<ArrowRight size={17}/></Link></div></section>}</> }
+
+function HomePage() {
+  const { i18n } = useTranslation()
+  const en = i18n.language === 'en'
+
+  return <section className="opening-scene">
+    <div className="opening-copy">
+      <p className="overline">YITANG · {en ? 'A WAY INTO THE PAINTING' : '从一张画，开始看'}</p>
+      <h1>{en ? <>Look closer.<br/><em>Something will appear.</em></> : <>先别急着看懂。<br/><em>靠近一点。</em></>}</h1>
+      <p className="opening-instruction">{en ? 'Move a figure. Part the clouds. Follow whatever catches your eye.' : '移动人物，拨开云层。从吸引你的地方开始。'}</p>
+    </div>
+    <div className="living-painting">
+      <GuardianGallery/>
+      <span className="living-corner living-corner-left" aria-hidden="true"/>
+      <span className="living-corner living-corner-right" aria-hidden="true"/>
+    </div>
+  </section>
+}

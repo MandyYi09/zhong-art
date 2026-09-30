@@ -5,7 +5,7 @@ import '@/lib/i18n'
 import '@/styles.css'
 
 export const Route = createRootRoute({
-  head: () => ({ meta: [{ charSet: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { title: '吉光 Auspicious Light' }, { name: 'description', content: 'A daily guardian card experience inspired by Chinese Water-and-Land paintings.' }] }),
+  head: () => ({ meta: [{ charSet: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { title: 'YITANG 吉光 · 从一张画开始看' }, { name: 'description', content: 'An interactive way to look closer at twenty Water-and-Land painting images.' }] }),
   component: () => <RootDocument><AppShell><Outlet/></AppShell></RootDocument>,
 })
 

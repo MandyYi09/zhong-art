@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import guardians from '@/lib/cloud-court-guardians.json'
 
 const labels = {
-  'zh-TW': { title: '雲庭 · 守護之境', names: ['天穹守護', '碧玉守護', '焰光守護'], elements: ['星辰與遠方', '清風與初心', '勇氣與光明'], previous: '上一位守護', next: '下一位守護', pause: '暫停輪播', play: '播放輪播', hint: '古老筆觸，在此刻甦醒。' },
-  en: { title: 'THE CLOUD COURT', names: ['The Celestial', 'The Jade', 'The Flame'], elements: ['Sky & possibility', 'Wind & intention', 'Courage & light'], previous: 'Previous guardian', next: 'Next guardian', pause: 'Pause carousel', play: 'Play carousel', hint: 'Old pigments. A new moment of wonder.' },
+  'zh-TW': { title: '雲庭 · 細看人物', names: ['人物一', '人物二', '人物三'], elements: ['先看神態', '再看衣紋', '留意持物'], previous: '上一位人物', next: '下一位人物', pause: '暫停輪播', play: '播放輪播', hint: '從原畫出發，讓舊筆觸動起來。' },
+  en: { title: 'THE CLOUD COURT', names: ['Figure I', 'Figure II', 'Figure III'], elements: ['Look at the face', 'Look at the robe', 'Look at the object'], previous: 'Previous figure', next: 'Next figure', pause: 'Pause carousel', play: 'Play carousel', hint: 'Old brushstrokes in motion.' },
 }
 
 function PaintedGuardian({ guardian, animate }: { guardian: typeof guardians[number]; animate: boolean }) {
