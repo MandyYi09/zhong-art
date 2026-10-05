@@ -60,3 +60,26 @@
 @media(max-width:950px){.site-header{grid-template-columns:130px 1fr 36px;gap:12px}.site-nav{gap:clamp(8px,1.3vw,15px)}.site-nav-link{font-size:11px}.wordmark small{letter-spacing:.08em}}
 @media(max-width:700px){.site-header{grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:12px 8px;padding:10px 16px 0}.site-nav{grid-column:1/-1;grid-row:2;width:100%;justify-content:space-between;gap:3px;min-height:44px}.site-nav-link{font-size:11px;letter-spacing:0;padding:7px 3px 13px}.site-nav-link.is-active:after{bottom:0}.site-header>.language-button{grid-column:2;grid-row:1}.nav-full-label{display:none}.nav-mobile-label{display:inline}.draw-workspace{grid-template-columns:1fr;gap:42px}.daily-card{width:min(70vw,340px)}.draw-side{width:100%;margin:auto}.draw-heading{margin:40px auto 32px}}
 @media(max-width:390px){.site-nav-link{font-size:10px;padding-inline:1px}.draw-page{padding-inline:17px}.draw-topline{font-size:9px}.daily-card{width:min(76vw,330px)}}
+
+.daily-card{display:block;border:0;text-align:left;color:var(--chalk);overflow:hidden;cursor:pointer}
+.daily-card:hover{transform:rotate(-2deg) translateY(-5px)}
+.daily-card-character,.daily-card-original{position:relative;width:100%;height:100%;overflow:hidden;animation:card-appear .55s ease-out both}
+.daily-card-character{background:radial-gradient(circle at 50% 37%,#3b6962 0,#1b4248 45%,#102a34 78%)}
+.daily-card-character:after{content:'';position:absolute;inset:8px;border:1px solid #d7c99b99;pointer-events:none}
+.daily-character-index{position:absolute;top:18px;left:21px;z-index:3;color:#e8dbb9;font-size:9px;letter-spacing:.19em}
+.daily-character-halo{position:absolute;top:14%;left:10%;width:80%;aspect-ratio:1;border:1px solid #d6c98b66;border-radius:50%;box-shadow:0 0 0 13px #d6c98b18,0 0 0 37px #d6c98b0b}
+.daily-card-character img{position:absolute;z-index:2;top:4%;left:5%;width:90%;height:72%;object-fit:contain;background:transparent;filter:drop-shadow(0 10px 11px #0615189c);animation:none}
+.daily-card-message{position:absolute;z-index:3;left:0;right:0;bottom:28px;min-height:112px;padding:24px 24px 10px;background:linear-gradient(transparent,#102a32 25%,#102a32 100%);display:flex;flex-direction:column;justify-content:flex-end;gap:8px;text-align:center}
+.daily-card-message small{color:#cdbb8c;font-size:9px;letter-spacing:.21em}
+.daily-card-message strong{color:#f3ead4;font:500 clamp(16px,1.45vw,19px)/1.55 'Noto Serif TC',serif}
+.daily-card-hint{position:absolute;z-index:4;bottom:8px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:5px;color:#dce5d2;font-size:11px;letter-spacing:.05em}
+.daily-card-original{display:flex;flex-direction:column;background:#173538}
+.daily-card-original img{width:100%;height:calc(100% - 29px);object-fit:contain;background:#173538}
+.daily-card-original span{display:grid;place-items:center;height:29px;background:#1d3438;color:#e2d5b6;font-size:9px;letter-spacing:.2em}
+.daily-card-character:focus-visible,.daily-card-original:focus-visible{outline:2px solid #ead7a6}
+.daily-card-character+.daily-card-hint{pointer-events:none}
+.draw-reset{display:flex;align-items:center;gap:8px;margin-top:20px;padding:3px 0;border:0;background:transparent;color:#aebead;font-size:11px}
+.draw-reset:hover{color:#eee2c6}
+.draw-blessing{margin:0 0 24px;padding:4px 0 4px 18px;border-left:2px solid #cdbb8c;color:#ebdfbf;font:500 clamp(20px,2vw,27px)/1.65 'Noto Serif TC',serif}
+@media(max-width:700px){.daily-card-message{min-height:112px}.daily-card-character img{height:73%}}
+@media(max-width:390px){.daily-card-message{padding-inline:14px}.daily-card-message strong{font-size:17px}.daily-card-hint{font-size:10px}}
