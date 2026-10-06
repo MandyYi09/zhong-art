@@ -16,6 +16,5 @@ export const resources = {
   } },
 } as const
 
-const stored = typeof window !== 'undefined' ? window.localStorage.getItem('zhong-locale') : null
-void i18n.use(initReactI18next).init({ resources, lng: stored === 'en' ? 'en' : 'zh-TW', fallbackLng: 'zh-TW', interpolation: { escapeValue: false } })
+void i18n.use(initReactI18next).init({ resources, lng: 'en', fallbackLng: 'en', interpolation: { escapeValue: false } })
 export default i18n

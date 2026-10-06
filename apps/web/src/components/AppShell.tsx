@@ -6,31 +6,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { i18n } = useTranslation()
   const pathname = useLocation({ select: location => location.pathname })
   const en = i18n.language === 'en'
-  useEffect(() => { document.documentElement.lang = en ? 'en' : 'zh-Hans' }, [en])
+  useEffect(() => { document.documentElement.lang = en ? 'en' : 'zh-Hant' }, [en])
   const toggleLanguage = () => {
     const next = en ? 'zh-TW' : 'en'
     void i18n.changeLanguage(next)
-    localStorage.setItem('zhong-locale', next)
   }
   const navigation = [
     { to: '/' as const, zh: '首页', en: 'Home', shortEn: 'Home', active: pathname === '/' },
     { to: '/draw' as const, zh: '每日抽卡', en: 'Daily Draw', shortEn: 'Draw', active: pathname === '/draw' },
     { to: '/collection' as const, zh: '原画画册', en: 'Atlas', shortEn: 'Atlas', active: pathname === '/collection' || pathname.startsWith('/card/') },
     { to: '/create' as const, zh: '重新构图', en: 'Compose', shortEn: 'Compose', active: pathname === '/create' },
-    { to: '/about' as const, zh: '关于作品', en: 'About', shortEn: 'About', active: pathname === '/about' },
   ]
 
   return <div className="app-shell">
-    <header className="site-header">
-      <Link to="/" className="wordmark" aria-label={en ? 'Yitang, home' : '吉光，首页'}>
-        <span className="wordmark-seal">吉</span><span>YITANG <small>水陆画的另一种看法</small></span>
-      </Link>
-      <nav className="site-nav" aria-label={en ? 'Main navigation' : '主导航'}>
-        {navigation.map(item => <Link key={item.to} to={item.to} className={`site-nav-link${item.active ? ' is-active' : ''}`} aria-current={item.active ? 'page' : undefined}><span className="nav-full-label">{en ? item.en : item.zh}</span><span className="nav-mobile-label">{en ? item.shortEn : item.zh}</span></Link>)}
-      </nav>
-      <button className="language-button" type="button" onClick={toggleLanguage} aria-label={en ? 'Switch to Chinese' : 'Switch to English'}>{en ? '中' : 'EN'}</button>
-    </header>
+    <button className="language-button floating-language" type="button" onClick={toggleLanguage} aria-label={en ? 'Switch to Chinese' : 'Switch to English'} title={en ? 'Switch to Chinese' : '切換至英文'}><span className={!en ? 'is-current' : undefined} aria-hidden="true">中</span><span className="language-divider" aria-hidden="true">/</span><span className={en ? 'is-current' : undefined} aria-hidden="true">EN</span></button>
+    <nav className="page-dock" aria-label={en ? 'Main navigation' : '主导航'}>
+      {navigation.map(item => <Link key={item.to} to={item.to} className={`page-dock-link${item.active ? ' is-active' : ''}`} aria-current={item.active ? 'page' : undefined}><span className="nav-full-label">{en ? item.en : item.zh}</span><span className="nav-mobile-label">{en ? item.shortEn : item.zh}</span></Link>)}
+    </nav>
     <main>{children}</main>
-    <footer className="site-footer"><span>YITANG · 2026</span><span>{en ? 'A way into Water-and-Land paintings' : '从一张画，开始看'}</span></footer>
+    <footer className="site-footer"><span className="footer-note">{en ? 'A way into Water-and-Land paintings' : '从一张画，开始看'}</span></footer>
   </div>
 }
