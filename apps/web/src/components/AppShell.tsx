@@ -15,6 +15,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     { to: '/' as const, zh: '首页', en: 'Home', shortEn: 'Home', active: pathname === '/' },
     { to: '/draw' as const, zh: '每日抽卡', en: 'Daily Draw', shortEn: 'Draw', active: pathname === '/draw' },
     { to: '/collection' as const, zh: '原画画册', en: 'Atlas', shortEn: 'Atlas', active: pathname === '/collection' || pathname.startsWith('/card/') },
+    { to: '/path' as const, zh: '我的路径', en: 'My Path', shortEn: 'Path', active: pathname === '/path' },
     { to: '/create' as const, zh: '重新构图', en: 'Compose', shortEn: 'Compose', active: pathname === '/create' },
   ]
 
