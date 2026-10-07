@@ -21,7 +21,7 @@ function DrawPage() {
     <div className="draw-heading"><span className="overline">{en ? 'ONE IMAGE EACH DAY' : '每日抽卡'}</span><h1>{en ? <>Today, meet<br/><em>one painting.</em></> : <>今天，<br/><em>遇见一幅画。</em></>}</h1><p>{en ? 'A character card, a small blessing, and the painting it came from.' : '先遇见角色与一句祝福，再回到它来自的原画。'}</p></div>
     <div className="draw-workspace">
       <button className={`daily-card daily-card-${phase}`} type="button" onClick={nextPhase} aria-label={phase === 'sealed' ? (en ? 'Turn today’s card' : '翻开今日卡片') : phase === 'character' ? (en ? 'View the original painting' : '查看对应原画') : (en ? 'Return to the character card' : '回到角色卡')}>
-        {phase === 'sealed' && <div className="daily-card-back" aria-hidden="true"><span>吉</span><small>YITANG · NO. {String(daily.index).padStart(2, '0')}</small></div>}
+        {phase === 'sealed' && <div className="daily-card-back" aria-hidden="true"><span className={en ? 'english-word' : undefined}>{en ? 'LUCK' : '吉'}</span><small>YITANG · NO. {String(daily.index).padStart(2, '0')}</small></div>}
         {phase === 'character' && <div className="daily-card-character">
           <span className="daily-character-index">YITANG · {String(daily.index).padStart(2, '0')} / 20</span>
           <span className="daily-character-halo" aria-hidden="true"/>

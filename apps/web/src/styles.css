@@ -105,3 +105,14 @@
 .site-footer .footer-note{margin-left:auto;text-align:right}
 .figure-selector button:hover,.figure-selector button.selected{opacity:1;transform:translateY(-4px);border-color:#d4c597}
 .choice-chips button{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;background:#1b292b;border:1px solid rgba(232,220,188,.2);color:#c8d0c1;font-size:11px}
+.daily-card-back .english-word{font:500 clamp(54px,7vw,85px)/1 Georgia,serif;letter-spacing:.07em}
+
+.clue-response.has-detail{max-width:450px;min-height:0;margin:24px 0 30px;padding:23px 25px 20px;border:1px solid rgba(219,213,184,.22);border-left:2px solid #c9d9b6;background:rgba(22,40,43,.72);color:#e5e9d8}
+.clue-response-eyebrow{display:block;margin-bottom:8px;color:#a7baa5;font:10px/1.5 'Plus Jakarta Sans',sans-serif;letter-spacing:.18em}
+.clue-response h3{margin:0 0 18px;color:#ebead6;font:24px/1.4 'Noto Serif TC',serif;font-weight:500}
+.clue-response p{margin:0 0 16px}
+.clue-response p strong{display:block;margin-bottom:5px;color:#b8d3b3;font:11px/1.5 'Plus Jakarta Sans','Noto Serif TC',sans-serif;font-weight:600;letter-spacing:.08em}
+.clue-response .clue-observation,.clue-response .clue-meaning{font-size:14px;line-height:1.85}
+.clue-response .clue-question{margin:18px 0 14px;padding-top:15px;border-top:1px solid rgba(219,213,184,.18);color:#e1cda5;font-size:13px}
+.clue-source{display:block;color:#9fac9e;font:11px/1.7 'Noto Serif TC',serif}
+@media(max-width:700px){.clue-response.has-detail{padding:19px 18px}.clue-response h3{font-size:22px}}
