@@ -8,3 +8,5 @@
 
 :root{--bg:#101d20}main{max-width:none;padding:0}.scroll{height:600px;min-height:0}.controls{padding:22px 0 16px;border-bottom:0}.characters{flex:1;justify-content:space-between;padding-right:20px}.guardian-button>span:nth-child(2){font-size:15px}.character-symbol{width:43px;height:49px}.guardian-button small{font-size:9px}.scene-top,.scene-bottom{font-size:10px}.scene-index{font-size:21px}.vertical-poem{font-size:21px}.key{display:none}.world-controls{gap:6px}.wind-control{width:85px;margin-right:0}.announcement{font-size:12px;bottom:90px}body{overflow:hidden}
 @media(max-width:1050px){.scroll{height:500px}.world-controls{display:none}.characters{padding-right:0}.controls{padding-top:18px}.guardian-button>span:nth-child(2){font-size:14px}}
+.scene-index{letter-spacing:.22em}.vertical-poem.is-english{writing-mode:horizontal-tb;width:150px;text-align:right;font:14px/1.8 Georgia,serif;letter-spacing:.18em}
+@media(max-width:800px){.vertical-poem.is-english{right:18px;width:115px;font-size:11px}}

@@ -181,3 +181,20 @@
 @media(max-width:800px){.path-stop:nth-child(even){margin-left:0}}
 @media(max-width:700px){.page-dock{grid-template-columns:repeat(5,minmax(0,1fr))}.viewing-path-page{padding:75px 18px 120px}.path-heading{margin:45px auto 40px}.path-trail{padding-left:24px}.path-stop{grid-template-columns:120px minmax(0,1fr);gap:15px;padding:12px 28px 12px 12px}.path-stop>.detail-crop{width:120px}.path-stop-number{left:-62px;font-size:14px}.path-stop-number i{left:39px}.path-stop-copy{padding-top:0}.path-stop-copy h2{font-size:19px}.path-stop-copy p{font-size:11px}.path-stop-actions{gap:10px}.path-stop-actions a{font-size:10px}}
 @media(max-width:480px){.path-stop{grid-template-columns:95px minmax(0,1fr);gap:12px}.path-stop>.detail-crop{width:95px}.path-stop-copy h2{font-size:17px}.path-stop-copy .overline{font-size:8px}.path-stop-number{left:-59px}.comparison-pair figcaption span{font-size:10px}.composition-from-detail{padding:10px}.composition-from-detail .detail-crop{width:68px;height:68px}.composition-from-detail strong{font-size:17px}}
+
+.blessing-option{display:flex;align-items:flex-start;gap:13px;width:100%;padding:15px 16px;border:1px solid rgba(222,215,185,.28);background:#1b3030;cursor:pointer}
+.blessing-option:has(input:checked){border-color:#d9c99f;background:#223a36}
+.blessing-option input{flex:none;width:18px;height:18px;margin:2px 0 0;accent-color:#d8c9a1;cursor:pointer}
+.blessing-option>span{display:flex;flex-direction:column;gap:7px}
+.blessing-option strong{color:#e7e5d3;font:500 14px/1.5 'Noto Serif TC',serif}
+.blessing-option small{color:#a8bba9;font-size:10px;letter-spacing:.04em}
+.blessing-choice-preview{margin:14px 0 0;padding:0 0 0 13px;border-left:1px solid #d4c499;color:#ddceab;font:14px/1.8 'Noto Serif TC',serif}
+.composition-art{width:min(100%,410px);aspect-ratio:6/13}
+.composition-art:after{background:linear-gradient(180deg,rgba(8,30,35,.68),rgba(8,30,35,.5) 16%,transparent 32%,transparent 58%,rgba(8,26,29,.78))}
+.composition-caption{margin-right:max(0px,calc((100% - 410px)/2))}
+.composition-blessing{position:absolute;z-index:9;left:7.8%;bottom:12.5%;width:78%;color:#f2ead6;text-shadow:0 2px 18px rgba(5,23,25,.9),0 2px 4px rgba(5,23,25,.85)}
+.composition-art.has-focus .composition-blessing{width:54%}
+.composition-blessing p{margin:0;font:500 clamp(16px,1.5vw,18px)/1.55 'Noto Serif TC','Songti SC',Georgia,serif}
+.wallpaper-hint{margin:11px 0 0;color:#afbead;font-size:10px;line-height:1.6}
+@media(max-width:480px){.composition-blessing p{font-size:clamp(15px,4.4vw,18px)}}
+.stage-inscription.is-english{width:116px;writing-mode:horizontal-tb;text-align:right;font:10px/1.6 Georgia,serif;letter-spacing:.15em}

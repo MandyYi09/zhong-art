@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Cloud Court · Interactive guardians</title><link rel="stylesheet" href="scene.css"><script src="scene.js" defer></script></head><body><main>    <section class="scroll" aria-label="Interactive guardian painting">
-      <div class="scene-top"><span><i class="live-dot"></i> <span id="scene-status">THE COURT IS DREAMING</span></span><span class="scene-index">雲 庭 · 一</span></div>
+      <div class="scene-top"><span><i class="live-dot"></i> <span id="scene-status">THE COURT IS DREAMING</span></span><span class="scene-index" id="scene-index">CLOUD COURT · I</span></div>
       <canvas id="scene" tabindex="0" aria-label="Three animated painted figures among clouds. Drag a figure to move it. Click to awaken it. Use the buttons below for keyboard access."></canvas>
-      <div class="loading" id="loading"><span class="seal">雲</span><p>Unrolling the clouds…</p></div>
-      <div class="vertical-poem" aria-hidden="true">雲起時 · 萬象生</div>
+      <div class="loading" id="loading"><span class="seal" id="loading-seal">☁</span><p>Unrolling the clouds…</p></div>
+      <div class="vertical-poem is-english" id="scene-poem" aria-hidden="true">CLOUDS RISE · ALL THINGS AWAKEN</div>
       <div class="scene-bottom"><span id="hint">DRAG A FIGURE <b>·</b> TAP TO AWAKEN <b>·</b> STIR THE SKY</span><button id="fullscreen" title="Toggle fullscreen" aria-label="Toggle fullscreen">⛶</button></div>
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
     </section>

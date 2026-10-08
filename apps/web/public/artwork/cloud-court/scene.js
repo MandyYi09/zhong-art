@@ -1,6 +1,14 @@
 (() => {
   'use strict';
   const $ = s => document.querySelector(s);
+  const sceneLanguage = new URLSearchParams(location.search).get('lang') === 'zh-TW' ? 'zh-TW' : 'en';
+  document.documentElement.lang = sceneLanguage === 'en' ? 'en' : 'zh-Hant';
+  if (sceneLanguage === 'zh-TW') {
+    $('#scene-index').textContent = '雲 庭 · 一';
+    $('#scene-poem').textContent = '雲起時 · 萬象生';
+    $('#scene-poem').classList.remove('is-english');
+    $('#loading-seal').textContent = '雲';
+  }
   const canvas = $('#scene'), ctx = canvas.getContext('2d');
   const TAU = Math.PI * 2, reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let width = 1200, height = 600, dpr = 1, time = 0, last = 0, paused = reducedMotion.matches, wind = .35;

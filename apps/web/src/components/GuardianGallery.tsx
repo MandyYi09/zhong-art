@@ -15,6 +15,6 @@ export function GuardianGallery() {
 
   return <div className={`guardian-gallery ${mobile ? 'gallery-mobile' : 'gallery-desktop'}`}>
     {mobile === true && <GuardianCarousel/>}
-    {mobile === false && <iframe className="cloud-court-scene" src="/artwork/cloud-court/scene.html" title={i18n.language === 'en' ? 'The Cloud Court: three animated figures among painted clouds' : '雲庭：三位畫中人物與流動的彩雲'} allow="fullscreen" />}
+    {mobile === false && <iframe className="cloud-court-scene" src={`/artwork/cloud-court/scene.html?lang=${i18n.language === 'en' ? 'en' : 'zh-TW'}`} title={i18n.language === 'en' ? 'The Cloud Court: three animated figures among painted clouds' : '雲庭：三位畫中人物與流動的彩雲'} allow="fullscreen" />}
   </div>
 }
