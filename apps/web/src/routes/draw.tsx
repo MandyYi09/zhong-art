@@ -25,7 +25,7 @@ function DrawPage() {
         {phase === 'character' && <div className="daily-card-character">
           <span className="daily-character-index">YITANG · {String(daily.index).padStart(2, '0')} / 20</span>
           <span className="daily-character-halo" aria-hidden="true"/>
-          <img src={daily.character} alt={en ? `Illustrated character adapted from painting ${daily.id}` : `根据原画 ${daily.id} 绘制的角色形象`}/>
+          <img src={daily.character} onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = `/paintings/character/${encodeURIComponent(daily.id)}.webp` }} alt={en ? `Illustrated character adapted from painting ${daily.id}` : `根据原画 ${daily.id} 绘制的角色形象`}/>
           <span className="daily-card-message"><small>{en ? 'A WISH FOR TODAY' : '今日祝福'}</small><strong>{blessing}</strong></span>
           <span className="daily-card-hint">{en ? 'Tap the card to see the original' : '轻触卡片 · 翻看原画'} <ArrowRight size={14}/></span>
         </div>}
