@@ -2,7 +2,17 @@ import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import guardians from '@/lib/cloud-court-guardians.json'
-import { publicAsset } from '@/lib/assets'
+import celestialPreview from '@/assets/guardian-celestial-inline.webp?inline'
+import jadePreview from '@/assets/guardian-jade-inline.webp?inline'
+import flamePreview from '@/assets/guardian-flame-inline.webp?inline'
+
+// Keep the mobile hero independent of separate image requests. These small
+// previews render at the canvas's display size and are bundled with the JS.
+const previews: Record<string, { src: string; width: number; height: number }> = {
+  'guardian-celestial.jpg': { src: celestialPreview, width: 1124, height: 1912 },
+  'guardian-jade.jpg': { src: jadePreview, width: 1128, height: 1870 },
+  'guardian-flame.jpg': { src: flamePreview, width: 1094, height: 1918 },
+}
 
 const labels = {
   'zh-TW': { title: '雲庭 · 細看人物', inscription: '雲起時 · 萬象生', names: ['人物一', '人物二', '人物三'], elements: ['先看神態', '再看衣紋', '留意持物'], previous: '上一位人物', next: '下一位人物', pause: '暫停輪播', play: '播放輪播', hint: '從原畫出發，讓舊筆觸動起來。' },
@@ -11,6 +21,8 @@ const labels = {
 
 function PaintedGuardian({ guardian, animate }: { guardian: typeof guardians[number]; animate: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null)
+  const [rendered, setRendered] = useState(false)
+  const preview = previews[guardian.file]
   useEffect(() => {
     const canvas = ref.current
     if (!canvas) return
@@ -41,27 +53,39 @@ function PaintedGuardian({ guardian, animate }: { guardian: typeof guardians[num
     }
     image.onload = () => {
       if (disposed) return
-      const [x, y, width, height] = guardian.bounds
-      texture = document.createElement('canvas')
-      texture.width = width
-      texture.height = height
-      const paint = texture.getContext('2d')!
-      paint.translate(-x, -y)
-      paint.save()
-      paint.clip(new Path2D(guardian.outline))
-      paint.drawImage(image, 0, 0)
-      paint.restore()
-      paint.globalCompositeOperation = 'destination-out'
-      guardian.holes.forEach(hole => paint.fill(new Path2D(hole)))
-      render(performance.now())
+      try {
+        const [x, y, width, height] = guardian.bounds
+        texture = document.createElement('canvas')
+        texture.width = width
+        texture.height = height
+        const paint = texture.getContext('2d')
+        if (!paint) return
+        paint.translate(-x, -y)
+        paint.save()
+        paint.clip(new Path2D(guardian.outline))
+        paint.drawImage(image, 0, 0, preview.width, preview.height)
+        paint.restore()
+        paint.globalCompositeOperation = 'destination-out'
+        guardian.holes.forEach(hole => paint.fill(new Path2D(hole)))
+        render(performance.now())
+        setRendered(true)
+      } catch {
+        // Some embedded mobile browsers fail to create the clipped canvas.
+        // The still image remains visible instead of leaving an empty stage.
+        texture = null
+        setRendered(false)
+      }
     }
     const refresh = () => { cancelAnimationFrame(frame); render(performance.now()) }
     motion.addEventListener('change', refresh)
     document.addEventListener('visibilitychange', refresh)
-    image.src = publicAsset(`artwork/cloud-court/${guardian.file}`)
+    image.src = preview.src
     return () => { disposed = true; cancelAnimationFrame(frame); motion.removeEventListener('change', refresh); document.removeEventListener('visibilitychange', refresh) }
   }, [guardian, animate])
-  return <canvas ref={ref} width={420} height={560} className="painted-guardian" aria-hidden="true" />
+  return <>
+    {!rendered && <img className="guardian-fallback" src={preview.src} alt="" aria-hidden="true" />}
+    <canvas ref={ref} width={420} height={560} className="painted-guardian" aria-hidden="true" />
+  </>
 }
 
 export function GuardianCarousel() {
