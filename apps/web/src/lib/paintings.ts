@@ -42,7 +42,7 @@ export const paintings: Painting[] = paintingFiles.map((id, index) => ({
   index: index + 1,
   original: publicAsset(`paintings/original/${encodeURIComponent(id)}.webp`),
   thumbnail: publicAsset(`paintings/thumb/${encodeURIComponent(id)}.webp`),
-  character: publicAsset(`paintings/character-modern/${encodeURIComponent(id)}.webp`),
+  character: publicAsset(`paintings/character-web/${encodeURIComponent(id)}.webp`),
   blessing: blessings[id],
 }))
 
