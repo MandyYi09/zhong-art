@@ -1,4 +1,5 @@
 import type { Painting } from './paintings'
+import { publicAsset } from './assets'
 import type { ClueKey } from './paintingClues'
 
 export type WallpaperSource = 'original' | 'character'
@@ -180,7 +181,7 @@ function drawWallpaper(ctx: CanvasRenderingContext2D, width: number, height: num
 }
 
 export async function renderWallpaper(canvas: HTMLCanvasElement, painting: Painting, options: WallpaperOptions) {
-  const characterFallback = `/paintings/character/${encodeURIComponent(painting.id)}.webp`
+  const characterFallback = publicAsset(`paintings/character/${encodeURIComponent(painting.id)}.webp`)
   const image = options.source === 'character'
     ? await loadImage(painting.character).catch(() => loadImage(characterFallback))
     : await loadImage(painting.original)

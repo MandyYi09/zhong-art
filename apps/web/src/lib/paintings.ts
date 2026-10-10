@@ -40,9 +40,9 @@ const blessings: Record<PaintingId, { zh: string; en: string }> = {
 export const paintings: Painting[] = paintingFiles.map((id, index) => ({
   id,
   index: index + 1,
-  original: `/paintings/original/${encodeURIComponent(id)}.webp`,
-  thumbnail: `/paintings/thumb/${encodeURIComponent(id)}.webp`,
-  character: `/paintings/character-modern/${encodeURIComponent(id)}.webp`,
+  original: publicAsset(`paintings/original/${encodeURIComponent(id)}.webp`),
+  thumbnail: publicAsset(`paintings/thumb/${encodeURIComponent(id)}.webp`),
+  character: publicAsset(`paintings/character-modern/${encodeURIComponent(id)}.webp`),
   blessing: blessings[id],
 }))
 
@@ -76,3 +76,4 @@ export function getDiscovered(): string[] {
 export function discover(id: string) {
   localStorage.setItem(discoveredKey, JSON.stringify([...new Set([...getDiscovered(), id])]))
 }
+import { publicAsset } from './assets'

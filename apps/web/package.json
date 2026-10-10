@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "vite build",
+    "pages:build": "vite build --config vite.config.pages.ts --mode pages",
     "start": "vite preview --port 3000",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"

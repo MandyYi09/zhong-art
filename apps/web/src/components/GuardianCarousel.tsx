@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import guardians from '@/lib/cloud-court-guardians.json'
+import { publicAsset } from '@/lib/assets'
 
 const labels = {
   'zh-TW': { title: '雲庭 · 細看人物', inscription: '雲起時 · 萬象生', names: ['人物一', '人物二', '人物三'], elements: ['先看神態', '再看衣紋', '留意持物'], previous: '上一位人物', next: '下一位人物', pause: '暫停輪播', play: '播放輪播', hint: '從原畫出發，讓舊筆觸動起來。' },
@@ -57,7 +58,7 @@ function PaintedGuardian({ guardian, animate }: { guardian: typeof guardians[num
     const refresh = () => { cancelAnimationFrame(frame); render(performance.now()) }
     motion.addEventListener('change', refresh)
     document.addEventListener('visibilitychange', refresh)
-    image.src = `/artwork/cloud-court/${guardian.file}`
+    image.src = publicAsset(`artwork/cloud-court/${guardian.file}`)
     return () => { disposed = true; cancelAnimationFrame(frame); motion.removeEventListener('change', refresh); document.removeEventListener('visibilitychange', refresh) }
   }, [guardian, animate])
   return <canvas ref={ref} width={420} height={560} className="painted-guardian" aria-hidden="true" />

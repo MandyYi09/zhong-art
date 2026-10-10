@@ -1,5 +1,19 @@
 # Zhong Art integrated stack
 
+## Public website preview
+
+The public website can be published to GitHub Pages at
+`https://mandyyi09.github.io/zhong-art/`. It includes the home page, daily
+draw, painting atlas and details, viewing path, and wallpaper composition.
+These pages use local artwork and browser storage, so no server is required
+for the public preview.
+
+The `Publish website` GitHub Actions workflow builds and deploys this preview
+on pushes to `main`. In the repository's Settings → Pages, select **GitHub
+Actions** as the build and deployment source. The website then updates at the
+same URL after each successful workflow run. The API and admin app are separate
+from this public preview.
+
 ## Local start
 
 Prerequisites: Node 20+, npm, and Docker. The development stack starts and

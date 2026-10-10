@@ -16,5 +16,5 @@ export const resources = {
   } },
 } as const
 
-void i18n.use(initReactI18next).init({ resources, lng: 'en', fallbackLng: 'en', interpolation: { escapeValue: false } })
+void i18n.use(initReactI18next).init({ resources, lng: import.meta.env.MODE === 'pages' ? 'zh-TW' : 'en', fallbackLng: 'en', interpolation: { escapeValue: false } })
 export default i18n
