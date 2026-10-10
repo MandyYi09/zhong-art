@@ -54,6 +54,7 @@
 .draw-side p{color:#bac8bd;font-size:14px;line-height:2;margin-bottom:30px}
 .draw-side>.paper-button{min-width:210px}
 .draw-side>small{display:block;margin-top:22px;color:#97a99c;font-size:11px;letter-spacing:.06em}
+.draw-heading .draw-daily-rule{max-width:570px;margin:20px 0 0;padding:8px 0 8px 14px;border-left:2px solid #cdbb8c;color:#d4c8ab;font-size:12px;line-height:1.8}
 @media(max-width:950px){.site-header{grid-template-columns:130px 1fr 36px;gap:12px}.site-nav{gap:clamp(8px,1.3vw,15px)}.site-nav-link{font-size:11px}.wordmark small{letter-spacing:.08em}}
 @media(max-width:700px){.site-header{grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:12px 8px;padding:10px 16px 0}.site-nav{grid-column:1/-1;grid-row:2;width:100%;justify-content:space-between;gap:3px;min-height:44px}.site-nav-link{font-size:11px;letter-spacing:0;padding:7px 3px 13px}.site-nav-link.is-active:after{bottom:0}.site-header>.language-button{grid-column:2;grid-row:1}.nav-full-label{display:none}.nav-mobile-label{display:inline}.draw-workspace{grid-template-columns:1fr;gap:42px}.daily-card{width:min(70vw,340px)}.draw-side{width:100%;margin:auto}.draw-heading{margin:40px auto 32px}}
 @media(max-width:390px){.site-nav-link{font-size:10px;padding-inline:1px}.draw-page{padding-inline:17px}.draw-topline{font-size:9px}.daily-card{width:min(76vw,330px)}}
