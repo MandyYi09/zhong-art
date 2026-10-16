@@ -14,6 +14,12 @@ Actions** as the build and deployment source. The website then updates at the
 same URL after each successful workflow run. The API and admin app are separate
 from this public preview.
 
+The public entry checks a cache-bypassed `version.json` before loading the current
+release. Returning to an open tab or leaving it open checks again once per minute;
+an updated release loads automatically unless the visitor has entered text.
+Artwork URLs also include the release version, so replacing a file keeps the
+original website link usable without asking visitors to clear their cache.
+
 ## Local start
 
 Prerequisites: Node 20+, npm, and Docker. The development stack starts and
