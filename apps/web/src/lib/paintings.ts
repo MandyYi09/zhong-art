@@ -1,3 +1,4 @@
+import { readStoredValue } from './localCollectionStorage'
 export const paintingFiles = [
   '5683', '5685', '5686', '5687', '5688', '5689', '5690', '5691', '5692', '5693',
   '5694', '5695', '5696 2', '5697 2', '5698', '5699', '5702', '5703', '5704', '5705',
@@ -69,9 +70,9 @@ export function getDailyPainting(date = new Date()) {
   return paintings[dailyOrder[cyclePosition]]
 }
 
-const discoveredKey = 'yitang-discovered-v1'
+const discoveredKey = 'shuilu-discovered-v1'
 export function getDiscovered(): string[] {
-  try { return JSON.parse(localStorage.getItem(discoveredKey) || '[]') as string[] } catch { return [] }
+  try { return JSON.parse(readStoredValue(discoveredKey, 'collection') || '[]') as string[] } catch { return [] }
 }
 export function discover(id: string) {
   localStorage.setItem(discoveredKey, JSON.stringify([...new Set([...getDiscovered(), id])]))

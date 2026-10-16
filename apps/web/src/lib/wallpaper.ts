@@ -166,7 +166,7 @@ function drawWallpaper(ctx: CanvasRenderingContext2D, width: number, height: num
   ctx.fillStyle = 'rgba(238, 222, 183, .85)'
   ctx.font = '26px Arial, sans-serif'
   ctx.letterSpacing = '5px'
-  ctx.fillText(`YITANG  /  ${String(painting.index).padStart(2, '0')}`, 108, 160)
+  ctx.fillText(`NO. ${String(painting.index).padStart(2, '0')}`, 108, 160)
   ctx.letterSpacing = '0px'
 
   if (options.focus) drawInset(ctx, original, options.focus)

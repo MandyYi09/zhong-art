@@ -104,7 +104,7 @@ function CreatePage() {
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
-      link.download = `yitang-${painting.id}-${source}${includeBlessing ? '-blessing' : ''}-wallpaper.png`
+      link.download = `shuilu-${painting.id}-${source}${includeBlessing ? '-blessing' : ''}-wallpaper.png`
       link.click()
       window.setTimeout(() => URL.revokeObjectURL(url), 30000)
     } catch {

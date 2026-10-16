@@ -25,6 +25,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {navigation.map(item => <Link key={item.to} to={item.to} className={`page-dock-link${item.active ? ' is-active' : ''}`} aria-current={item.active ? 'page' : undefined}><span className="nav-full-label">{en ? item.en : item.zh}</span><span className="nav-mobile-label">{en ? item.shortEn : item.zh}</span></Link>)}
     </nav>
     <main>{children}</main>
-    <footer className="site-footer"><span className="footer-note">{en ? 'A way into Water-and-Land paintings' : '从一张画，开始看'}</span></footer>
+    <footer className="site-footer"><span className="footer-note">{en ? 'A way into Shuilu paintings' : '从一张画，开始看'}</span></footer>
   </div>
 }

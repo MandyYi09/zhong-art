@@ -1,13 +1,14 @@
+import { readStoredValue } from './localCollectionStorage'
 import type { ClueKey } from './paintingClues'
 import { paintingFiles, type PaintingId } from './paintings'
 
 export type PathEntry = { paintingId: PaintingId; clue: ClueKey; note?: string }
-const storageKey = 'yitang-viewing-path-v1'
+const storageKey = 'shuilu-viewing-path-v1'
 const clueKeys: ClueKey[] = ['head', 'hands', 'robe']
 
 export function readViewingPath(): PathEntry[] {
   try {
-    const saved: unknown = JSON.parse(localStorage.getItem(storageKey) || '[]')
+    const saved: unknown = JSON.parse(readStoredValue(storageKey, 'path') || '[]')
     if (!Array.isArray(saved)) return []
     const seen = new Set<string>()
     return saved.filter((item): item is PathEntry => {

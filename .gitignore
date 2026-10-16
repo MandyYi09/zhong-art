@@ -9,3 +9,15 @@ coverage/
 !.env.example
 *.log
 *.tsbuildinfo
+
+.DS_Store
+
+.vscode/
+
+apps/web/.vite/
+
+output/
+
+art-source/
+
+tmp/

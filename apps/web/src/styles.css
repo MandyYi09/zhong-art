@@ -201,6 +201,121 @@
 @media(max-width:480px){.composition-blessing p{font-size:clamp(15px,4.4vw,18px)}}
 .stage-inscription.is-english{width:116px;writing-mode:horizontal-tb;text-align:right;font:10px/1.6 Georgia,serif;letter-spacing:.15em}
 
+/* A first encounter explains the purpose and gives visitors a path to follow. */
+.opening-intro{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.8fr);gap:clamp(30px,6vw,100px);align-items:start}
+.opening-purpose{max-width:620px;margin:0 0 22px;color:#c4cec1;font-size:14px;line-height:1.95}
+.opening-actions{display:flex;align-items:center;flex-wrap:wrap;gap:20px}
+.opening-actions>a:last-child{color:#d1c199;font-size:12px}
+.opening-promise{margin:14px 0 0;color:#aab9aa;font-size:11px;line-height:1.7}
+.opening-steps{display:grid;gap:19px;margin:0;padding:3px 0 0;list-style:none}
+.opening-steps li{display:flex;align-items:start;gap:16px}
+.opening-steps li>span{color:#cdbb90;font:22px/1.2 Georgia,serif}
+.opening-steps strong{font:500 16px/1.4 'Noto Serif TC',serif;color:#e2dfcc}
+.opening-steps p{margin:5px 0 0;color:#aebdaf;font-size:12px;line-height:1.7}
+.painting-background{max-width:720px;margin-top:26px;padding-top:16px;border-top:1px solid var(--line);color:#adbcad;font-size:12px;line-height:1.9}
+.painting-background summary,.optional-observation summary{width:fit-content;cursor:pointer;color:#dfd1ad;line-height:1.8}
+.painting-background p{margin:13px 0 8px}
+.painting-background a{color:#cbb98f;font-size:11px;text-decoration:underline;text-underline-offset:4px}
+.living-instruction{position:relative;max-width:1250px;margin:29px auto 15px;font-size:12px}
+.guide-invitation{display:block;max-width:450px;margin:-12px 0 26px;color:#d9c69b;font-size:12px;line-height:1.8}
+.guide-invitation:hover{text-decoration:underline;text-underline-offset:4px}
+.atlas-heading .guide-invitation{margin:20px 0 0}
+.everyday-connection{max-width:450px;margin:0 0 29px;padding:22px 23px;border:1px solid rgba(214,212,174,.2);background:rgba(46,65,49,.25)}
+.everyday-connection p{margin:12px 0;color:#cad5c2;font-size:13px;line-height:1.9}
+.everyday-connection blockquote{margin:16px 0;color:#e9dfc2;font:500 17px/1.75 'Noto Serif TC',serif}
+.everyday-connection small{display:block;color:#a2b3a2;font-size:10px;line-height:1.7}
+.clue-response .clue-takeaway{padding-top:14px;border-top:1px solid var(--line);font-size:14px;line-height:1.85}
+.optional-observation{max-width:450px;padding:18px 0;border-block:1px solid var(--line);font-size:12px}
+.optional-observation>p{margin:16px 0;color:#abbbaa;font-size:12px;line-height:1.8}
+.draw-side .draw-blessing-context{display:block;max-width:360px;margin:-10px 0 22px;color:#aabbaa;font-size:11px;line-height:1.8}
+.draw-stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:1090px;margin:30px auto 44px;padding:0;list-style:none}
+.draw-stages li{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:15px 17px;border:1px solid var(--line);color:#9bac9f;background:rgba(18,34,37,.65)}
+.draw-stages li>span{color:#c1b28c;font:20px/1 Georgia,serif}
+.draw-stages strong{font:500 15px/1.5 'Noto Serif TC',serif}
+.draw-stages small{margin-left:auto;color:#8c9f92;font-size:9px;letter-spacing:.06em}
+.draw-stages .is-current{border-color:#d2c193;background:#293d36;color:#f0e6cb}
+.draw-stages .is-current small{color:#e0cea3}
+.draw-stages .is-complete{color:#bdcfb6;border-color:#819a7a66}
+.draw-clue-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 16px}
+.draw-clue-choices button{min-width:0;padding:5px;border:1px solid var(--line);background:#1b3031;color:#d5ddc8;text-align:center;transition:border-color .2s,transform .2s}
+.draw-clue-choices button:not(:disabled):hover{border-color:#d2c198;transform:translateY(-3px)}
+.draw-clue-choices .detail-crop{width:100%;aspect-ratio:1}
+.draw-clue-choices button>span{display:block;padding:10px 2px 5px;font-size:10px;letter-spacing:.08em}
+.draw-clue-choices .is-matched{border-color:#bdd5a6;background:#2d4536}
+.draw-clue-choices .is-tried{border-color:#c7a584}
+.draw-clue-choices button:disabled{cursor:default}
+.draw-clue-feedback{min-height:54px;margin:0 0 24px;padding:12px 0;color:#afc0ad;font-size:12px;line-height:1.8}
+.draw-clue-feedback strong{font:500 16px/1.6 'Noto Serif TC',serif;color:#e2d6b5}
+.draw-side .draw-clue-feedback p{margin:8px 0 0;color:#b5c8af;font-size:12px;line-height:1.8}
+.draw-clue-feedback.is-matched{padding:15px 17px;border-left:2px solid #b6cfa4;background:#22382d}
+.daily-card:disabled{cursor:default}
+.daily-card:disabled:hover{transform:rotate(-4deg)}
+@media(max-width:700px){.draw-stages{gap:7px;margin-bottom:34px}.draw-stages li{flex-direction:column;align-items:flex-start;gap:6px;padding:13px 10px}.draw-stages strong{font-size:13px}.draw-stages small{margin:0}.draw-workspace{gap:32px}.draw-clue-choices{gap:8px}}
+.painting-guide{max-width:500px;scroll-margin-top:78px}
+.guide-progress{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;list-style:none;margin:24px 0 30px;padding:0}
+.guide-progress button{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;width:100%;min-height:42px;padding:8px 4px;color:#a8bbaa;border:1px solid var(--line);background:transparent;font-size:11px}
+.guide-progress button span{color:#c6b488;font:14px Georgia,serif}
+.guide-progress button[aria-current="step"]{background:#d7c8a0;border-color:#d7c8a0;color:#1b292a}
+.guide-progress button[aria-current="step"] span{color:#384b3b}
+.painting-guide h1{margin-top:0;font-size:clamp(32px,3.4vw,48px);outline:none}
+.guide-content>p{color:#c1cabf;font-size:13px;line-height:1.9;margin:0 0 22px}
+.guide-single{margin:0 0 25px}
+.guide-single .detail-crop{height:220px;border:1px solid rgba(229,216,177,.35);background-size:185% auto;background-position:50% 27%}
+.guide-single figcaption{margin-top:10px;color:#b6c6b0;font-size:11px;line-height:1.6}
+.guide-reading{border-left:2px solid #c3d2ab;padding:2px 0 2px 18px;margin:0 0 27px}
+.guide-reading>span{color:#c2d0ad;font-size:10px;letter-spacing:.13em}
+.guide-reading>p{margin:9px 0 17px;color:#ced4c3;font-size:13px;line-height:1.9}
+.guide-reading>p:last-child{margin-bottom:0}
+.guide-pair{margin:0 0 24px}
+.guide-pair .detail-crop{aspect-ratio:1;border:1px solid rgba(225,216,184,.4)}
+.guide-pair figcaption span{font-size:12px;line-height:1.8}
+.guide-life{margin:27px 0;padding:25px 23px;background:#20362f;border:1px solid #b8c39d44}
+.guide-life h2{margin:15px 0;color:#ece3cc;font-size:23px;line-height:1.6}
+.guide-life p{color:#c1d0bb;font-size:13px;line-height:1.9}
+.guide-life small{display:block;color:#a9bbaa;font-size:10px;line-height:1.8}
+.guide-takeaways{list-style:none;margin:25px 0 30px;padding:0}
+.guide-takeaways li{display:flex;gap:18px;padding:18px 0;border-top:1px solid var(--line)}
+.guide-takeaways li>span{color:#cfbd91;font:22px/1.5 Georgia,serif}
+.guide-takeaways strong{color:#e3e3ce;font:500 19px/1.5 'Noto Serif TC',serif}
+.guide-takeaways p{margin:6px 0 0;color:#bdccba;font-size:13px;line-height:1.8}
+.guide-controls{display:flex;align-items:center;flex-wrap:wrap;gap:20px;margin-top:25px}
+.guide-back{display:inline-flex;gap:7px;align-items:center;padding:12px 0;border:0;background:none;color:#b5c7b3;font-size:12px}
+.guide-skip{display:inline-block;margin-top:22px;color:#a8b9a6;font-size:11px}
+.guide-finish{display:flex;align-items:center;flex-wrap:wrap;gap:20px}
+.guide-finish>a:last-child{color:#cdb98d;font-size:12px}
+.painting-layout.is-guided>.painting-view{position:sticky;top:85px}
+.painting-layout.is-guided .painting-mat{height:min(760px,75vh)}
+.painting-layout.is-guided>.painting-view{min-height:0}
+.painting-layout.is-guided .painting-notes{padding-top:0}
+@media(max-width:800px){
+  .opening-intro{grid-template-columns:1fr;gap:26px}
+  .opening-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .opening-steps li{flex-direction:column;gap:8px}
+  .painting-layout.is-guided>.painting-view{position:static;grid-row:2}
+  .painting-layout.is-guided>.painting-notes{grid-row:1}
+  .painting-layout.is-guided .painting-mat{height:min(760px,150vw)}
+  .painting-guide{max-width:600px;margin:auto}
+  .painting-guide h1{font-size:clamp(30px,7vw,44px)}
+  .guide-single .detail-crop{height:240px;background-size:155% auto}
+}
+@media(max-width:480px){
+  .opening-copy h1{font-size:35px}
+  .opening-purpose{font-size:13px;line-height:1.85}
+  .opening-actions{gap:16px}
+  .opening-actions .paper-button{padding:13px 15px;font-size:12px}
+  .opening-steps{gap:14px}
+  .opening-steps strong{font-size:14px}
+  .opening-steps p{font-size:11px}
+  .painting-background{margin-top:22px}
+  .guide-progress{gap:6px;margin:20px 0 26px}
+  .guide-progress button{gap:5px;font-size:11px}
+  .guide-single .detail-crop{height:200px;background-size:185% auto}
+  .guide-reading{padding-left:15px}
+  .guide-life,.everyday-connection{padding:20px 18px}
+  .guide-life h2{font-size:21px}
+  .guide-pair figcaption span{font-size:11px}
+}
+
 .composition-display{position:sticky;top:90px}
 .wallpaper-preview{display:block;width:min(100%,410px);height:auto;aspect-ratio:6/13;background:#182b30;box-shadow:17px 27px 42px #02090999;cursor:grab;touch-action:none;user-select:none}
 .wallpaper-preview:active{cursor:grabbing}
@@ -229,3 +344,13 @@
 .compose-error{margin:14px 0 0;color:#ffcebf;font-size:12px}
 @media(max-width:800px){.composition-display{position:static}}
 @media(max-width:480px){.source-options img{width:42px;height:58px}.source-options button{gap:8px}.source-options strong,.layout-options strong{font-size:12px}.source-options small,.layout-options small{font-size:9px}.layout-options{gap:6px}.layout-options button{padding:9px;min-height:117px}.placement-sliders label{grid-template-columns:65px minmax(0,1fr) 38px;gap:7px}.wallpaper-preview{width:min(100%,360px)}}
+
+/* The selected K/E card backs match the physical twenty-plus-two collection. */
+.daily-card .illustrated-card-back{background:transparent;padding:0;border:0;box-shadow:none}
+.illustrated-card-back::before,.illustrated-card-back::after{display:none}
+.illustrated-card-back img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 20px 22px #0005)}
+.illustrated-card-back small{position:absolute;bottom:12px;left:0;right:0;text-align:center;color:#f1dfb9;font-size:10px;letter-spacing:.16em}
+.daily-card.is-hidden-edition .daily-card-character{background:#14212c;color:#e4be82;border-color:#e4be82}
+.hidden-edition-title{position:absolute;top:44px;left:15px;right:15px;text-align:center;z-index:2;color:#e4be82;font:500 11px/1.5 Georgia,serif;letter-spacing:.12em}
+.is-hidden-edition .daily-character-halo{border-color:#e4be8266}
+.is-hidden-edition .daily-card-message{color:#e4be82}

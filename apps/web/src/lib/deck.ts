@@ -30,7 +30,7 @@ export const curatedDeck: GuardianCard[] = Array.from({ length: 50 }, (_, index)
     blessing: { 'zh-TW': blessings['zh-TW'][index % 5], en: blessings.en[index % 5] },
     story: {
       'zh-TW': `此卡以水陸畫中的${base[0]}形象為文化線索，從服飾、持物與祥雲紋樣理解其象徵。卡片提供當代鼓勵，不取代宗教解釋或儀式。`,
-      en: `This card uses the Water-and-Land painting of ${base[1]} as a cultural point of entry, reading meaning through dress, attributes, and cloud motifs. Its message is contemporary encouragement, not a substitute for religious interpretation or ritual.`,
+      en: `This card uses the Shuilu painting of ${base[1]} as a cultural point of entry, reading meaning through dress, attributes, and cloud motifs. Its message is contemporary encouragement, not a substitute for religious interpretation or ritual.`,
     },
     status: index < 12 ? 'approved' : index < 46 ? 'in_review' : 'rejected',
     image: index === 0 ? '/references/5698.JPG' : index === 1 ? '/references/5702.JPG' : undefined,
