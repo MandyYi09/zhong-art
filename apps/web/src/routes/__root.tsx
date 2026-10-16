@@ -5,7 +5,7 @@ import '@/lib/i18n'
 import '@/styles.css'
 
 export const Route = createRootRoute({
-  head: () => ({ meta: [{ charSet: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { title: 'YITANG 吉光 · 从一张画开始看' }, { name: 'description', content: 'An interactive way to look closer at twenty Water-and-Land painting images.' }] }),
+  head: () => ({ meta: [{ charSet: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { title: 'A Way into Shuilu Paintings' }, { name: 'description', content: 'An interactive way to look closer at twenty Water-and-Land painting images.' }] }),
   component: () => import.meta.env.MODE === 'pages'
     ? <AppShell><Outlet/></AppShell>
     : <RootDocument><AppShell><Outlet/></AppShell></RootDocument>,

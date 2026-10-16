@@ -20,7 +20,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   ]
 
   return <div className="app-shell">
-    <button className="language-button floating-language" type="button" onClick={toggleLanguage} aria-label={en ? 'Switch to Chinese' : 'Switch to English'} title={en ? 'Switch to Chinese' : '切換至英文'}><span className={!en ? 'is-current' : undefined} aria-hidden="true">中</span><span className="language-divider" aria-hidden="true">/</span><span className={en ? 'is-current' : undefined} aria-hidden="true">EN</span></button>
+    <button className="language-button floating-language" type="button" onClick={toggleLanguage} aria-label={en ? 'Switch to Chinese' : 'Switch to English'} title={en ? 'Switch to Chinese' : '切換至英文'}><span className={en ? 'is-current' : undefined} aria-hidden="true">EN</span><span className="language-divider" aria-hidden="true">/</span><span className={!en ? 'is-current' : undefined} aria-hidden="true">中</span></button>
     <nav className="page-dock" aria-label={en ? 'Main navigation' : '主导航'}>
       {navigation.map(item => <Link key={item.to} to={item.to} className={`page-dock-link${item.active ? ' is-active' : ''}`} aria-current={item.active ? 'page' : undefined}><span className="nav-full-label">{en ? item.en : item.zh}</span><span className="nav-mobile-label">{en ? item.shortEn : item.zh}</span></Link>)}
     </nav>
