@@ -42,7 +42,7 @@ function DrawPage() {
     ].map((stage, index) => <li key={stage.phase} className={phase === stage.phase ? 'is-current' : index < (phase === 'original' ? 2 : phase === 'character' ? 1 : 0) ? 'is-complete' : ''} aria-current={phase === stage.phase ? 'step' : undefined}><span>{String(index + 1).padStart(2, '0')}</span><strong>{en ? stage.en : stage.zh}</strong><small>{phase === stage.phase ? (en ? 'CURRENT' : '进行中') : index < (phase === 'original' ? 2 : phase === 'character' ? 1 : 0) ? (en ? 'COMPLETE' : '已完成') : (en ? 'NEXT' : '待探索')}</small></li>)}</ol>
     <div className="draw-workspace">
       <button className={`daily-card daily-card-${phase}`} type="button" onClick={nextPhase} disabled={phase === 'character' && !matched} aria-label={phase === 'sealed' ? (en ? 'Turn today’s card' : '翻开今日卡片') : phase === 'character' ? (en ? 'View the original after finding its clue' : '找到线索后查看对应原画') : (en ? 'Return to the character card' : '回到角色卡')}>
-        {phase === 'sealed' && <div className="daily-card-back illustrated-card-back" aria-hidden="true"><img src={publicAsset('cards/back-k.webp')} alt=""/><small>NO. {String(daily.index).padStart(2, '0')}</small></div>}
+        {phase === 'sealed' && <div className="daily-card-back illustrated-card-back" aria-hidden="true"><img src={publicAsset('cards/back-k.webp')} alt=""/></div>}
         {phase === 'character' && <div className="daily-card-character">
           <span className="daily-character-index">{String(daily.index).padStart(2, '0')} / 20</span>
           <span className="daily-character-halo" aria-hidden="true"/>
