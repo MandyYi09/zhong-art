@@ -35,7 +35,7 @@ function DrawPage() {
   const nextPhase = () => setPhase(current => current === 'sealed' ? 'character' : current === 'character' && matched ? 'original' : 'character')
 
   return <section className="draw-page">
-    <div className="draw-topline"><Link to="/" className="return-link"><ArrowLeft size={15}/>{en ? 'Back to the painting' : '回到画前'}</Link><span>DAILY DRAW / {String(daily.index).padStart(2, '0')}</span></div>
+    <div className="draw-topline"><Link to="/" className="return-link"><ArrowLeft size={15}/>{en ? 'Back to the painting' : '回到画前'}</Link></div>
     <div className="draw-heading"><span className="overline">{en ? 'DAILY DRAW · THREE SMALL STAGES' : '每日抽卡 · 三个小关卡'}</span><h1>{en ? <>Turn a card.<br/><em>A clue awaits.</em></> : <>翻开一张卡，<br/><em>开启今天的探索。</em></>}</h1><p>{en ? 'Meet a character, find its detail, then discover the original painting.' : '先遇见角色，再找出它的线索，最后回到原画。'}</p><p className="draw-daily-rule">{en ? 'One painting a day. This card stays today; tomorrow brings a different one. Twenty regular cards and one secret card rotate without repeats across 21 days.' : '每天遇见一张画。今天再打开仍是这张；明天换一张，20 张常规款与 1 张隐藏款，连续 21 天不重复。'}</p></div>
     <ol className="draw-stages" aria-label={en ? 'Exploration stages' : '探索关卡'}>{[
       { phase: 'sealed', zh: '遇见角色', en: 'Meet a character' },
