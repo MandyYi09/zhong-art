@@ -1,0 +1,25 @@
+// Contemporary wishes inspired by each card’s visual theme, not claims about a deity’s historical role.
+// Study wishes follow focus, problem-solving, curiosity and companionship until identities are verified.
+export const paintingBlessings = {
+  '5683': { zh: '愿你把烦恼拴好，今天只让快乐出来溜达。', en: 'May your worries stay on a leash while joy gets the run of the park.' },
+  '5685': { zh: '愿你今天气场两米八，内耗见了也绕道。', en: 'May you walk so tall today that overthinking crosses the street.' },
+  '5686': { zh: '愿你的底气像这身衣服，一层不够，还有一层。', en: 'May your courage come in layers, just like this outfit. There is always a spare.' },
+  '5687': { zh: '愿你站得稳、吃得香，麻烦来了也得先取号。', en: 'May you stand firm and eat well. Any trouble can take a number.' },
+  '5688': { zh: '愿你热情满格，电量都花在喜欢的事上。', en: 'May your enthusiasm stay fully charged, with battery to spare for what you love.' },
+  '5689': { zh: '愿你复习时脑子加载成功，合上书也不恢复出厂设置。', en: 'May your revision load properly, with no factory reset when you close the book.' },
+  '5690': { zh: '愿你有话直说，嘴替今天终于轮到自己当。', en: 'May you say what you mean. Today, you get to be your own spokesperson.' },
+  '5691': { zh: '愿你解题有思路，多臂忙着翻草稿，不忙着挠头。', en: 'May every tricky problem give you a clue, and every extra hand reach for scrap paper.' },
+  '5692': { zh: '愿你出门自带方向感，人生导航少说“重新规划”。', en: 'May your inner GPS find its signal and say “recalculating” a little less.' },
+  '5693': { zh: '愿你行动比纠结快一步，待办清单先慌起来。', en: 'May action beat hesitation by one step and give your to-do list a fright.' },
+  '5694': { zh: '愿你遇到死胡同，转角就有奶茶和新思路。', en: 'May every dead end have bubble tea and a fresh idea just around the corner.' },
+  '5695': { zh: '愿你好奇心不下课，难题刚摆架子，就被你拆了招。', en: 'May your curiosity stay after class and catch tricky questions before they can show off.' },
+  '5696 2': { zh: '愿你脑内灯泡常亮，电费由灵感报销。', en: 'May the light bulb in your head stay bright, with inspiration paying the bill.' },
+  '5697 2': { zh: '愿好消息像慢炖的汤，晚一点，也浓一点。', en: 'May good news arrive like slow-cooked soup: a little later, a little richer.' },
+  '5698': { zh: '愿你三餐有着落，快乐有加餐，烦恼没座位。', en: 'May your meals be hearty, joy get seconds, and worry find no seat at the table.' },
+  '5699': { zh: '愿你跟上自己的节奏，连踩水坑都像在跳舞。', en: 'May you find your rhythm, until even a puddle splash feels like a dance move.' },
+  '5702': { zh: '愿你遇见靠谱学搭子：互相讲懂难题，谁也不先睡着。', en: 'May you find a study buddy who helps untangle hard questions, with both of you still awake.' },
+  '5703': { zh: '愿你先迈一步，完美主义还没起床，你已出发。', en: 'May you take the first step while perfectionism is still hitting snooze.' },
+  '5704': { zh: '愿你热爱有回响，忙完还有力气快乐蹦跶。', en: 'May what you love love you back, with energy left for a little victory dance.' },
+  '5705': { zh: '愿你打开未知的盲盒，惊喜多一点，问号少一点。', en: 'May the mystery box of today hold more pleasant surprises and fewer question marks.' },
+  '9549': { zh: '愿你今天左手比耶，右手点赞，烦恼自动靠边站。', en: 'May you flash a peace sign, give a thumbs-up, and send your worries shuffling aside.' },
+} satisfies Record<string, { zh: string; en: string }>
