@@ -3,6 +3,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowLeft, ArrowRight, RotateCcw, Plus } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PaintingIdentity } from '@/components/PaintingIdentity'
 import { DetailCrop } from '@/components/DetailCrop'
 import { PaintingGuide } from '@/components/PaintingGuide'
 import { lookingLessons } from '@/lib/lookingLessons'
@@ -29,6 +30,7 @@ function PaintingPage() {
   const [clue, setClue] = useState<ClueKey | null>(detail || 'head')
   const [note, setNote] = useState('')
   const [saved, setSaved] = useState(false)
+  const [showCharacter, setShowCharacter] = useState(true)
   const [comparedId, setComparedId] = useState<PaintingId | null>(null)
   const [pathEntries, setPathEntries] = useState<PathEntry[]>([])
 
@@ -39,6 +41,7 @@ function PaintingPage() {
     setComparedId(null)
     setNote(readStoredValue(`shuilu-note-${painting.id}`, 'note') || '')
     setSaved(false)
+    setShowCharacter(true)
     setPathEntries(readViewingPath())
   }, [painting?.id, detail, guided])
 
@@ -60,17 +63,20 @@ function PaintingPage() {
   const saveNote = () => { localStorage.setItem(`shuilu-note-${painting.id}`, note); if (clue) setPathEntries(updateViewingPathNote(painting.id, clue, note)); setSaved(true) }
 
   return <section className="painting-page">
-    <div className="painting-topline"><Link to="/collection" className="return-link"><ArrowLeft size={15}/>{en ? 'The atlas' : '回到画册'}</Link><span>IMAGE {String(painting.index).padStart(2, '0')} / 20</span></div>
+    <div className="painting-topline"><Link to="/collection" className="return-link"><ArrowLeft size={15}/>{en ? 'The atlas' : '回到画册'}</Link><span>IMAGE {String(painting.index).padStart(2, '0')} / {paintings.length} · {painting.edition === 'hidden' ? (en ? 'SECRET' : '隐藏款') : (en ? 'REGULAR' : '常规款')}</span></div>
     <div className={`painting-layout${guided ? ' is-guided' : ''}`}>
       <div className="painting-view is-revealed">
+        {painting.edition === 'hidden' && <div className="secret-source-toggle" role="group" aria-label={en ? 'Compare the adaptation and source' : '对照卡通改编与原画'}><button type="button" aria-pressed={showCharacter} onClick={() => setShowCharacter(true)}>{en ? 'Playful illustration' : '趣味卡通版'}</button><button type="button" aria-pressed={!showCharacter} onClick={() => setShowCharacter(false)}>{en ? 'Original painting' : '原始图像'}</button></div>}
         <div className="painting-mat">
-          <div className={`painting-window zoom-${clue || 'none'}`}><img src={painting.original} alt={en ? `Source photograph ${painting.id}` : `原始图像 ${painting.id}`}/></div>
+          <div className={`painting-window zoom-${painting.edition === 'hidden' && showCharacter ? 'none' : clue || 'none'}`}><img src={painting.edition === 'hidden' && showCharacter ? painting.character : painting.original} alt={painting.edition === 'hidden' && showCharacter ? (en ? 'Yang Ren in blue robes, with a peace-sign hand and a thumbs-up hand replacing the eyes' : '以比耶和点赞的两只手代替眼睛的蓝袍杨任卡通形象') : (en ? `Source photograph ${painting.id}` : `原始图像 ${painting.id}`)}/></div>
         </div>
-        <div className="painting-image-credit">{en ? 'SOURCE IMAGE' : '原始图像'} · {painting.id}.JPG</div>
+        <div className="painting-image-credit">{painting.edition === 'hidden' && showCharacter ? (en ? 'SECRET EDITION · CONTEMPORARY ADAPTATION' : '隐藏款 · 当代趣味改编') : (en ? 'SOURCE IMAGE' : '原始图像')} · {painting.id}</div>
         <button className="reset-view" type="button" onClick={() => setClue(clue ? null : 'head')}><RotateCcw size={14}/>{clue ? (en ? 'See the whole painting' : '看整幅画') : (en ? 'Return to the head detail' : '回到头部细节')}</button>
       </div>
       <div className="painting-notes">
+        <PaintingIdentity painting={painting} en={en}/>
         {guided ? <PaintingGuide painting={painting} onFocusChange={setClue}/> : <>
+          {painting.edition === 'hidden' && <div className="secret-edition-note"><span className="overline">{en ? 'THE ONLY SECRET EDITION · BACK E' : '唯一隐藏款 · E 卡背'}</span><p>{en ? 'A peace sign on one side, a thumbs-up on the other. The two hands in place of eyes become a playful greeting, below a softly tied blue-grey headwrap. The blue robe, seated pose and peaches preserve the connection to the source. These new gestures are a contemporary adaptation.' : '一边比耶，一边点赞：代替眼睛的两只小手，变成轻松的招呼，蓝灰软巾的巾尾也轻轻扬起。蓝袍、坐姿和托桃仍与原图呼应；新手势是当代趣味改编。其余 20 张常规款统一使用 K 卡背。'}</p><img src={painting.back} alt={en ? 'E secret card back' : 'E 隐藏款卡背'}/></div>}
           <span className="overline">{en ? 'LOOK / UNDERSTAND / CONNECT' : '细看 / 理解 / 连接'}</span>
           <h1>{en ? <>Look at a detail.<br/><em>Learn a way to see.</em></> : <>看一个细节，<br/><em>多懂一点。</em></>}</h1>
           <p className="painting-lead">{en ? 'Begin with one detail: read what is visible and how to understand it, then connect it to a familiar experience. Switch between headwear, objects and clothing to explore further.' : '从一处细节开始：看看画了什么、怎样理解，再连接一个熟悉的生活经验。可以切换头冠、持物和衣纹，继续探索。'}</p>

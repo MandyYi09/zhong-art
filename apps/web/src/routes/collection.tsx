@@ -15,14 +15,15 @@ function CollectionPage() {
   const visible = onlySeen ? paintings.filter(painting => seen.includes(painting.id)) : paintings
 
   return <section className="atlas-page">
-    <div className="atlas-topline"><Link to="/" className="return-link"><ArrowLeft size={15}/>{en ? 'Back to the painting' : '回到画前'}</Link><span>ARCHIVE / 20</span></div>
-    <div className="atlas-heading"><span className="overline">{en ? 'THE ATLAS' : '画册'}</span><h1>{en ? <>You do not need to<br/><em>know the names first.</em></> : <>先看见，<br/><em>再慢慢认识。</em></>}</h1><p>{en ? 'Choose a figure that catches your eye. Each image opens with a detail, an explanation and a connection to everyday experience.' : '选一张吸引你的画。每幅都会先展开一处细节，带着解释和生活里的类比，让你从看见走向理解。'}</p><Link className="guide-invitation" to="/draw">{en ? 'Not sure where to start? Draw a card and follow its clues →' : '不知道从哪开始？先抽一张卡，跟着线索探索 →'}</Link></div>
-    <div className="atlas-controls"><span>{en ? `${seen.length} of 20 seen` : `已看过 ${seen.length} / 20 幅`}</span><button type="button" className={onlySeen ? 'filter-active' : ''} onClick={() => setOnlySeen(value => !value)}>{onlySeen ? (en ? 'Show all' : '查看全部') : (en ? 'Show my encounters' : '只看遇见过的')}</button></div>
+    <div className="atlas-topline"><Link to="/" className="return-link"><ArrowLeft size={15}/>{en ? 'Back to the painting' : '回到画前'}</Link><span>ARCHIVE / {paintings.length}</span></div>
+    <div className="atlas-heading"><span className="overline">{en ? 'THE ATLAS' : '画册'}</span><h1>{en ? <>You do not need to<br/><em>know the names first.</em></> : <>先看见，<br/><em>再慢慢认识。</em></>}</h1><p>{en ? 'Choose a figure that catches your eye. Each image opens with a detail, an explanation and a connection to everyday experience.' : '选一张吸引你的画。每幅都会先展开一处细节，带着解释和生活里的类比，让你从看见走向理解。'}</p><p className="edition-summary">{en ? '20 regular cards + 1 secret card. Only the playful blue-robed figure uses the E back.' : '20 张常规款 ＋ 1 张隐藏款。只有新增的蓝袍趣味角色使用 E 隐藏款卡背。'}</p><Link className="guide-invitation" to="/draw">{en ? 'Not sure where to start? Draw a card and follow its clues →' : '不知道从哪开始？先抽一张卡，跟着线索探索 →'}</Link></div>
+    <div className="atlas-controls"><span>{en ? `${paintings.filter(painting => seen.includes(painting.id)).length} of ${paintings.length} seen` : `已看过 ${paintings.filter(painting => seen.includes(painting.id)).length} / ${paintings.length} 幅`}</span><button type="button" className={onlySeen ? 'filter-active' : ''} onClick={() => setOnlySeen(value => !value)}>{onlySeen ? (en ? 'Show all' : '查看全部') : (en ? 'Show my encounters' : '只看遇见过的')}</button></div>
     {visible.length ? <div className="atlas-wall">{visible.map((painting, index) => <Link key={painting.id} className={`atlas-sheet sheet-${index % 5}`} to="/card/$cardId" params={{ cardId: painting.id }}>
       <span className="sheet-image"><img src={painting.thumbnail} alt={en ? `Shuilu painting ${painting.id}` : `水陆画图像 ${painting.id}`} loading="lazy"/></span>
-      <span className="sheet-caption"><span>NO. {String(painting.index).padStart(2, '0')} <small>/ {painting.id}</small></span><ArrowUpRight size={17}/></span>
+      <span className="sheet-identity"><strong>{painting.identity.name[en ? 'en' : 'zh']}</strong><small>{painting.identity.date[en ? 'en' : 'zh']}</small></span>
+      <span className="sheet-caption"><span>NO. {String(painting.index).padStart(2, '0')} <small>/ {painting.id} · {painting.edition === 'hidden' ? (en ? 'SECRET' : '隐藏款') : (en ? 'REGULAR' : '常规款')}</small></span><ArrowUpRight size={17}/></span>
       {seen.includes(painting.id) && <i className="seen-mark" aria-label={en ? 'Viewed' : '已看过'}>✓</i>}
     </Link>)}</div> : <div className="atlas-empty">{en ? 'Your encounters will appear here. The entire atlas is still open.' : '你遇见过的画会出现在这里。完整画册随时开放。'}</div>}
-    <div className="atlas-colophon">{en ? 'Twenty source images. Every interpretation begins by looking.' : '二十幅原始图像。每一次理解，都从仔细看开始。'}</div>
+    <div className="atlas-colophon">{en ? 'Twenty-one source images. Every interpretation begins by looking.' : '二十一幅原始图像。每一次理解，都从仔细看开始。'}</div>
   </section>
 }

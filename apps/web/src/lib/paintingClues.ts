@@ -4,6 +4,8 @@ export type ClueKey = 'head' | 'hands' | 'robe'
 type Bilingual = { zh: string; en: string }
 
 export const clueReadings = {
+  softCap: { title: { zh: '软帽与手眼造型', en: 'Soft cap and hand-shaped eyes' }, meaning: { zh: '原图用两只小手代替眼睛，蓝色软帽与发际另成一层。插画把小手改成比耶和点赞，是当代趣味改编；不能用这些新手势解释原画的历史含义。', en: 'In the source, two small hands take the place of ordinary eyes, below the blue cap and hairline. The illustration turns those hands into a peace sign and thumbs-up as a playful contemporary adaptation; these new gestures do not explain the original image historically.' } },
+  peaches: { title: { zh: '托桃与手势', en: 'Peaches and gestures' }, meaning: { zh: '圆润的桃形持物与抬起的另一只手一起引导视线。先观察持物的颜色、形状和位置，人物身份仍需结合题签或图录核实。', en: 'The rounded peach-shaped objects and the other raised hand guide the eye. Begin with their colour, shape and position; the figure’s identity still needs an inscription or catalogue.' } },
   goldCrown: { title: { zh: '额冠与火焰纹', en: 'Crown and flames' }, meaning: { zh: '额前冠饰与头后的火焰是两层不同的造型。火焰强化神将的威势，但不能单凭它确定冠名或人物身份。', en: 'The brow crown and flames behind it are separate motifs. Flames heighten the figure’s forceful presence, but do not establish a formal crown name or identity.' } },
   hornedCrown: { title: { zh: '角形冠饰', en: 'Horn-like headpiece' }, meaning: { zh: '上翘的角形装饰使轮廓更威猛。在雷部神将图像中，这种夸张造型可提示非日常的力量，并非某位神明独有的身份证据。', en: 'The upward-curving forms make the silhouette more imposing. In images of thunder generals, such exaggerated shapes suggest extraordinary power; they do not identify one deity on their own.' } },
   officialCap: { title: { zh: '官帽式冠帽', en: 'Official-style cap' }, meaning: { zh: '方顶、侧翼或冠板让人联想到古代官帽。雷部神将也会借用官将装束来表现职司；这里先称“官帽式”，正式名称还需图录核对。', en: 'The square top, side flaps or front panel recall official headwear. Thunder generals may borrow the dress of officials to express their role; the formal name of this cap still needs checking.' } },
@@ -27,6 +29,11 @@ export type PaintingClue = { observed: Bilingual; motif: Motif }
 const clue = (zh: string, en: string, motif: Motif): PaintingClue => ({ observed: { zh, en }, motif })
 
 export const paintingClues: Record<PaintingId, Record<ClueKey, PaintingClue>> = {
+  '9549': {
+    head: clue('蓝色软帽下留着长须，两只小手代替眼睛；卡通版保留手代眼的造型，改作比耶和点赞，并换成蓝灰软巾。', 'The original has a blue cap, a long beard and two hands in place of eyes. The cartoon preserves the hand-shaped eyes as a peace sign and thumbs-up, with a blue-grey headwrap.', 'softCap'),
+    hands: clue('一只手在胸前抬起，另一只手在腰侧托着粉红与淡黄色的桃形持物。', 'One hand is raised at the chest; the other holds pink and pale-yellow peach-shaped objects near the waist.', 'peaches'),
+    robe: clue('宽大的蓝袍包围坐姿，乳白领缘、橙黄内层和腰间圆形饰物形成对比。', 'The broad blue robe frames a seated pose, contrasting with cream lapels, orange-yellow inner layers and a round belt ornament.', 'robe'),
+  },
   '5683': {
     head: clue('额前是金色方冠；黑红火焰另画在头后，并非整顶冠都在燃烧。', 'A square gold crown sits on the brow; the black-and-red flames are painted behind the head, not as the crown itself.', 'goldCrown'),
     hands: clue('右手提着一段有方形节扣的链索，另一只手握在腰侧。', 'One hand lifts a chain with rectangular links; the other is clenched by the waist.', 'chain'),

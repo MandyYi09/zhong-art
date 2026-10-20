@@ -4,6 +4,8 @@ import { paintings, type Painting, type PaintingId } from './paintings'
 export type DetailComparison = { painting: Painting; relation: 'echo' | 'contrast' }
 
 const visualNeighbours: Partial<Record<Motif, Motif[]>> = {
+  softCap: ['officialCap', 'ornateCap'],
+  peaches: ['tray', 'gesture'],
   goldCrown: ['officialCap', 'ornateCap'],
   hornedCrown: ['plume', 'ornateCap'],
   officialCap: ['goldCrown', 'ornateCap'],

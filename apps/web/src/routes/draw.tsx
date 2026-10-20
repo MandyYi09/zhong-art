@@ -2,10 +2,11 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PaintingIdentity } from '@/components/PaintingIdentity'
 import { DetailCrop } from '@/components/DetailCrop'
 import { getDetailComparisons } from '@/lib/detailComparisons'
 import { paintingClues, type ClueKey } from '@/lib/paintingClues'
-import { getDailyPainting } from '@/lib/paintings'
+import { getDailyPainting, paintings } from '@/lib/paintings'
 import { publicAsset } from '@/lib/assets'
 
 export const Route = createFileRoute('/draw')({ component: DrawPage })
@@ -19,7 +20,8 @@ function DrawPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const daily = getDailyPainting()
   const blessing = en ? daily.blessing.en : daily.blessing.zh
-  const focus = (['head', 'hands', 'robe'] as const)[(daily.index - 1) % 3]
+  // The secret card changes the facial gestures; compare the preserved robe instead.
+  const focus = daily.edition === 'hidden' ? 'robe' : (['head', 'hands', 'robe'] as const)[(daily.index - 1) % 3]
   const detail = paintingClues[daily.id][focus]
   const matched = selectedId === daily.id
   const candidates = [daily, ...getDetailComparisons(daily.id, focus).map(item => item.painting)]
@@ -34,7 +36,7 @@ function DrawPage() {
 
   return <section className="draw-page">
     <div className="draw-topline"><Link to="/" className="return-link"><ArrowLeft size={15}/>{en ? 'Back to the painting' : '回到画前'}</Link><span>DAILY DRAW / {String(daily.index).padStart(2, '0')}</span></div>
-    <div className="draw-heading"><span className="overline">{en ? 'DAILY DRAW · THREE SMALL STAGES' : '每日抽卡 · 三个小关卡'}</span><h1>{en ? <>Turn a card.<br/><em>A clue awaits.</em></> : <>翻开一张卡，<br/><em>开启今天的探索。</em></>}</h1><p>{en ? 'Meet a character, find its detail, then discover the original painting.' : '先遇见角色，再找出它的线索，最后回到原画。'}</p><p className="draw-daily-rule">{en ? 'One painting a day. This card stays today; tomorrow brings a different one. Twenty source paintings rotate without repeats across 20 days.' : '每天遇见一张画。今天再打开仍是这张；明天换一张，连续 20 天原画不重复。'}</p></div>
+    <div className="draw-heading"><span className="overline">{en ? 'DAILY DRAW · THREE SMALL STAGES' : '每日抽卡 · 三个小关卡'}</span><h1>{en ? <>Turn a card.<br/><em>A clue awaits.</em></> : <>翻开一张卡，<br/><em>开启今天的探索。</em></>}</h1><p>{en ? 'Meet a character, find its detail, then discover the original painting.' : '先遇见角色，再找出它的线索，最后回到原画。'}</p><p className="draw-daily-rule">{en ? 'One painting a day. This card stays today; tomorrow brings a different one. Twenty regular cards and one secret card rotate without repeats across 21 days.' : '每天遇见一张画。今天再打开仍是这张；明天换一张，20 张常规款与 1 张隐藏款，连续 21 天不重复。'}</p></div>
     <ol className="draw-stages" aria-label={en ? 'Exploration stages' : '探索关卡'}>{[
       { phase: 'sealed', zh: '遇见角色', en: 'Meet a character' },
       { phase: 'character', zh: '找到线索', en: 'Find the clue' },
@@ -42,9 +44,9 @@ function DrawPage() {
     ].map((stage, index) => <li key={stage.phase} className={phase === stage.phase ? 'is-current' : index < (phase === 'original' ? 2 : phase === 'character' ? 1 : 0) ? 'is-complete' : ''} aria-current={phase === stage.phase ? 'step' : undefined}><span>{String(index + 1).padStart(2, '0')}</span><strong>{en ? stage.en : stage.zh}</strong><small>{phase === stage.phase ? (en ? 'CURRENT' : '进行中') : index < (phase === 'original' ? 2 : phase === 'character' ? 1 : 0) ? (en ? 'COMPLETE' : '已完成') : (en ? 'NEXT' : '待探索')}</small></li>)}</ol>
     <div className="draw-workspace">
       <button className={`daily-card daily-card-${phase}`} type="button" onClick={nextPhase} disabled={phase === 'character' && !matched} aria-label={phase === 'sealed' ? (en ? 'Turn today’s card' : '翻开今日卡片') : phase === 'character' ? (en ? 'View the original after finding its clue' : '找到线索后查看对应原画') : (en ? 'Return to the character card' : '回到角色卡')}>
-        {phase === 'sealed' && <div className="daily-card-back illustrated-card-back" aria-hidden="true"><img src={publicAsset('cards/back-k.webp')} alt=""/></div>}
+        {phase === 'sealed' && <div className="daily-card-back illustrated-card-back" aria-hidden="true"><img src={daily.back} alt=""/></div>}
         {phase === 'character' && <div className="daily-card-character">
-          <span className="daily-character-index">{String(daily.index).padStart(2, '0')} / 20</span>
+          <span className="daily-character-index">{String(daily.index).padStart(2, '0')} / {paintings.length} · {daily.edition === 'hidden' ? (en ? 'SECRET' : '隐藏款') : (en ? 'REGULAR' : '常规款')}</span>
           <span className="daily-character-halo" aria-hidden="true"/>
           <img src={daily.character} onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = publicAsset(`paintings/character/${encodeURIComponent(daily.id)}.webp`) }} alt={en ? `Illustrated character adapted from painting ${daily.id}` : `根据原画 ${daily.id} 绘制的角色形象`}/>
           <span className="daily-card-message"><small>{en ? 'A WISH FOR TODAY' : '今日祝福'}</small><strong>{blessing}</strong></span>
@@ -53,6 +55,7 @@ function DrawPage() {
         {phase === 'original' && <div className="daily-card-original"><img src={daily.original} alt={en ? `Original Shuilu painting ${daily.id}` : `水陆画原画 ${daily.id}`}/><span>{en ? 'ORIGINAL PAINTING' : '原始图像'} · {daily.id}</span></div>}
       </button>
       <div className="draw-side">
+        {phase !== 'sealed' && <PaintingIdentity painting={daily} en={en}/>}
         <span className="overline">{phase === 'sealed' ? (en ? 'STAGE 01 · MEET' : '第一关 · 相遇') : phase === 'character' ? (en ? 'STAGE 02 · FIND' : '第二关 · 寻迹') : (en ? 'STAGE 03 · DISCOVER' : '第三关 · 入画')}</span>
         <h2>{phase === 'sealed' ? (en ? 'Who will you meet today?' : '今天会遇见谁？') : phase === 'character' ? (en ? 'Which detail belongs to your character?' : '哪处细节，属于你的角色？') : (en ? 'You found the way into the painting.' : '你找到了走进画里的线索。')}</h2>
         <p>{phase === 'sealed' ? (en ? 'Turn the card to meet your character. Then a small observation challenge will lead you back to the original.' : '先翻开卡片，遇见你的角色。接下来，用一个小小的观察挑战，找到它来自的原画。') : phase === 'character' ? (en ? `Look at the character’s ${labels[focus].en}. Which of the three original fragments shows the same detail? Start with shapes and colours; you do not need to know the figure’s name.` : `留意角色的${labels[focus].zh}。下面三处原画局部，哪一处和它对应？先比较形状和颜色，不需要认识人物名字。`) : (en ? 'The illustration and this painting share the detail you found. Open it to read an explanation and connect the observation to an experience today.' : '角色卡与这幅原画，保留着你刚刚找到的细节。带着这个发现继续看，认识它怎样塑造人物，再和今天的经验连起来。')}</p>
