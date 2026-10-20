@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react'
+import { ArrowLeft, ArrowRight, RotateCcw, Sparkles } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { BlessingExperience, BlessingIntroduction } from '@/components/BlessingExperience'
 import { PaintingIdentity } from '@/components/PaintingIdentity'
 import { DetailCrop } from '@/components/DetailCrop'
 import { getDetailComparisons } from '@/lib/detailComparisons'
@@ -16,6 +17,7 @@ type CardPhase = 'sealed' | 'character' | 'original'
 function DrawPage() {
   const { i18n } = useTranslation()
   const en = i18n.language === 'en'
+  const [blessingOpen, setBlessingOpen] = useState(false)
   const [phase, setPhase] = useState<CardPhase>('sealed')
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const daily = getDailyPainting()
@@ -43,6 +45,7 @@ function DrawPage() {
       { phase: 'original', zh: '回到原画', en: 'Return to the source' },
     ].map((stage, index) => <li key={stage.phase} className={phase === stage.phase ? 'is-current' : index < (phase === 'original' ? 2 : phase === 'character' ? 1 : 0) ? 'is-complete' : ''} aria-current={phase === stage.phase ? 'step' : undefined}><span>{String(index + 1).padStart(2, '0')}</span><strong>{en ? stage.en : stage.zh}</strong><small>{phase === stage.phase ? (en ? 'CURRENT' : '进行中') : index < (phase === 'original' ? 2 : phase === 'character' ? 1 : 0) ? (en ? 'COMPLETE' : '已完成') : (en ? 'NEXT' : '待探索')}</small></li>)}</ol>
     <div className="draw-workspace">
+      <div className="draw-card-column">
       <button className={`daily-card daily-card-${phase}`} type="button" onClick={nextPhase} disabled={phase === 'character' && !matched} aria-label={phase === 'sealed' ? (en ? 'Turn today’s card' : '翻开今日卡片') : phase === 'character' ? (en ? 'View the original after finding its clue' : '找到线索后查看对应原画') : (en ? 'Return to the character card' : '回到角色卡')}>
         {phase === 'sealed' && <div className="daily-card-back illustrated-card-back" aria-hidden="true"><img src={daily.back} alt=""/></div>}
         {phase === 'character' && <div className="daily-card-character">
@@ -54,6 +57,8 @@ function DrawPage() {
         </div>}
         {phase === 'original' && <div className="daily-card-original"><img src={daily.original} alt={en ? `Original Shuilu painting ${daily.id}` : `水陆画原画 ${daily.id}`}/><span>{en ? 'ORIGINAL PAINTING' : '原始图像'} · {daily.id}</span></div>}
       </button>
+      {phase !== 'sealed' && <div className="blessing-card-entry"><span>{en ? 'A DIGITAL ENCOUNTER, A PHYSICAL KEEPSAKE' : '把今日相遇，变成一份珍藏'}</span><button className="paper-button" type="button" onClick={() => setBlessingOpen(true)}><Sparkles size={17}/>{en ? 'Temple blessing' : '寺庙祈福加持'}<ArrowRight size={16}/></button><small>{en ? 'Explore the physical card · Preview only' : '体验实体收藏卡方案 · 暂未开放下单'}</small></div>}
+      </div>
       <div className="draw-side">
         {phase !== 'sealed' && <PaintingIdentity painting={daily} en={en}/>}
         <span className="overline">{phase === 'sealed' ? (en ? 'STAGE 01 · MEET' : '第一关 · 相遇') : phase === 'character' ? (en ? 'STAGE 02 · FIND' : '第二关 · 寻迹') : (en ? 'STAGE 03 · DISCOVER' : '第三关 · 入画')}</span>
@@ -67,5 +72,7 @@ function DrawPage() {
         {phase === 'original' ? <button className="draw-reset" type="button" onClick={() => setPhase('character')}><RotateCcw size={14}/>{en ? 'Back to character card' : '回到角色卡'}</button> : null}
       </div>
     </div>
+    <BlessingIntroduction en={en}/>
+    {blessingOpen && <BlessingExperience painting={daily} en={en} onClose={() => setBlessingOpen(false)}/>}
   </section>
 }

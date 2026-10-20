@@ -20,6 +20,21 @@ an updated release loads automatically unless the visitor has entered text.
 Artwork URLs also include the release version, so replacing a file keeps the
 original website link usable without asking visitors to clear their cache.
 
+## Temple blessing preview
+
+After revealing the daily character, visitors can open **寺庙祈福加持 / Temple
+blessing** beneath the card. The bilingual preview covers the physical-card
+edition, quantity, personal wish, sample delivery details and review, followed
+by the proposed production → temple → ceremony → recipient journey.
+
+This is a browser-only experience: it creates no orders, accepts no payments,
+and makes no temple or shipping bookings. Entered details are held only in the
+open dialog and cleared when it closes or the preview finishes. Partner temples,
+prices, delivery regions and timing are explicitly marked as pending. Real
+ordering requires a separately deployed order backend, confirmed partner and
+fulfilment terms, and a payment provider with server-verified payment events;
+GitHub Pages does not host that backend.
+
 ## Local start
 
 Prerequisites: Node 20+, npm, and Docker. The development stack starts and

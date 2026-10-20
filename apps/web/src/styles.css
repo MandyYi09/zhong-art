@@ -366,3 +366,68 @@
 .sheet-identity small { font-size: 10px; opacity: .7; line-height: 1.6; }
 
 .painting-identity .identity-date { color: #d8dccb; }
+
+/* The physical-card preview follows the free draw, without creating a live order. */
+.draw-card-column{min-width:0;display:flex;flex-direction:column;align-items:center;gap:32px}
+.blessing-card-entry{display:grid;gap:12px;width:min(100%,370px);text-align:center}
+.blessing-card-entry>span{color:var(--gold);font-size:10px;letter-spacing:.14em}
+.blessing-card-entry .paper-button{width:100%;min-height:52px}
+.blessing-card-entry>small{color:#aebeb2;font-size:11px;line-height:1.7}
+.blessing-introduction{max-width:1090px;margin:100px auto 0;padding-top:36px;border-top:1px solid var(--line)}
+.blessing-intro-heading{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:15px}
+.blessing-badge{border:1px solid #98aa9266;border-radius:30px;padding:7px 12px;color:#bdd0b5;font-size:10px;letter-spacing:.1em}
+.blessing-introduction h2{font-size:clamp(26px,3vw,40px);line-height:1.6;margin:21px 0 15px}
+.blessing-introduction>p{max-width:700px;font-size:13px;line-height:1.9;color:#bdc9bc}
+.blessing-journey{list-style:none;padding:0;margin:32px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px}
+.blessing-journey li{min-width:0;border-top:1px solid var(--line);padding-top:20px}
+.blessing-journey-icon{display:flex;align-items:center;justify-content:space-between;color:#cbb786}
+.blessing-journey-icon small{color:#91a89b;font-size:10px;letter-spacing:.1em}
+.blessing-journey h3{font:500 17px/1.6 'Noto Serif TC',serif;margin:16px 0 8px}
+.blessing-journey p{font-size:12px;line-height:1.8;color:#b4c2b7;margin:0}
+.blessing-introduction .blessing-footnote{max-width:none;font-size:11px;color:#9daf9f}
+.blessing-dialog{width:min(960px,calc(100% - 32px));max-height:calc(100dvh - 40px);padding:30px 36px;border:1px solid #a8976c88;color:var(--chalk);background:radial-gradient(ellipse at 0 0,#2e4140,transparent 55%),#142429;box-shadow:0 30px 100px #0009;overscroll-behavior:contain}
+.blessing-dialog::backdrop{background:#050d12d9;backdrop-filter:blur(7px)}
+.blessing-dialog-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.blessing-close{display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;border:1px solid var(--line);background:#172b30;color:#e7dcc3;border-radius:50%}
+.blessing-dialog .blessing-preview-note{padding:11px 14px;border-left:2px solid #cbb786;background:#d8cbb10a;font-size:12px;line-height:1.8;color:#dfd4b9;margin:16px 0 24px}
+.blessing-steps{display:flex;gap:24px;list-style:none;padding:0;margin:0 0 25px;color:#98ad9f}
+.blessing-steps li{display:flex;align-items:center;gap:8px;font-size:12px}
+.blessing-steps li>span{width:25px;height:25px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:10px}
+.blessing-steps .is-current{color:#eddfbc}.blessing-steps .is-current>span{background:#d8cbb1;color:#1b292a}
+.blessing-dialog h2{font-size:clamp(24px,3vw,34px);line-height:1.4;margin:0 0 27px}
+.blessing-dialog h2:focus{outline:none}
+.blessing-checkout-grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:36px;align-items:start}
+.blessing-card-summary{text-align:center;padding:23px 20px;background:#091b2055;border:1px solid var(--line)}
+.blessing-print{width:140px;aspect-ratio:3/4.6;background:#19383b;border:6px solid #d3c4a5;margin:0 auto 24px;transform:rotate(-5deg);box-shadow:8px 12px 20px #02090977}
+.blessing-print img{width:100%;height:100%;object-fit:contain}
+.blessing-card-summary>.overline{font-size:9px;letter-spacing:.1em}
+.blessing-card-summary h3{font:500 20px/1.6 'Noto Serif TC',serif;margin:12px 0}
+.blessing-card-summary p{font:13px/1.9 'Noto Serif TC',serif;color:#d5d3bb}
+.blessing-card-summary>small{display:block;color:#9daf9f;font-size:10px;line-height:1.8}
+.blessing-fields{min-width:0}.blessing-packages{border:0;padding:0;margin:0 0 22px;min-width:0}
+.blessing-packages legend{font-size:13px;color:#e7dfc9;margin-bottom:12px}
+.blessing-packages label{display:flex;align-items:center;gap:10px;padding:15px 12px;border:1px solid var(--line);margin:0 0 10px;cursor:pointer}
+.blessing-packages label.is-selected{border-color:#cbb786;background:#d8cbb10a}
+.blessing-packages strong{font-size:13px;font-weight:500}.blessing-packages small{display:block;margin-top:6px;font-size:11px;line-height:1.7;color:#aebeb1}
+.blessing-packages .blessing-price{font-size:11px;color:#d9c79f;white-space:nowrap;margin-left:auto}
+.blessing-dialog input[type=radio],.blessing-dialog input[type=checkbox]{accent-color:#ddc99e;width:16px;height:16px;flex-shrink:0}
+.blessing-field{display:flex;flex-direction:column;gap:9px;font-size:12px;line-height:1.6;color:#e0d7be;margin-bottom:19px}
+.blessing-field input,.blessing-field textarea,.blessing-field select{border:1px solid #71897d;background:#0e2026;color:#ede5d1;padding:11px 12px;min-width:0;width:100%;font-size:14px;line-height:1.6;border-radius:0}
+.blessing-field textarea{resize:vertical;font-size:14px}.blessing-field select{font:inherit;max-width:130px}
+.blessing-field :is(input,textarea,select):focus-visible{outline:2px solid #d7c59e;outline-offset:3px}
+.blessing-field small{font-size:10px;color:#aebeb1}.blessing-field-pair{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.blessing-temple{display:flex;gap:12px;padding:15px;border:1px solid var(--line);background:#b4cfb408;color:#b9ceb3}
+.blessing-temple>svg{flex-shrink:0}.blessing-temple strong{font-size:12px;font-weight:500}.blessing-temple p{font-size:11px;line-height:1.8;margin:8px 0 0;color:#b8c7b9}
+.blessing-field-help{font-size:12px;line-height:1.8;color:#bbccbd;margin:0 0 16px}
+.blessing-sample{padding:10px 0;margin-bottom:18px;border:0;border-bottom:1px solid #ccb98e;background:none;color:#e1cc9c;font-size:12px}
+.blessing-review,.blessing-costs{margin:0 0 22px;font-size:12px;line-height:1.8}
+.blessing-review>div,.blessing-costs>div{display:flex;justify-content:space-between;gap:18px;margin-bottom:14px}
+.blessing-review dt,.blessing-costs dt{color:#aebfb0;flex-shrink:0}.blessing-review dd,.blessing-costs dd{margin:0;text-align:right;overflow-wrap:anywhere;white-space:pre-wrap}
+.blessing-costs{padding-top:18px;border-top:1px solid var(--line)}.blessing-costs .blessing-total{border-top:1px solid var(--line);padding-top:15px;font-size:15px;color:#eadcba}
+.blessing-consent{display:flex;align-items:flex-start;gap:10px;color:#bccbbb;font-size:11px;line-height:1.8}.blessing-consent input{margin-top:3px}
+.blessing-form-actions{display:flex;justify-content:flex-end;gap:12px;padding-top:25px;margin-top:25px;border-top:1px solid var(--line)}
+.blessing-complete>p{font-size:13px;line-height:1.9;color:#bccbbb;max-width:650px}
+.blessing-complete-seal{display:grid;place-items:center;width:62px;height:62px;border:1px solid #cbb786;margin:0 0 20px;color:#decda8;font:32px 'Noto Serif TC',serif;transform:rotate(-5deg)}
+.blessing-complete-card{display:flex;align-items:center;gap:22px;padding:20px;border:1px solid var(--line);margin:25px 0 30px}.blessing-complete-card img{width:80px;height:110px;object-fit:contain;background:#1b3739}.blessing-complete-card h3{font:500 21px/1.5 'Noto Serif TC',serif;margin:8px 0}.blessing-complete-card p{font-size:12px;margin:0 0 8px}.blessing-complete-card small{font-size:11px;color:#aec1af}
+.blessing-complete>h3{font-size:14px;font-weight:500;color:#d6c69f}
+@media(max-width:700px){.blessing-introduction{margin-top:64px}.blessing-introduction h2 em{display:block}.blessing-journey{grid-template-columns:1fr 1fr;gap:23px 18px}.blessing-dialog{width:calc(100% - 20px);max-height:calc(100dvh - 20px);padding:18px}.blessing-checkout-grid{grid-template-columns:1fr;gap:25px}.blessing-card-summary{display:grid;grid-template-columns:85px 1fr;text-align:left;column-gap:16px;padding:16px;align-items:center}.blessing-print{grid-row:1/5;width:75px;margin:0 0 5px;border-width:4px}.blessing-card-summary h3{font-size:18px;margin:8px 0}.blessing-card-summary p{margin:0 0 8px;font-size:12px}.blessing-steps{gap:16px}.blessing-steps li{font-size:11px}.blessing-form-actions .paper-button{flex:1}.blessing-form-actions{gap:8px}.blessing-form-actions button{padding:13px 10px;letter-spacing:0;font-size:11px}.blessing-complete-card{padding:14px;gap:15px}.blessing-field-pair{grid-template-columns:1fr;gap:0}}
