@@ -5,7 +5,7 @@ import '@/lib/i18n'
 import '@/styles.css'
 
 export const Route = createRootRoute({
-  head: () => ({ meta: [{ charSet: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { title: 'A Way into Shuilu Paintings' }, { name: 'description', content: 'An interactive way to look closer at twenty Shuilu painting images.' }] }),
+  head: () => ({ meta: [{ charSet: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { title: 'Zhong Art | Collect Chinese Heritage' }, { name: 'description', content: 'Discover collectible art cards inspired by Chinese Shuilu paintings. Collect the art, reconnect with history, and carry your heritage forward.' }] }),
   component: () => import.meta.env.MODE === 'pages'
     ? <AppShell><Outlet/></AppShell>
     : <RootDocument><AppShell><Outlet/></AppShell></RootDocument>,
