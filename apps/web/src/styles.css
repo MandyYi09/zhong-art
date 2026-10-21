@@ -444,49 +444,58 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero-art-card,.product-art img{transition:none}}
 
 
-/* Dark collector theme: charcoal surfaces, white typography and red accents. */
+/* Artwork-derived dark palette.
+   Featured paintings: cinnabar #ab4b3a / #b44d3b, jade #566f5d,
+   blue #4a6c8d, parchment #e1c8a1, and gold #cfaf7a.
+   Surface shades are darkened companions; images retain their original color. */
 :root {
   color-scheme: dark;
-  --night: #181818;
-  --night-blue: #222222;
-  --desk: #292929;
-  --paper: #dddddd;
-  --paper-light: #f5f5f5;
-  --chalk: #f5f5f5;
-  --muted: #b8b8b8;
-  --line: rgba(255,255,255,.18);
-  --jade: #eeeeee;
-  --gold: #dddddd;
-  --vermilion: #e46c65;
-  --ink: #f5f5f5;
+  --night: #1d211e;
+  --night-blue: #242d30;
+  --desk: #2b3029;
+  --paper: #e1c8a1;
+  --paper-light: #f1e7d5;
+  --chalk: #f1e7d5;
+  --muted: #b9b5a5;
+  --line: rgba(207,175,122,.22);
+  --jade: #b3bb90;
+  --gold: #cfaf7a;
+  --vermilion: #ab4b3a;
+  --ink: #f1e7d5;
 }
-.collector-header, .collector-home { background: #181818; color: #f5f5f5; }
-.collector-header { border-top-color: #bd3933; border-bottom-color: #3c3c3c; }
-.collector-hero { background: radial-gradient(ellipse at 80% 40%, #363636, transparent 65%), #181818; }
-.brand-chop, .vermilion-button, .paper-button { background: #b63732; border-color: #c94b45; color: #ffffff; }
-.brand-chop { outline-color: #ffffff; }
-.vermilion-button:hover, .paper-button:hover { background: #922d29; color: #ffffff; }
+.collector-header, .collector-home { background: #1d211e; color: #f1e7d5; }
+.collector-header { border-top-color: #ab4b3a; border-bottom-color: #cfaf7a33; }
+.collector-hero { background: radial-gradient(ellipse at 80% 40%, #354039, transparent 65%), #1d211e; }
+.brand-chop, .vermilion-button, .paper-button { background: #ab4b3a; border-color: #ab4b3a; color: #fff5e5; }
+.brand-chop { outline-color: #e1c8a1; }
+.vermilion-button:hover, .paper-button:hover { background: #8d3d30; color: #fff5e5; }
+.collector-header .is-current, .collector-nav-link:hover,
+.collector-nav-link.is-active { color: #e1c8a1; }
+.collector-nav-link.is-active:after { background: #ab4b3a; }
 .heritage-eyebrow, .heritage-interactive .heritage-eyebrow,
-.collector-ritual span, .heritage-manifesto em, .manifesto-mark, .collection-stamp { color: #e46c65; }
+.collector-ritual span { color: #cfaf7a; }
+.hero-story h1 em, .heritage-manifesto em { color: #e1c8a1; }
+.manifesto-mark, .collection-stamp { color: #ab4b3a; }
 .hero-description, .hero-footnote, .vertical-inscription,
 .section-heading > p, .collector-product > p, .availability-note,
-.heritage-manifesto p:not(.heritage-eyebrow), .collector-ritual p { color: #bdbdbd; }
-.ink-link { border-color: #777777; }
-.hero-ring { border-color: #5b5b5b; box-shadow: 0 0 0 15px #ffffff05, 0 0 0 35px #ffffff04; }
-.hero-art-card { background: #303030; border-color: #777777; outline-color: #484848; color: #ffffff; }
-.hero-art-card:after { border-color: #ffffff33; }
-.card-position-0 { background: #3b2929; }
-.card-position-2 { background: #242424; }
-.collection-stamp { border-color: #e46c65; }
-.heritage-ribbon { background: #a6312d; color: #ffffff; }
-.heritage-interactive { background: #222222; color: #f5f5f5; }
-.heritage-interactive .living-painting { border-color: #666666; box-shadow: 0 0 0 7px #ffffff06; }
-.product-art, .collector-product:nth-child(2) .product-art,
-.collector-product:nth-child(3) .product-art { background: #2b2b2b; border-bottom-color: #b63732; }
-.product-art > span { color: #c7c7c7; }
-.heritage-manifesto { background: #242424; border-color: #444444; }
-.manifesto-mark { border-color: #e46c6580; outline-color: #e46c6540; }
-.collector-ritual article { border-color: #555555; }
-.site-footer { background: #131313; color: #bdbdbd; }
+.heritage-manifesto p:not(.heritage-eyebrow), .collector-ritual p { color: #b9b5a5; }
+.ink-link { border-color: #cfaf7a77; }
+.hero-ring { border-color: #cfaf7a44; box-shadow: 0 0 0 15px #cfaf7a05, 0 0 0 35px #cfaf7a04; }
+.hero-art-card { background: #293b46; border-color: #8f775a; outline-color: #554743; color: #e1c8a1; }
+.hero-art-card:after { border-color: #cfaf7a66; }
+.card-position-0 { background: #354638; }
+.card-position-2 { background: #3d302b; }
+.collection-stamp { border-color: #ab4b3a; }
+.heritage-ribbon { background: #893e32; color: #f1e7d5; }
+.heritage-interactive { background: #252e28; color: #f1e7d5; }
+.heritage-interactive .living-painting { border-color: #8f775a88; box-shadow: 0 0 0 7px #cfaf7a06; }
+.product-art { background: #303c32; border-bottom-color: #8f775a; }
+.collector-product:nth-child(2) .product-art { background: #293740; border-bottom-color: #8f775a; }
+.collector-product:nth-child(3) .product-art { background: #3c302a; border-bottom-color: #8f775a; }
+.product-art > span { color: #e1c8a1; }
+.heritage-manifesto { background: #2c2c25; border-color: #cfaf7a33; }
+.manifesto-mark { border-color: #ab4b3a80; outline-color: #ab4b3a40; }
+.collector-ritual article { border-color: #cfaf7a55; }
+.site-footer { background: #181c19; color: #b9b5a5; }
 .draw-page, .atlas-page, .painting-page, .compose-page,
-.viewing-path-page { background-color: #181818; }
+.viewing-path-page { background-color: #1d211e; }
