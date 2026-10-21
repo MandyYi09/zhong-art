@@ -22,9 +22,9 @@ export const initialCards: CuratedCard[] = Array.from({ length: 50 }, (_, index)
 }))
 
 export const initialUsers: AdminUser[] = [
-  { id: 'u1', name: '林映彤', email: 'yingtong@zhong.art', roles: ['admin'], status: 'active', lastActiveAt: '2026-09-13T05:10:00Z' },
-  { id: 'u2', name: 'Alex Chen', email: 'alex@zhong.art', roles: ['editor'], status: 'active', lastActiveAt: '2026-09-12T14:42:00Z' },
-  { id: 'u3', name: '吳安琪', email: 'anqi@zhong.art', roles: ['support'], status: 'active', lastActiveAt: '2026-09-11T09:18:00Z' },
+  { id: 'u1', name: '林映彤', email: 'yingtong@modern-shuilu.example', roles: ['admin'], status: 'active', lastActiveAt: '2026-09-13T05:10:00Z' },
+  { id: 'u2', name: 'Alex Chen', email: 'alex@modern-shuilu.example', roles: ['editor'], status: 'active', lastActiveAt: '2026-09-12T14:42:00Z' },
+  { id: 'u3', name: '吳安琪', email: 'anqi@modern-shuilu.example', roles: ['support'], status: 'active', lastActiveAt: '2026-09-11T09:18:00Z' },
   { id: 'u4', name: 'Morgan Lee', email: 'morgan@example.com', roles: ['viewer'], status: 'invited' },
   { id: 'u5', name: '陳庭羽', email: 'tingyu@example.com', roles: ['viewer'], status: 'suspended', lastActiveAt: '2026-08-27T02:30:00Z' },
 ]

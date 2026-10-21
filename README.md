@@ -1,4 +1,6 @@
-# Zhong Art integrated stack
+# Modern Shuilu integrated stack
+
+The project name is **Modern Shuilu** in both languages. The existing `zhong-art` repository URL, local folder, authentication realm, database identifiers, and browser-storage keys are retained for compatibility; they are infrastructure identifiers, not the project’s display name.
 
 ## Public website preview
 

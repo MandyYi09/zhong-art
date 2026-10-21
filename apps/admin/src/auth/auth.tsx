@@ -32,7 +32,7 @@ function OidcBridge({ children }: { children: ReactNode }) {
   return <AuthContext.Provider value={{ isLoading: auth.isLoading, isAuthenticated: auth.isAuthenticated, session, accessToken: auth.user?.access_token, signIn: () => void auth.signinRedirect(), signOut: () => void auth.signoutRedirect() }}>{children}</AuthContext.Provider>
 }
 
-const mockSession: AdminSession = { subject: 'local-admin', name: '林映彤', email: 'yingtong@zhong.art', roles: ['admin'] }
+const mockSession: AdminSession = { subject: 'local-admin', name: '林映彤', email: 'yingtong@modern-shuilu.example', roles: ['admin'] }
 export function AdminAuthProvider({ children }: { children: ReactNode }) {
   if (import.meta.env.VITE_AUTH_MODE === 'mock') return <AuthContext.Provider value={{ isLoading: false, isAuthenticated: true, session: mockSession, accessToken: import.meta.env.VITE_DEV_ACCESS_TOKEN, signIn: () => {}, signOut: () => {} }}>{children}</AuthContext.Provider>
   return <OidcProvider {...oidcConfig}><OidcBridge>{children}</OidcBridge></OidcProvider>

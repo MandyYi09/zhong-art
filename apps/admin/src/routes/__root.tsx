@@ -10,7 +10,7 @@ import { AdminStoreProvider } from '@/state/admin-store'
 import '@/styles.css'
 
 export const Route = createRootRoute({
-  head: () => ({ meta: [{ charSet: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { title: 'Zhong Art Admin' }, { name: 'description', content: 'Bilingual Zhong Art administration console' }] }),
+  head: () => ({ meta: [{ charSet: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { title: 'Modern Shuilu Admin' }, { name: 'description', content: 'Bilingual Modern Shuilu administration console' }] }),
   component: Root,
   shellComponent: Document,
   notFoundComponent: () => <div className="p-8 text-sm">Page not found.</div>,

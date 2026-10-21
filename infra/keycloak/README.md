@@ -1,4 +1,4 @@
-# Zhong Art Keycloak realm
+# Modern Shuilu Keycloak realm
 
 `realm.json` is imported by the root Compose stack into the local Keycloak at
 `http://localhost:8080`. It includes deliberately weak local accounts and must

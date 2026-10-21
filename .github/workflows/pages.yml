@@ -25,7 +25,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node --test scripts/pages-entry.test.mjs
-      - run: npm run pages:build --workspace @zhong-art/web
+      - run: npm run pages:build --workspace @modern-shuilu/web
         env:
           VITE_RELEASE_VERSION: ${{ github.sha }}
       - run: cp pages-dist/index.html pages-dist/404.html

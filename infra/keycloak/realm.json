@@ -1,6 +1,6 @@
 {
   "realm": "zhong-art",
-  "displayName": "Zhong Art",
+  "displayName": "Modern Shuilu",
   "enabled": true,
   "sslRequired": "external",
   "attributes": {
@@ -26,13 +26,13 @@
     "realm": [
       {
         "name": "user",
-        "description": "Standard Zhong Art application access",
+        "description": "Standard Modern Shuilu application access",
         "composite": false,
         "clientRole": false
       },
       {
         "name": "admin",
-        "description": "Zhong Art administrative application access",
+        "description": "Modern Shuilu administrative application access",
         "composite": false,
         "clientRole": false
       }
@@ -90,7 +90,7 @@
   "clientScopes": [
     {
       "name": "zhong-api",
-      "description": "Adds the Zhong Art server audience to access tokens",
+      "description": "Adds the Modern Shuilu server audience to access tokens",
       "protocol": "openid-connect",
       "attributes": {
         "include.in.token.scope": "true",
@@ -115,7 +115,7 @@
   "clients": [
     {
       "clientId": "zhong-public",
-      "name": "Zhong Art public app",
+      "name": "Modern Shuilu public app",
       "description": "Browser-based public application; Authorization Code flow with PKCE",
       "enabled": true,
       "protocol": "openid-connect",
@@ -159,7 +159,7 @@
     },
     {
       "clientId": "zhong-admin",
-      "name": "Zhong Art admin app",
+      "name": "Modern Shuilu admin app",
       "description": "Browser-based administration application; Authorization Code flow with PKCE",
       "enabled": true,
       "protocol": "openid-connect",
@@ -202,7 +202,7 @@
     },
     {
       "clientId": "zhong-server",
-      "name": "Zhong Art server",
+      "name": "Modern Shuilu server",
       "description": "Confidential server client for service-to-service authentication and API audience validation",
       "enabled": true,
       "protocol": "openid-connect",

@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next'
 
 export const resources = {
   'zh-TW': { translation: {
-    product: '中・管理台', overview: '總覽', deck: '策展牌組', users: '使用者', settings: '配額與預算',
+    product: 'Modern Shuilu', overview: '總覽', deck: '策展牌組', users: '使用者', settings: '配額與預算',
     adminConsole: '管理控制台', environment: '正式環境', search: '搜尋', searchHint: '搜尋卡牌、使用者…',
     signOut: '登出', language: '語言', nav: '主選單', openMenu: '開啟選單', close: '關閉',
     dashboardTitle: '營運總覽', dashboardSubtitle: '檢視牌組發布進度與 AI 使用狀況。',
@@ -26,7 +26,7 @@ export const resources = {
     cardEditor: '編輯雙語卡牌', zhTitle: '繁體中文標題', enTitle: '英文標題', zhPrompt: '繁體中文引導', enPrompt: '英文引導', saveCard: '儲存卡牌', cardSaved: '卡牌已儲存', unsaved: '有未儲存的變更',
   } },
   en: { translation: {
-    product: 'Zhong Admin', overview: 'Overview', deck: 'Curated deck', users: 'Users', settings: 'Quotas & budget',
+    product: 'Modern Shuilu', overview: 'Overview', deck: 'Curated deck', users: 'Users', settings: 'Quotas & budget',
     adminConsole: 'Admin console', environment: 'Production', search: 'Search', searchHint: 'Search cards, users…',
     signOut: 'Sign out', language: 'Language', nav: 'Main navigation', openMenu: 'Open menu', close: 'Close',
     dashboardTitle: 'Operations overview', dashboardSubtitle: 'Track deck readiness and AI usage at a glance.',

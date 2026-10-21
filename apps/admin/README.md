@@ -1,4 +1,4 @@
-# Zhong Art Admin
+# Modern Shuilu Admin
 
 Separate bilingual administration surface built with TanStack Start.
 

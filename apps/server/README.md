@@ -1,4 +1,4 @@
-# Zhong Art server
+# Modern Shuilu server
 
 Express/PostgreSQL API for bilingual card curation and drawing.
 
