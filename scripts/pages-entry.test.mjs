@@ -13,7 +13,7 @@ async function browser(responses) {
   const stored = new Map()
   const state = { reloads: 0 }
   const context = {
-    URL, AbortSignal,
+    URL, AbortSignal, setTimeout, clearTimeout,
     navigator: { onLine: true },
     sessionStorage: { getItem: key => stored.get(key), setItem: (key, value) => stored.set(key, value) },
     document: {
@@ -29,7 +29,7 @@ async function browser(responses) {
     },
     fetch: async (url, options) => {
       requests.push({ url, options })
-      const result = responses.shift()
+      const result = await responses.shift()
       if (result instanceof Error) throw result
       return { ok: true, json: async () => result }
     },
@@ -96,4 +96,22 @@ test('build output keeps fonts and replaces stale entry and CSS tags with the ve
   assert.ok(!result.html.includes('src="/zhong-art/assets/old.js"'))
   assert.ok(!result.html.includes('href="/zhong-art/assets/old.css"'))
   assert.throws(() => versionedHtml('<head></head>', 'old', '/zhong-art/'))
+})
+
+
+test('a stalled version check mounts the fallback within the startup budget', async () => {
+  const start = Date.now()
+  const page = await browser([new Promise(() => {})])
+  assert.equal(page.elements.at(-1).src, 'https://example.test/zhong-art/assets/old.js')
+  assert.ok(Date.now() - start < 2000, 'startup must not wait for the five-second network timeout')
+})
+
+test('a late manifest does not mount a second application', async () => {
+  let resolve
+  const response = new Promise(done => { resolve = done })
+  const page = await browser([response])
+  resolve(next)
+  await new Promise(done => setTimeout(done, 0))
+  assert.equal(page.elements.filter(element => element.tag === 'script').length, 1)
+  assert.equal(page.elements.at(-1).src, 'https://example.test/zhong-art/assets/old.js')
 })

@@ -47,15 +47,15 @@ function DrawPage() {
     <div className="draw-workspace">
       <div className="draw-card-column">
       <button className={`daily-card daily-card-${phase}`} type="button" onClick={nextPhase} disabled={phase === 'character' && !matched} aria-label={phase === 'sealed' ? (en ? 'Turn today’s card' : '翻开今日卡片') : phase === 'character' ? (en ? 'View the original after finding its clue' : '找到线索后查看对应原画') : (en ? 'Return to the character card' : '回到角色卡')}>
-        {phase === 'sealed' && <div className="daily-card-back illustrated-card-back" aria-hidden="true"><img src={daily.back} alt=""/></div>}
+        {phase === 'sealed' && <div className="daily-card-back illustrated-card-back" aria-hidden="true"><img decoding="async" src={daily.back} alt=""/></div>}
         {phase === 'character' && <div className="daily-card-character">
           <span className="daily-character-index">{String(daily.index).padStart(2, '0')} / {paintings.length} · {daily.edition === 'hidden' ? (en ? 'SECRET' : '隐藏款') : (en ? 'REGULAR' : '常规款')}</span>
           <span className="daily-character-halo" aria-hidden="true"/>
-          <img src={daily.character} onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = publicAsset(`paintings/character/${encodeURIComponent(daily.id)}.webp`) }} alt={en ? `Illustrated character adapted from painting ${daily.id}` : `根据原画 ${daily.id} 绘制的角色形象`}/>
+          <img decoding="async" src={daily.character} onError={event => { event.currentTarget.onerror = null; event.currentTarget.src = publicAsset(`paintings/character/${encodeURIComponent(daily.id)}.webp`) }} alt={en ? `Illustrated character adapted from painting ${daily.id}` : `根据原画 ${daily.id} 绘制的角色形象`}/>
           <span className="daily-card-message"><small>{en ? 'A WISH FOR TODAY' : '今日祝福'}</small><strong>{blessing}</strong></span>
           <span className="daily-card-hint">{matched ? (en ? 'Clue found · tap to see the source' : '线索已找到 · 轻触翻看原画') : (en ? 'Find its detail to unlock the source' : '找到对应局部 · 解锁原画')} {matched && <ArrowRight size={14}/>}</span>
         </div>}
-        {phase === 'original' && <div className="daily-card-original"><img src={daily.original} alt={en ? `Original Shuilu painting ${daily.id}` : `水陆画原画 ${daily.id}`}/><span>{en ? 'ORIGINAL PAINTING' : '原始图像'} · {daily.id}</span></div>}
+        {phase === 'original' && <div className="daily-card-original"><img decoding="async" src={daily.original} alt={en ? `Original Shuilu painting ${daily.id}` : `水陆画原画 ${daily.id}`}/><span>{en ? 'ORIGINAL PAINTING' : '原始图像'} · {daily.id}</span></div>}
       </button>
       {phase !== 'sealed' && <div className="blessing-card-entry"><span>{en ? 'A DIGITAL ENCOUNTER, A PHYSICAL KEEPSAKE' : '把今日相遇，变成一份珍藏'}</span><button className="paper-button" type="button" onClick={() => setBlessingOpen(true)}><Sparkles size={17}/>{en ? 'Temple blessing' : '寺庙祈福加持'}<ArrowRight size={16}/></button><small>{en ? 'Explore the physical card · Preview only' : '体验实体收藏卡方案 · 暂未开放下单'}</small></div>}
       </div>

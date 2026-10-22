@@ -14,6 +14,7 @@
   let width = 1200, height = 600, dpr = 1, time = 0, last = 0, paused = reducedMotion.matches, wind = .35;
   let pointer = { x: 0, y: 0, active: false }, drag = null, hovered = -1, particles = [], ripples = [];
   let sound = false, audio = null, master = null, nextNote = 0, toastTimer, ready = false;
+  let frameId = 0, inView = true;
   const palette = ['#b1d9ad', '#dfd66d', '#d58a95', '#89c8b4'];
   // The masks below are drawn in source-image coordinates. The source files
   // remain untouched; individual paintings become flexible, textured puppets.
@@ -54,15 +55,15 @@
     try {
       await Promise.all(guardians.map(async g=>{
         const im=await loadImage(g.file);const [x,y,w,h]=g.bounds;
-        const c=document.createElement('canvas');c.width=w;c.height=h;const p=c.getContext('2d');
-        p.translate(-x,-y);p.save();p.clip(new Path2D(g.outline));p.drawImage(im,0,0);p.restore();
+        const c=document.createElement('canvas');const scale=Math.min(1,800/h);c.width=Math.round(w*scale);c.height=Math.round(h*scale);const p=c.getContext('2d');
+        p.scale(scale,scale);p.translate(-x,-y);p.save();p.clip(new Path2D(g.outline));p.drawImage(im,0,0);p.restore();
         p.globalCompositeOperation='destination-out';for(const path of g.holes)p.fill(new Path2D(path));
         g.texture=c;g.home={x:g.x,y:g.y};g.burst=0;g.box={x:0,y:0,w:0,h:0};
       }));
-      ready=true;$('#loading').classList.add('loaded');resize();syncPause();requestAnimationFrame(frame);
+      ready=true;$('#loading').classList.add('loaded');resize();syncPause();invalidate();
     } catch(error) {$('#loading').replaceChildren(Object.assign(document.createElement('p'),{textContent:'The scroll could not open. Please check the assets folder and reload.'}));console.error(error);}
   }
-  function resize(){const rect=canvas.getBoundingClientRect();width=rect.width;height=rect.height;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);}
+  function resize(){const rect=canvas.getBoundingClientRect();width=rect.width;height=rect.height;dpr=Math.min(devicePixelRatio||1,1.25,1600/width);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);invalidate();}
   new ResizeObserver(resize).observe(canvas);
   function cloud(c, foreground=false) {
     let x=((c.x+time*c.speed*(.1+wind))%1.5+1.5)%1.5-.25;
@@ -94,9 +95,9 @@
     g.box={x:x-w/2,y:y-h/2,w,h};
     drawHalo(g,x,y,h);
     ctx.save();ctx.translate(x,y);ctx.rotate(Math.sin(time*.55+g.phase)*(.016+wind*.012)+dance*.035);
-    if(hovered===index || (drag&&drag.index===index)){ctx.shadowColor=g.color;ctx.shadowBlur=14;}
+    // The halo supplies emphasis without applying a blur to every image strip.
     // Overlapping strips make the head, cloth, and legs flex continuously.
-    const strips=76,sh=g.texture.height/strips;
+    const strips=32,sh=g.texture.height/strips;
     for(let j=0;j<strips;j++){
       const v=j/strips,flex=Math.sin(v*7-time*(1.1+wind)+g.phase)*(1.6+wind*3.8)*(Math.pow(Math.abs(v-.48)*2,1.5));
       const gesture=energy>0?Math.sin(v*9+(4-energy)*6)*energy*(index===2?1.9:1.2):0;
@@ -110,18 +111,30 @@
     particles=particles.filter(p=>p.life>0);
     for(const r of ripples){if(!paused)r.life-=dt;ctx.globalAlpha=Math.max(0,r.life*.35);ctx.strokeStyle=r.color;ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(r.x,r.y,(2-r.life)*75+10,(2-r.life)*32+5,0,0,TAU);ctx.stroke();}ripples=ripples.filter(r=>r.life>0);ctx.globalAlpha=1;
   }
+  function invalidate(){
+    if(ready && inView && !document.hidden && !frameId) frameId=requestAnimationFrame(frame);
+  }
+  function stopFrame(){cancelAnimationFrame(frameId);frameId=0;last=0;}
+  window.addEventListener('message',event=>{
+    if(event.source!==parent || event.origin!==location.origin || event.data?.type!=='scene-visibility')return;
+    inView=event.data.visible===true;
+    if(!inView)stopFrame();else invalidate();
+  });
   function frame(now){
+    frameId=0;
+    if(!inView || document.hidden)return;
+    if(!paused && last && now-last<1000/30){invalidate();return;}
     const dt=Math.min((now-last)/1000||0,.05);last=now;if(!paused)time+=dt;
     ctx.setTransform(dpr,0,0,dpr,0,0);sky();
     for(const index of [0,2,1]){const g=guardians[index];if(!paused)g.burst=Math.max(0,g.burst-dt);drawGuardian(g,index);}
     clouds.filter(c=>c.front).forEach(c=>cloud(c,true));drawEffects(dt);
     ctx.fillStyle=paperPattern;ctx.fillRect(0,0,width,height);
     if(sound&&!paused&&audio&&audio.currentTime>nextNote){tone([146.83,174.61,196,220,261.63,293.66][Math.floor(random()*6)],.08,3);nextNote=audio.currentTime+2.6+random()*2.5;}
-    requestAnimationFrame(frame);
+    if(!paused)invalidate();
   }
   function announce(message){$('#announcement').textContent=message;$('#announcement').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#announcement').classList.remove('visible'),3100);}
   function emit(x,y,color,count=25){for(let i=0;i<count;i++){const a=random()*TAU,s=20+random()*95;particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-20,color,life:1.5+random()*2.5,size:1+random()*3.3});}if(particles.length>350)particles.splice(0,particles.length-350);}
-  function awaken(index){if(!ready)return;const g=guardians[index];g.burst=4;const b=g.box;emit(b.x+b.w/2,b.y+b.h*.35,g.color,55);ripples.push({x:b.x+b.w/2,y:b.y+b.h*.5,color:g.color,life:2});$('#scene-status').textContent=`${g.name.toUpperCase()} AWAKENS`;announce(g.message);const button=$(`[data-guardian="${index}"]`);button.classList.add('active');setTimeout(()=>button.classList.remove('active'),3500);if(sound&&!paused){[1,1.5,2].forEach((n,i)=>tone((index===0?146.83:index===1?196:220)*n,.13,2,i*.15));}}
+  function awaken(index){if(!ready)return;invalidate();const g=guardians[index];g.burst=4;const b=g.box;emit(b.x+b.w/2,b.y+b.h*.35,g.color,55);ripples.push({x:b.x+b.w/2,y:b.y+b.h*.5,color:g.color,life:2});$('#scene-status').textContent=`${g.name.toUpperCase()} AWAKENS`;announce(g.message);const button=$(`[data-guardian="${index}"]`);button.classList.add('active');setTimeout(()=>button.classList.remove('active'),3500);if(sound&&!paused){[1,1.5,2].forEach((n,i)=>tone((index===0?146.83:index===1?196:220)*n,.13,2,i*.15));}}
   function position(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
   function hit(p){for(const i of [1,2,0]){const b=guardians[i].box;if(b&&p.x>b.x&&p.x<b.x+b.w&&p.y>b.y&&p.y<b.y+b.h)return i;}return -1;}
   canvas.addEventListener('pointerdown',e=>{if(!ready)return;const p=position(e),index=hit(p);pointer={...p,active:true};canvas.setPointerCapture(e.pointerId);if(index>=0){const g=guardians[index];drag={index,start:p,last:p,moved:0,offsetX:p.x-(g.box.x+g.box.w/2),offsetY:p.y-(g.box.y+g.box.h/2)};}else{emit(p.x,p.y,palette[Math.floor(random()*4)],15);ripples.push({...p,color:'#d9e0af',life:2});}});
@@ -130,7 +143,7 @@
   canvas.addEventListener('pointercancel',()=>{drag=null;});canvas.addEventListener('lostpointercapture',()=>{drag=null;});canvas.addEventListener('pointerleave',()=>{hovered=-1;pointer.active=false;});
   document.querySelectorAll('[data-guardian]').forEach(b=>b.addEventListener('click',()=>awaken(Number(b.dataset.guardian))));
   $('#wind').addEventListener('input',e=>{wind=Number(e.target.value)/100;$('#wind-value').textContent=wind<.1?'Still':wind<.45?'Gentle':wind<.75?'Breezy':'Wild';});
-  function syncPause(){const b=$('#pause');b.textContent=paused?'▷':'Ⅱ';b.setAttribute('aria-pressed',String(paused));b.setAttribute('aria-label',paused?'Resume animation':'Pause animation');b.title=paused?'Resume animation':'Pause animation';$('#scene-status').textContent=paused?'A MOMENT OF STILLNESS':'THE COURT IS DREAMING';if(master&&audio)master.gain.setTargetAtTime(paused?0:.22,audio.currentTime,.2);}
+  function syncPause(){invalidate();const b=$('#pause');b.textContent=paused?'▷':'Ⅱ';b.setAttribute('aria-pressed',String(paused));b.setAttribute('aria-label',paused?'Resume animation':'Pause animation');b.title=paused?'Resume animation':'Pause animation';$('#scene-status').textContent=paused?'A MOMENT OF STILLNESS':'THE COURT IS DREAMING';if(master&&audio)master.gain.setTargetAtTime(paused?0:.22,audio.currentTime,.2);}
   function togglePause(){paused=!paused;syncPause();}
   $('#pause').addEventListener('click',togglePause);
   reducedMotion.addEventListener('change',e=>{paused=e.matches;syncPause();});
@@ -142,6 +155,7 @@
   document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreenElement;$('#fullscreen').setAttribute('aria-label',on?'Exit fullscreen':'Enter fullscreen');});
   const about = { open: false };
   document.addEventListener('keydown',e=>{if(about.open||e.ctrlKey||e.metaKey||e.altKey||/^(INPUT|BUTTON|SELECT|TEXTAREA|A)$/.test(e.target.tagName))return;if(['1','2','3'].includes(e.key))awaken(Number(e.key)-1);else if(e.code==='Space'){e.preventDefault();togglePause();}else if(e.key.toLowerCase()==='r')reset();});
-  document.addEventListener('visibilitychange',()=>{last=performance.now();if(audio&&sound){if(document.hidden)audio.suspend();else audio.resume().catch(()=>{});}});
+  document.addEventListener('visibilitychange',()=>{stopFrame();invalidate();if(audio&&sound){if(document.hidden)audio.suspend();else audio.resume().catch(()=>{});}});
+  for(const name of ['pointerdown','pointermove','pointerup','pointerleave','pointercancel'])canvas.addEventListener(name,invalidate);
   init();
 })();

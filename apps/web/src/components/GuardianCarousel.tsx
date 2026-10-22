@@ -2,12 +2,11 @@ import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import guardians from '@/lib/cloud-court-guardians.json'
-import celestialPreview from '@/assets/guardian-celestial-inline.webp?inline'
-import jadePreview from '@/assets/guardian-jade-inline.webp?inline'
-import flamePreview from '@/assets/guardian-flame-inline.webp?inline'
+import celestialPreview from '@/assets/guardian-celestial-inline.webp'
+import jadePreview from '@/assets/guardian-jade-inline.webp'
+import flamePreview from '@/assets/guardian-flame-inline.webp'
 
-// Keep the mobile hero independent of separate image requests. These small
-// previews render at the canvas's display size and are bundled with the JS.
+// Separate cacheable images keep artwork bytes out of the application bundle.
 const previews: Record<string, { src: string; width: number; height: number }> = {
   'guardian-celestial.jpg': { src: celestialPreview, width: 1124, height: 1912 },
   'guardian-jade.jpg': { src: jadePreview, width: 1128, height: 1870 },
@@ -31,10 +30,13 @@ function PaintedGuardian({ guardian, animate }: { guardian: typeof guardians[num
     const motion = matchMedia('(prefers-reduced-motion: reduce)')
     const image = new Image()
     let frame = 0
+    let lastFrame = 0
     let disposed = false
     let texture: HTMLCanvasElement | null = null
     const render = (now: number) => {
       if (!texture || disposed) return
+      if (animate && now - lastFrame < 1000 / 30) { frame = requestAnimationFrame(render); return }
+      lastFrame = now
       const time = animate && !motion.matches ? now / 1000 : 0
       context.clearRect(0, 0, canvas.width, canvas.height)
       const height = 505
@@ -42,11 +44,11 @@ function PaintedGuardian({ guardian, animate }: { guardian: typeof guardians[num
       context.save()
       context.translate(210, 284 + Math.sin(time * .8 + guardian.phase) * 5)
       context.rotate(Math.sin(time * .55 + guardian.phase) * .012)
-      for (let strip = 0; strip < 76; strip++) {
-        const progress = strip / 76
+      for (let strip = 0; strip < 32; strip++) {
+        const progress = strip / 32
         const sourceY = progress * texture.height
         const flex = Math.sin(progress * 7 - time * 1.45 + guardian.phase) * 2.7 * Math.pow(Math.abs(progress - .48) * 2, 1.5)
-        context.drawImage(texture, 0, sourceY, texture.width, Math.min(texture.height / 76 + 2, texture.height - sourceY), -width / 2 + flex, -height / 2 + progress * height, width, height / 76 + 1)
+        context.drawImage(texture, 0, sourceY, texture.width, Math.min(texture.height / 32 + 2, texture.height - sourceY), -width / 2 + flex, -height / 2 + progress * height, width, height / 32 + 1)
       }
       context.restore()
       if (animate && !motion.matches && !document.hidden) frame = requestAnimationFrame(render)
@@ -83,7 +85,7 @@ function PaintedGuardian({ guardian, animate }: { guardian: typeof guardians[num
     return () => { disposed = true; cancelAnimationFrame(frame); motion.removeEventListener('change', refresh); document.removeEventListener('visibilitychange', refresh) }
   }, [guardian, animate])
   return <>
-    {!rendered && <img className="guardian-fallback" src={preview.src} alt="" aria-hidden="true" />}
+    {!rendered && <img decoding="async" className="guardian-fallback" src={preview.src} alt="" aria-hidden="true" />}
     <canvas ref={ref} width={420} height={560} className="painted-guardian" aria-hidden="true" />
   </>
 }
@@ -91,6 +93,13 @@ function PaintedGuardian({ guardian, animate }: { guardian: typeof guardians[num
 export function GuardianCarousel() {
   const { i18n } = useTranslation()
   const copy = labels[i18n.language === 'en' ? 'en' : 'zh-TW']
+  const container = useRef<HTMLElement>(null)
+  const [visible, setVisible] = useState(true)
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting))
+    if (container.current) observer.observe(container.current)
+    return () => observer.disconnect()
+  }, [])
   const [active, setActive] = useState(1)
   const [playing, setPlaying] = useState(true)
   const [interacting, setInteracting] = useState(false)
@@ -105,12 +114,12 @@ export function GuardianCarousel() {
     return () => preference.removeEventListener('change', update)
   }, [])
   useEffect(() => {
-    if (!playing || interacting || reducedMotion) return
+    if (!playing || interacting || reducedMotion || !visible) return
     const timer = setInterval(() => { if (!document.hidden) setActive(index => (index + 1) % guardians.length) }, 7000)
     return () => clearInterval(timer)
-  }, [playing, interacting, reducedMotion, active])
+  }, [playing, interacting, reducedMotion, active, visible])
 
-  return <section className="guardian-carousel" aria-roledescription="carousel" aria-label={copy.title}
+  return <section ref={container} className="guardian-carousel" aria-roledescription="carousel" aria-label={copy.title}
     onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)}
     onFocusCapture={() => setInteracting(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setInteracting(false) }}
     onKeyDown={event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1) } }}>
@@ -122,7 +131,7 @@ export function GuardianCarousel() {
       {guardians.map((guardian, index) => {
         const offset = (index - active + guardians.length) % guardians.length
         return <div key={guardian.file} role="group" className={`guardian-slide ${offset === 0 ? 'is-active' : offset === 1 ? 'is-next' : 'is-previous'}`} aria-hidden={index !== active} aria-roledescription="slide" aria-label={`${index + 1} / ${guardians.length}: ${copy.names[index]}`}>
-          <PaintedGuardian guardian={guardian} animate={index === active && playing && !reducedMotion}/>
+          <PaintedGuardian guardian={guardian} animate={index === active && playing && visible && !reducedMotion}/>
         </div>
       })}
       <span className="stage-cloud stage-cloud-left"/><span className="stage-cloud stage-cloud-right"/>

@@ -44,7 +44,15 @@ export async function loadLatestRelease(fallback, base) {
     current = release.version
   }
 
-  try { mount(await latest()) } catch { mount(fallback) }
+  // A slow manifest must not hold the whole site behind a blank screen.
+  let startupTimer
+  try {
+    mount(await Promise.race([
+      latest(),
+      new Promise(resolve => { startupTimer = setTimeout(() => resolve(fallback), 800) }),
+    ]))
+  } catch { mount(fallback) }
+  finally { clearTimeout(startupTimer) }
 
   async function checkForUpdate() {
     if (checking || edited || document.visibilityState !== 'visible' || navigator.onLine === false) return
