@@ -59,3 +59,25 @@ body { background: #f0f1e8; }
   .page-hem { height: 70px; margin-top: -10px; }
   .site-footer { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
 }
+
+/* Cloud silhouettes replace the rectangular carousel mat and control strip. */
+.living-painting { border: 0; background: transparent; box-shadow: none; }
+.living-corner { display: none; }
+.guardian-gallery { position: relative; min-height: 0; }
+.cloud-court-scene { height: 600px; mask: url('./assets/cloud-window.svg') center / 100% 100% no-repeat; }
+.cloud-frame { position: absolute; z-index: 6; width: clamp(155px, 25%, 330px); pointer-events: none; }
+.cloud-frame > svg:first-child { display: block; width: 100%; }
+.cloud-frame .garment-ornament { position: absolute; width: 125%; left: -10%; top: 48%; opacity: .85; }
+.cloud-frame-top { top: -8px; left: -15px; }
+.cloud-frame-bottom { right: -15px; bottom: -12px; transform: rotate(180deg); }
+.guardian-stage { background: url('./assets/painted-clouds.svg') center / cover, linear-gradient(160deg,#16343c,#27665d 80%); mask: url('./assets/cloud-window.svg') center / 100% 100% no-repeat; }
+.guardian-stage::before, .guardian-stage::after, .stage-cloud { display: none; }
+.guardian-orbit { border-color: #d6c08966; }
+.stage-inscription { color: #e2e0c2cc; }
+.carousel-controls { position: absolute; z-index: 7; bottom: 19px; left: 50%; transform: translateX(-50%); margin: 0; gap: 8px; padding: 6px 10px; border-radius: 40% 25% / 50%; background: #edf0ded9; }
+.carousel-count { display: none; }
+.carousel-heading { padding: 12px 32px 18px; }
+.gallery-mobile .cloud-frame { width: 155px; }
+.gallery-mobile .cloud-frame-top { top: 35px; left: -10px; }
+.gallery-mobile .cloud-frame-bottom { bottom: -8px; right: -10px; }
+@media(max-width:1050px) and (min-width:768px) { .cloud-court-scene { height: 500px; } }

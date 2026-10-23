@@ -135,7 +135,7 @@ export function GuardianCarousel() {
         </div>
       })}
       <span className="stage-cloud stage-cloud-left"/><span className="stage-cloud stage-cloud-right"/>
-      <div className="guardian-caption" aria-live={playing && !interacting ? 'off' : 'polite'}><span>{copy.elements[active]}</span><h2>{copy.names[active]}</h2></div>
+
     </div>
     <div className="carousel-controls">
       <button className="carousel-arrow" onClick={() => move(-1)} aria-label={copy.previous}><ChevronLeft size={19}/></button>
@@ -144,6 +144,6 @@ export function GuardianCarousel() {
       <span className="carousel-count">0{active + 1}<span> / 03</span></span>
       <button className="carousel-play" aria-label={playing ? copy.pause : copy.play} aria-pressed={!playing} onClick={() => setPlaying(value => !value)}>{playing ? <Pause size={14}/> : <Play size={14}/>}</button>
     </div>
-    <p className="carousel-footnote">{copy.hint}</p>
+
   </section>
 }

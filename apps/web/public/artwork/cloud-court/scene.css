@@ -21,3 +21,5 @@ body{background:var(--bg)}
 .wind-control input{accent-color:#577761}
 dialog{background:#eff1e6;border-color:#9b9e7d88}.dialog-close,dialog p{color:#425d51}
 .caption{color:#536b60!important}.scroll{border-color:#8f9e7b88}
+/* The host adds a cloud-and-ribbon silhouette around this painting. */
+:root{--bg:transparent}body{background:transparent}.scroll{border:0}.scroll::after{box-shadow:none}.corner{display:none}
