@@ -43,7 +43,7 @@ body { background: #f0f1e8; }
 .painting-mat { background: #e7e7d6; box-shadow: 8px 15px 32px #314a4317; }
 .painting-window { background: #ecebdd; }
 .atlas-sheet { box-shadow: 0 6px 18px #314a4310; }
-.daily-card { box-shadow: 10px 18px 35px #314a4322; }
+.daily-card:not(.daily-card-sealed) { box-shadow: 10px 18px 35px #314a4322; }
 .daily-card-message { background: linear-gradient(transparent, #e5ebdf 25%, #e5ebdf); }
 .daily-card-character { background: radial-gradient(circle at 50% 37%, #f5efdd, #d8e7dc 55%, #d0e0d6); }
 .daily-card-character img { filter: drop-shadow(0 8px 10px #314a4320); }
