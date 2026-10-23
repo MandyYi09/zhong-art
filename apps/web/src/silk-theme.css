@@ -1,0 +1,61 @@
+/* Light silk surfaces and robe-derived accents; the original bottom-dock layout is retained. */
+:root {
+  color-scheme: light;
+  --night: #f0f1e8;
+  --night-blue: #dfe9e4;
+  --desk: #e5eade;
+  --paper: #eee9d9;
+  --paper-light: #faf7ee;
+  --chalk: #2d4843;
+  --muted: #52665f;
+  --line: #9b9e7d50;
+  --jade: #4e7063;
+  --gold: #78683f;
+  --ink: #2d4843;
+  --silk-wash: radial-gradient(ellipse at 0% 5%, #c8deda99, transparent 48%), radial-gradient(ellipse at 100% 35%, #e9dfc385, transparent 42%), radial-gradient(ellipse at 45% 100%, #d4e2d27a, transparent 50%), linear-gradient(125deg, #eff2eb, #f7f3e8 65%, #e5eee7);
+}
+body { background: #f0f1e8; }
+.app-shell { background: var(--silk-wash); }
+.app-shell main { position: relative; isolation: isolate; }
+.app-shell main::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .35; background: repeating-linear-gradient(0deg, transparent 0 3px, #708f7406 3px 4px), repeating-linear-gradient(90deg, transparent 0 4px, #a7977006 4px 5px); }
+.opening-scene { background: transparent; }
+.garment-ornament { display: block; pointer-events: none; user-select: none; }
+.page-ribbon { position: absolute; top: 100px; left: 0; width: 65px; height: 430px; overflow: hidden; pointer-events: none; z-index: -1; }
+.page-ribbon svg { position: absolute; width: 470px; left: -230px; top: 120px; transform: rotate(80deg); opacity: .46; }
+.page-hem { height: 90px; overflow: hidden; position: relative; margin-top: -30px; pointer-events: none; }
+.page-hem svg { width: min(470px, 70vw); position: absolute; right: -65px; bottom: -24px; opacity: .64; }
+.page-dock { background: #f1f3e8ed; border-color: #a3af9566; box-shadow: 0 8px 30px #314a431a; }
+.page-dock-link { color: #49635a; }
+.page-dock-link:hover { background: #dce7d9; color: #294b3d; }
+.page-dock-link.is-active { background: #496a5c; color: #faf7ed; }
+.floating-language { background: #eef2e7ed; color: #52665f; border-color: #9aab9a88; }
+.floating-language .is-current { color: #294b3d; }
+.floating-language .language-divider { color: #657564; }
+.floating-language:hover { background: #dce7d9; color: #294b3d; }
+.living-painting { border-color: #9aab9a77; background: #e4ede1; box-shadow: none; }
+.living-corner { border-color: #9e9672; }
+.site-footer { background: #dee8df88; color: #52665f; border-color: var(--line); padding-bottom: 105px; }
+.paper-button { color: #faf7ed; background: #496a5c; border-color: #496a5c; }
+.paper-button:hover { color: #fffdf5; background: #355548; }
+.subtle-button { border-color: #9e9672; color: var(--ink); }
+.subtle-button:hover { background: #dce7d9; }
+.draw-page, .atlas-page, .painting-page, .compose-page, .viewing-path-page { background: radial-gradient(ellipse at 0% 15%, #c7dedb55, transparent 45%), radial-gradient(ellipse at 100% 80%, #e8ddc355, transparent 50%); }
+.painting-mat { background: #e7e7d6; box-shadow: 8px 15px 32px #314a4317; }
+.painting-window { background: #ecebdd; }
+.atlas-sheet { box-shadow: 0 6px 18px #314a4310; }
+.daily-card { box-shadow: 10px 18px 35px #314a4322; }
+.daily-card-message { background: linear-gradient(transparent, #e5ebdf 25%, #e5ebdf); }
+.daily-card-character { background: radial-gradient(circle at 50% 37%, #f5efdd, #d8e7dc 55%, #d0e0d6); }
+.daily-card-character img { filter: drop-shadow(0 8px 10px #314a4320); }
+.guardian-stage { background: radial-gradient(ellipse at 50% 40%, #f2ebd5, #d4e4d8 65%, #c7ddd8); }
+.guardian-slide canvas { filter: none; }
+.guardian-controls, .guardian-caption { color: var(--ink); }
+.blessing-dialog { background: var(--silk-wash); box-shadow: 0 20px 70px #213e4433; }
+.blessing-dialog::backdrop { background: #243c4666; }
+::selection { background: #b6d2c0; color: #243d35; }
+@media(max-width:700px) {
+  .page-ribbon { width: 22px; top: 135px; opacity: .55; }
+  .page-ribbon svg { left: -253px; }
+  .page-hem { height: 70px; margin-top: -10px; }
+  .site-footer { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
+}

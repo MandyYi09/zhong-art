@@ -1,19 +1,37 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { GuardianGallery } from '@/components/GuardianGallery'
-import { paintings } from '@/lib/paintings'
 
 export const Route = createFileRoute('/')({ component: HomePage })
 
 function HomePage() {
   const { i18n } = useTranslation()
   const en = i18n.language === 'en'
-  const featured = [paintings[0], paintings[8], paintings[16]]
-  return <div className="collector-home">
-    <section className="heritage-interactive"><div className="section-heading"><div><p className="heritage-eyebrow">01 / {en ? 'ENTER THE WORLD' : '走入画境'}</p><h1>{en ? 'Before the card, there was a world.' : '卡片之外，是一整个画中世界。'}</h1></div><p>{en ? 'Move a figure. Part the clouds. Meet the world that inspires the collection.' : '移动人物，拨开云层。亲手探索这套收藏卡的灵感世界。'}</p></div><div className="living-painting"><GuardianGallery/><span className="living-corner living-corner-left" aria-hidden="true"/><span className="living-corner living-corner-right" aria-hidden="true"/></div></section>
-    <section className="collector-edit"><div className="section-heading"><div><p className="heritage-eyebrow">02 / {en ? 'THE COLLECTOR’S EDIT' : '典藏之选'}</p><h2>{en ? 'Every figure has a story.' : '每一位人物，都有值得珍藏的故事。'}</h2></div><Link to="/collection" className="ink-link">{en ? 'View all 21 cards' : '查看全部 21 张卡片'} <ArrowUpRight size={16}/></Link></div><div className="collector-products">{featured.map(p => <Link to="/card/$cardId" params={{cardId:p.id}} key={p.id} className="collector-product"><div className="product-art"><span>NO. {String(p.index).padStart(2,'0')}</span><img decoding="async" src={p.character} alt={p.identity.name[en ? 'en' : 'zh']} loading="lazy"/></div><div className="product-title"><h3>{p.identity.name[en ? 'en' : 'zh']}</h3><ArrowUpRight size={20}/></div><p>{en ? 'Shuilu Collection / Regular edition' : '水陆画典藏系列 / 常规款'}</p></Link>)}</div><p className="availability-note">{en ? 'Explore the digital collection today. Physical-card ordering is not yet available.' : '即刻探索数字图录。实体卡订购暂未开放。'}</p></section>
-    <section className="heritage-manifesto"><div className="manifesto-mark" aria-hidden="true">承</div><div><p className="heritage-eyebrow">03 / {en ? 'OUR REASON FOR COLLECTING' : '为何收藏'}</p><h2>{en ? <>More than something to keep.<br/><em>Something to belong to.</em></> : <>珍藏的不只是卡片，<br/><em>更是一份文化归属。</em></>}</h2><p>{en ? 'A familiar robe. An intricate crown. A gesture that reaches across generations. Modern Shuilu brings the visual language of Chinese tradition into a personal collection, inviting you to reconnect with your ancestry—or discover these stories for the first time.' : '一袭衣袍，一顶华冠，一个跨越时光的姿态。Modern Shuilu 将中华传统的视觉语言融入个人收藏，让你与祖辈的文化重新相遇，也欢迎每一位初次走近这些故事的人。'}</p><Link to="/draw" className="vermilion-button">{en ? 'Begin your collecting ritual' : '开启你的收藏日常'}<ArrowRight size={16}/></Link></div></section>
-    <section className="collector-ritual"><article><span>壹 / 01</span><h3>{en ? 'Discover' : '遇见'}</h3><p>{en ? 'Reveal a daily card and meet a figure from the collection.' : '翻开每日卡片，遇见典藏系列中的人物。'}</p></article><article><span>贰 / 02</span><h3>{en ? 'Reconnect' : '溯源'}</h3><p>{en ? 'Follow its details back to the source painting and its cultural context.' : '循着细节回到原画，了解图像背后的文化语境。'}</p></article><article><span>叁 / 03</span><h3>{en ? 'Make it personal' : '珍藏'}</h3><p>{en ? 'Keep the details that speak to you in your journal, saved on this device.' : '将触动你的细节留在收藏手记中，保存在当前设备。'}</p></article></section>
-  </div>
+
+  return <section className="opening-scene">
+    <div className="opening-copy">
+      <p className="overline">{en ? 'A WAY INTO THE PAINTING' : '从一张画，开始看'}</p>
+      <h1>{en ? <>Draw a card.<br/><em>Follow its clues.</em></> : <>先遇见一张卡，<br/><em>再发现画里的线索。</em></>}</h1>
+      <div className="opening-intro">
+        <div>
+          <p className="opening-purpose">{en ? 'New to old paintings? Draw one of twenty illustrated characters, find its detail among fragments of the original paintings, then follow that clue back to its source. A small discovery opens a way to understand the image and connect it to today.' : '不了解古画，也可以从这里开始。先抽一张由水陆画转绘的角色卡，在原画局部中找出它的线索，再回到画里认识这个细节。从一个小发现，走近古画，也连接今天的生活。'}</p>
+          <div className="opening-actions"><Link className="paper-button" to="/draw">{en ? 'Draw a card & begin exploring' : '抽一张卡，开启探索'} <ArrowRight size={16}/></Link><Link to="/collection">{en ? 'Explore the atlas →' : '自己逛逛画册 →'}</Link></div>
+          <p className="opening-promise">{en ? 'Three small stages · no prior knowledge needed · discover by looking' : '三个小关卡 · 无需古画知识 · 跟着线索慢慢发现'}</p>
+        </div>
+        <ol className="opening-steps">
+          <li><span>01</span><div><strong>{en ? 'Meet your character' : '抽卡 · 遇见角色'}</strong><p>{en ? 'Turn a card to meet today’s figure.' : '翻开卡片，遇见今天的画中人物。'}</p></div></li>
+          <li><span>02</span><div><strong>{en ? 'Find its clue' : '寻迹 · 找到线索'}</strong><p>{en ? 'Match a detail to the original image.' : '在原画局部里，找出角色的细节。'}</p></div></li>
+          <li><span>03</span><div><strong>{en ? 'Return to its source' : '入画 · 解开画意'}</strong><p>{en ? 'Discover what the detail can tell you.' : '带着发现回到原画，读懂一点画意。'}</p></div></li>
+        </ol>
+      </div>
+      <details className="painting-background"><summary>{en ? 'What are Shuilu paintings?' : '水陆画是什么？'}</summary><p>{en ? 'Shuilu paintings were displayed in temples during Buddhist Shuilu rituals. Their imagery includes Buddhist and Daoist deities, folk figures and people from many walks of life. This project begins with the visible details in a selection of figure images.' : '水陆画是寺庙举行水陆法会时使用的绘画，题材包括佛教、道教及民间神祇，也有人间各类人物。这个项目从一组人物图像出发，先带你认识画面中看得见的细节。'}</p><a href="https://www.ihchina.cn/project_details/14249/" target="_blank" rel="noreferrer">{en ? 'Background: China Intangible Cultural Heritage website ↗' : '背景资料：中国非物质文化遗产网 ↗'}</a></details>
+    </div>
+    <p className="opening-instruction living-instruction">{en ? 'You can also begin by moving a figure and parting the clouds below.' : '也可以先在画中探索：移动人物，拨开云层。'}</p>
+    <div className="living-painting">
+      <GuardianGallery/>
+      <span className="living-corner living-corner-left" aria-hidden="true"/>
+      <span className="living-corner living-corner-right" aria-hidden="true"/>
+    </div>
+  </section>
 }

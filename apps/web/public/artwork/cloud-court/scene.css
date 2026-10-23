@@ -10,3 +10,14 @@
 @media(max-width:1050px){.scroll{height:500px}.world-controls{display:none}.characters{padding-right:0}.controls{padding-top:18px}.guardian-button>span:nth-child(2){font-size:14px}}
 .scene-index{letter-spacing:.22em}.vertical-poem.is-english{writing-mode:horizontal-tb;width:150px;text-align:right;font:14px/1.8 Georgia,serif;letter-spacing:.18em}
 @media(max-width:800px){.vertical-poem.is-english{right:18px;width:115px;font-size:11px}}
+
+/* Light silk controls around the unchanged interactive painting. */
+:root{color-scheme:light;--bg:#e8eee3;--paper:#2d4843;--muted:#536b60;--jade:#4d7160;--line:#9b9e7d50;--pink:#a35b4e}
+body{background:var(--bg)}
+.controls{background:linear-gradient(110deg,#e2ebe0,#f2efdf);padding-inline:18px}
+.character-symbol{border-color:#8f9e7b88}.celestial{color:#426478}.flame{color:#a35b4e}
+.guardian-button.active .character-symbol{background:#c4d8c655;box-shadow:none;border-color:#687d5c}
+.icon-button{color:#426451}.icon-button:hover{color:#263e35}
+.wind-control input{accent-color:#577761}
+dialog{background:#eff1e6;border-color:#9b9e7d88}.dialog-close,dialog p{color:#425d51}
+.caption{color:#536b60!important}.scroll{border-color:#8f9e7b88}
