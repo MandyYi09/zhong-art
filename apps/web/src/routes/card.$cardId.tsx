@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CollectibleEntry } from '@/components/BlessingExperience'
 import { PaintingIdentity } from '@/components/PaintingIdentity'
+import { FocusedPainting } from '@/components/FocusedPainting'
 import { DetailCrop } from '@/components/DetailCrop'
 import { PaintingGuide } from '@/components/PaintingGuide'
 import { lookingLessons } from '@/lib/lookingLessons'
@@ -69,17 +70,17 @@ function PaintingPage() {
       <div className="painting-view is-revealed">
         {painting.edition === 'hidden' && <div className="secret-source-toggle" role="group" aria-label={en ? 'Compare the adaptation and source' : '对照卡通改编与原画'}><button type="button" aria-pressed={showCharacter} onClick={() => setShowCharacter(true)}>{en ? 'Playful illustration' : '趣味卡通版'}</button><button type="button" aria-pressed={!showCharacter} onClick={() => setShowCharacter(false)}>{en ? 'Original painting' : '原始图像'}</button></div>}
         <div className="painting-mat">
-          <div className={`painting-window zoom-${painting.edition === 'hidden' && showCharacter ? 'none' : clue || 'none'}`}><img decoding="async" src={painting.edition === 'hidden' && showCharacter ? painting.character : painting.original} alt={painting.edition === 'hidden' && showCharacter ? (en ? `Cartoon adaptation of ${painting.identity.name.en}` : `${painting.identity.name.zh}卡通改编形象`) : (en ? `Source photograph ${painting.id}` : `原始图像 ${painting.id}`)}/></div>
+          <div className="painting-window"><FocusedPainting painting={painting} clue={clue} character={painting.edition === 'hidden' && showCharacter} label={en ? `${painting.identity.name.en} · ${clue || 'whole painting'}` : `${painting.identity.name.zh} · ${clue ? clueCopy[clue].zh : '整幅画'}`}/></div>
         </div>
         <div className="painting-image-credit">{painting.edition === 'hidden' && showCharacter ? (en ? 'SECRET EDITION · CONTEMPORARY ADAPTATION' : '隐藏款 · 当代趣味改编') : (en ? 'SOURCE IMAGE' : '原始图像')} · {painting.id}</div>
-        <button className="reset-view" type="button" onClick={() => setClue(clue ? null : 'head')}><RotateCcw size={14}/>{clue ? (en ? 'See the whole painting' : '看整幅画') : (en ? 'Return to the head detail' : '回到头部细节')}</button>
+        <button className="reset-view" type="button" onClick={() => { setClue(clue ? null : 'head'); setShowCharacter(false) }}><RotateCcw size={14}/>{clue ? (en ? 'See the whole painting' : '看整幅画') : (en ? 'Return to the head detail' : '回到头部细节')}</button>
       </div>
       <div className="painting-notes">
         <PaintingIdentity painting={painting} en={en}/>
         {guided ? <PaintingGuide painting={painting} onFocusChange={setClue}/> : <>
           {painting.id === '9549' && <div className="secret-edition-note"><span className="overline">{en ? 'SECRET EDITION · BACK E' : '隐藏款 · E 卡背'}</span><p>{en ? 'A peace sign on one side, a thumbs-up on the other. The two hands in place of eyes become a playful greeting, below a softly tied blue-grey headwrap. The blue robe, seated pose and peaches preserve the connection to the source. These new gestures are a contemporary adaptation.' : '一边比耶，一边点赞：代替眼睛的两只小手，变成轻松的招呼，蓝灰软巾的巾尾也轻轻扬起。蓝袍、坐姿和托桃仍与原图呼应；新手势是当代趣味改编。其余常规款统一使用 K 卡背。'}</p><img decoding="async" src={painting.back} alt={en ? 'E secret card back' : 'E 隐藏款卡背'}/></div>}
           <h1 className="detail-title">{en ? 'Explore details' : '查看细节'}</h1>
-          <div className="clue-list">{(['head', 'hands', 'robe'] as const).map(key => <button key={key} className={clue === key ? 'active' : ''} aria-pressed={clue === key} type="button" onClick={() => { setClue(clue === key ? null : key); setComparedId(null) }}><span>{clueCopy[key][en ? 'en' : 'zh']}</span><small>↗</small></button>)}</div>
+          <div className="clue-list">{(['head', 'hands', 'robe'] as const).map(key => <button key={key} className={clue === key ? 'active' : ''} aria-pressed={clue === key} type="button" onClick={() => { setClue(clue === key ? null : key); setShowCharacter(false); setComparedId(null) }}><span>{clueCopy[key][en ? 'en' : 'zh']}</span><small>↗</small></button>)}</div>
           <div className={`clue-response${selectedClue ? ' has-detail' : ''}`} aria-live="polite">{selectedClue && selectedReading ? <>
             <span className="clue-response-eyebrow">{en ? 'LOOK CLOSER / VISUAL READING' : '细看 / 图像释读'}</span>
             <h3>{selectedReading.title[en ? 'en' : 'zh']}</h3>
