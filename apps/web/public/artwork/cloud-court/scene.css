@@ -30,5 +30,8 @@ dialog{background:#eff1e6;border-color:#9b9e7d88}.dialog-close,dialog p{color:#4
 .scene-bottom { justify-content:flex-end; }
 
 /* Pale mineral wash blends into the surrounding silk. */
-.scroll, .loading { background:#d9e5db; }
+.scroll, .loading { background:#c3d6cb; }
 .scene-bottom button { color:#496a5c; background:#edf0ded9; border-color:#9aab9a66; border-radius:50%; }
+
+/* Match the host frame at every desktop width. */
+.scroll { height:100vh; min-height:0; }

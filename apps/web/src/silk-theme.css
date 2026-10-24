@@ -64,13 +64,13 @@ body { background: #f0f1e8; }
 .living-painting { border: 0; background: transparent; box-shadow: none; }
 .living-corner { display: none; }
 .guardian-gallery { position: relative; min-height: 0; }
-.cloud-court-scene { height: 600px; mask: url('./assets/cloud-window.svg') center / 100% 100% no-repeat; }
+.cloud-court-scene { height: 700px; mask: url('./assets/cloud-window.svg') center / 100% 100% no-repeat; }
 .cloud-frame { position: absolute; z-index: 6; width: clamp(155px, 25%, 330px); pointer-events: none; }
 .cloud-frame > svg:first-child { display: block; width: 100%; }
 .cloud-frame .garment-ornament { position: absolute; width: 125%; left: -10%; top: 48%; opacity: .85; }
 .cloud-frame-top { top: -8px; left: -15px; }
 .cloud-frame-bottom { right: -15px; bottom: -12px; transform: rotate(180deg); }
-.guardian-stage { background: url('./assets/painted-clouds.svg') center / cover, linear-gradient(160deg,#d9e5db,#adc9bc 48%,#dbe5ce); mask: url('./assets/cloud-window.svg') center / 100% 100% no-repeat; }
+.guardian-stage { background: url('./assets/painted-clouds.svg') center / cover, linear-gradient(160deg,#c3d6cb,#8faf9f 48%,#c6d7b9); mask: url('./assets/cloud-window.svg') center / 100% 100% no-repeat; }
 .guardian-stage::before, .guardian-stage::after, .stage-cloud { display: none; }
 .guardian-orbit { border-color: #d6c08966; }
 .stage-inscription { color: #e2e0c2cc; }
@@ -80,7 +80,7 @@ body { background: #f0f1e8; }
 .gallery-mobile .cloud-frame { width: 155px; }
 .gallery-mobile .cloud-frame-top { top: 35px; left: -10px; }
 .gallery-mobile .cloud-frame-bottom { bottom: -8px; right: -10px; }
-@media(max-width:1050px) and (min-width:768px) { .cloud-court-scene { height: 500px; } }
+@media(max-width:1050px) and (min-width:768px) { .cloud-court-scene { height: 600px; } }
 
 /* Full-width navigation stays in document flow and at the top on scroll. */
 .app-shell { padding-top:0; }
@@ -105,3 +105,6 @@ body { background: #f0f1e8; }
 .cloud-frame { opacity:.55; }
 .cloud-frame .garment-ornament { opacity:.4; }
 .guardian-orbit { border-color:#7e9b8133; }
+
+@media(max-width:767px) { .guardian-stage { height:520px; } }
+@media(max-width:480px) { .guardian-stage { height:470px; } }
