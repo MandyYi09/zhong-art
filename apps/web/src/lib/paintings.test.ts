@@ -23,11 +23,11 @@ describe('daily painting', () => {
 })
 
 describe('physical and website edition mapping', () => {
-  it('uses K for all nineteen unique regular cards and E only for the new secret', () => {
-    expect(paintings).toHaveLength(20)
-    expect(paintings.filter(card => card.edition === 'hidden').map(card => card.id)).toEqual(['9549'])
+  it('uses K for all nineteen unique regular cards and E for both secret cards', () => {
+    expect(paintings).toHaveLength(21)
+    expect(paintings.filter(card => card.edition === 'hidden').map(card => card.id)).toEqual(['9549', '438'])
     expect(paintings.filter(card => card.edition === 'regular')).toHaveLength(19)
-    for (const card of paintings) expect(card.back).toContain(card.id === '9549' ? 'back-e.webp' : 'back-k.webp')
+    for (const card of paintings) expect(card.back).toContain(card.edition === 'hidden' ? 'back-e.webp' : 'back-k.webp')
     expect(getPainting('5695')?.edition).toBe('regular')
     expect(getPainting('5702')?.edition).toBe('regular')
   })

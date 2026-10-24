@@ -481,5 +481,28 @@
       "zh": "姓名据用户提供线索记为杨任。另提供“甲子太岁金辩大将军”称号及“公元前1007年、商纣王时期”线索，尚待书名、页码核对，不能据此确定原画年代。卡通版为2026年当代改编，以两只手代替眼睛。",
       "en": "Identified as Yang Ren from the owner’s book information. The proposed title and 1007 BCE legendary timeframe await the book reference; they do not date this painting. The cartoon is a 2026 adaptation, with hands replacing the eyes."
     }
+  },
+  "438": {
+    "name": {
+      "zh": "斗姆元君",
+      "en": "Doumu Yuanjun"
+    },
+    "date": {
+      "zh": "原画年代待考",
+      "en": "Original artwork date unverified"
+    },
+    "year": null,
+    "status": "owner-provided",
+    "source": {
+      "zh": "用户提供图片 · WechatIMG438.jpg",
+      "en": "Owner-supplied image · WechatIMG438.jpg"
+    },
+    "catalogueUrl": "",
+    "facsimileUrl": "",
+    "plate": "WechatIMG438.jpg",
+    "note": {
+      "zh": "名称据图片右上题字。作者、出处与年代尚未核实。卡通版为2026年基于此图生成的当代改编。",
+      "en": "Name transcribed from the upper-right inscription. Artist, provenance and date remain unverified. The cartoon is a contemporary adaptation generated from this image in 2026."
+    }
   }
 }

@@ -21,5 +21,6 @@ export const paintingBlessings = {
   '5703': { zh: '愿你先迈一步，完美主义还没起床，你已出发。', en: 'May you take the first step while perfectionism is still hitting snooze.' },
   '5704': { zh: '愿你热爱有回响，忙完还有力气快乐蹦跶。', en: 'May what you love love you back, with energy left for a little victory dance.' },
   '5705': { zh: '愿你打开未知的盲盒，惊喜多一点，问号少一点。', en: 'May the mystery box of today hold more pleasant surprises and fewer question marks.' },
+  '438': { zh: '愿你心中有日月，忙碌有章法，也给快乐留一只手。', en: 'May your days hold light, your plans find rhythm, and one hand stay free for joy.' },
   '9549': { zh: '愿你今天左手比耶，右手点赞，烦恼自动靠边站。', en: 'May you flash a peace sign, give a thumbs-up, and send your worries shuffling aside.' },
 } satisfies Record<string, { zh: string; en: string }>

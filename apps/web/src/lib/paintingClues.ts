@@ -29,6 +29,11 @@ export type PaintingClue = { observed: Bilingual; motif: Motif }
 const clue = (zh: string, en: string, motif: Motif): PaintingClue => ({ observed: { zh, en }, motif })
 
 export const paintingClues: Record<PaintingId, Record<ClueKey, PaintingClue>> = {
+  '438': {
+    head: clue('三张面孔各戴金色宝冠，中央面孔正视，两侧分别朝向左右，背后有圆形光轮。', 'Three visible faces wear golden crowns, with a frontal face and two profiles against a circular halo.', 'ornateCap'),
+    hands: clue('上方双手分别托起金色与浅蓝圆盘，其余手臂持铃、印、弓等物件。', 'The upper hands hold gold and pale-blue discs; the other arms carry a bell, seal, bow and other objects.', 'roundObjects'),
+    robe: clue('朱红袍服围绕盘坐姿态，蓝色飘带从肩侧绕出，白色衣带垂向莲座。', 'Cinnabar robes frame the seated pose, blue ribbons flow from the shoulders, and cream sashes descend towards the lotus seat.', 'robe'),
+  },
   '9549': {
     head: clue('蓝色软帽下留着长须，两只小手代替眼睛；卡通版保留手代眼的造型，改作比耶和点赞，并换成蓝灰软巾。', 'The original has a blue cap, a long beard and two hands in place of eyes. The cartoon preserves the hand-shaped eyes as a peace sign and thumbs-up, with a blue-grey headwrap.', 'softCap'),
     hands: clue('一只手在胸前抬起，另一只手在腰侧托着粉红与淡黄色的桃形持物。', 'One hand is raised at the chest; the other holds pink and pale-yellow peach-shaped objects near the waist.', 'peaches'),
