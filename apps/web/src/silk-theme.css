@@ -82,12 +82,21 @@ body { background: #f0f1e8; }
 .gallery-mobile .cloud-frame-bottom { bottom: -8px; right: -10px; }
 @media(max-width:1050px) and (min-width:768px) { .cloud-court-scene { height: 500px; } }
 
-/* Place navigation above page content at every screen size. */
-.app-shell { padding-top:85px; }
-.page-dock { top:20px; bottom:auto; }
+/* Full-width navigation stays in document flow and at the top on scroll. */
+.app-shell { padding-top:0; }
+.navigation-bar { position:sticky; top:0; z-index:60; display:flex; align-items:center; justify-content:space-between; gap:24px; width:100%; min-height:72px; padding:env(safe-area-inset-top) clamp(18px,4.2vw,72px) 0; background:#f1f3e8f5; border-bottom:1px solid #a3af954d; backdrop-filter:blur(18px); }
+.navigation-bar .page-dock { position:static; display:flex; flex-wrap:nowrap; transform:none; width:auto; max-width:none; gap:clamp(12px,2.4vw,36px); padding:0; border:0; border-radius:0; background:none; box-shadow:none; backdrop-filter:none; }
+.navigation-bar .page-dock-link { min-height:72px; padding:0 2px; border-radius:0; font-size:12px; border-bottom:2px solid transparent; }
+.navigation-bar .page-dock-link:hover { background:none; color:#294b3d; }
+.navigation-bar .page-dock-link.is-active { background:none; color:#294b3d; border-bottom-color:#496a5c; }
+.navbar-language { display:inline-flex; align-items:center; gap:5px; flex-shrink:0; padding:10px 0 10px 20px; border-left:1px solid #a3af9566; font-size:12px; letter-spacing:0; }
+.navbar-language .is-current { color:#294b3d; font-weight:700; }
+.navbar-language .language-divider { color:#929d8c; }
 .site-footer { padding-bottom:23px; }
 @media(max-width:700px) {
-  .app-shell { padding-top:120px; }
-  .page-dock { top:calc(58px + env(safe-area-inset-top)); bottom:auto; }
+  .navigation-bar { min-height:60px; gap:12px; padding-inline:12px; }
+  .navigation-bar .page-dock { flex:1; justify-content:space-between; gap:4px; }
+  .navigation-bar .page-dock-link { min-height:60px; font-size:10px; padding-inline:0; }
+  .navbar-language { gap:3px; padding-left:10px; font-size:10px; }
   .site-footer { padding-bottom:calc(23px + env(safe-area-inset-bottom)); }
 }
