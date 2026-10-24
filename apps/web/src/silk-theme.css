@@ -70,7 +70,7 @@ body { background: #f0f1e8; }
 .cloud-frame .garment-ornament { position: absolute; width: 125%; left: -10%; top: 48%; opacity: .85; }
 .cloud-frame-top { top: -8px; left: -15px; }
 .cloud-frame-bottom { right: -15px; bottom: -12px; transform: rotate(180deg); }
-.guardian-stage { background: url('./assets/painted-clouds.svg') center / cover, linear-gradient(160deg,#16343c,#27665d 80%); mask: url('./assets/cloud-window.svg') center / 100% 100% no-repeat; }
+.guardian-stage { background: url('./assets/painted-clouds.svg') center / cover, linear-gradient(160deg,#d9e5db,#adc9bc 48%,#dbe5ce); mask: url('./assets/cloud-window.svg') center / 100% 100% no-repeat; }
 .guardian-stage::before, .guardian-stage::after, .stage-cloud { display: none; }
 .guardian-orbit { border-color: #d6c08966; }
 .stage-inscription { color: #e2e0c2cc; }
@@ -100,3 +100,8 @@ body { background: #f0f1e8; }
   .navbar-language { gap:3px; padding-left:10px; font-size:10px; }
   .site-footer { padding-bottom:calc(23px + env(safe-area-inset-bottom)); }
 }
+
+/* Let the cloud silhouette dissolve softly into the page. */
+.cloud-frame { opacity:.55; }
+.cloud-frame .garment-ornament { opacity:.4; }
+.guardian-orbit { border-color:#7e9b8133; }
