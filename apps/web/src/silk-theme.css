@@ -189,3 +189,21 @@ body { background: #f0f1e8; }
   .painting-image-credit { margin-top:5px; }
   .painting-view .reset-view { padding:6px 0; }
 }
+
+/* Keep the reference card visible throughout the clue-matching exercise. */
+.draw-card-column { position:sticky; top:calc(88px + env(safe-area-inset-top)); align-self:start; display:flex; justify-content:center; min-width:0; }
+.draw-card-column .daily-card { width:min(100%,370px,calc((100dvh - 150px - env(safe-area-inset-top)) * .65217)); transform:none; flex-shrink:0; }
+.draw-card-column .daily-card:hover { transform:none; }
+.draw-side h2 { font-size:clamp(24px,2.2vw,32px); margin:14px 0; line-height:1.4; }
+.draw-side>p { font-size:13px; line-height:1.8; margin-bottom:20px; }
+.draw-card-column .daily-card-message { min-height:0; padding:16px 14px 8px; }
+.draw-card-column .daily-card-message strong { font-size:clamp(12px,1.2vw,16px); }
+@media(max-width:700px) {
+  .draw-card-column { top:calc(64px + env(safe-area-inset-top)); z-index:15; background:#edf1e8f5; padding:8px 0; }
+  .draw-card-column .daily-card { width:auto; height:32dvh; max-height:290px; padding:4px; }
+  .draw-card-column .daily-card-character { width:100%; }
+  .draw-card-column .daily-card-character img { top:0; left:0; width:100%; height:100%; }
+  .draw-card-column .daily-character-index,.draw-card-column .daily-card-message,.draw-card-column .daily-card-hint,.draw-card-column .daily-character-halo { display:none; }
+  .draw-side h2 { font-size:23px; }
+}
+@media(max-width:600px) { .draw-card-column { top:calc(84px + env(safe-area-inset-top)); } }
