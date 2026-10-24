@@ -67,11 +67,7 @@ function DrawPage() {
         {phase === 'original' ? <button className="draw-reset" type="button" onClick={() => setPhase('character')}><RotateCcw size={14}/>{en ? 'Back to character card' : '回到角色卡'}</button> : null}
       </div>
     </div>
-    <ol className="draw-stages" aria-label={en ? 'Exploration stages' : '探索关卡'}>{[
-      { phase: 'sealed', zh: '遇见角色', en: 'Meet a character' },
-      { phase: 'character', zh: '找到线索', en: 'Find the clue' },
-      { phase: 'original', zh: '回到原画', en: 'Return to the source' },
-    ].map((stage, index) => <li key={stage.phase} className={phase === stage.phase ? 'is-current' : index < (phase === 'original' ? 2 : phase === 'character' ? 1 : 0) ? 'is-complete' : ''} aria-current={phase === stage.phase ? 'step' : undefined}><span>{String(index + 1).padStart(2, '0')}</span><strong>{en ? stage.en : stage.zh}</strong><small>{phase === stage.phase ? (en ? 'CURRENT' : '进行中') : index < (phase === 'original' ? 2 : phase === 'character' ? 1 : 0) ? (en ? 'COMPLETE' : '已完成') : (en ? 'NEXT' : '待探索')}</small></li>)}</ol>
+
     <BlessingIntroduction en={en}/>
     {blessingOpen && <BlessingExperience painting={daily} en={en} onClose={() => setBlessingOpen(false)}/>}
   </section>
