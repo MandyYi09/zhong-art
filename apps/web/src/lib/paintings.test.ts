@@ -13,7 +13,7 @@ describe('daily painting', () => {
     expect(tomorrow.id).not.toBe(morning.id)
   })
 
-  it('shows every painting once in any 21 consecutive days, including month boundaries', () => {
+  it('shows every painting once in one complete cycle of consecutive days, including month boundaries', () => {
     const start = Date.UTC(2026, 8, 20)
     for (let offset = 0; offset < 90; offset++) {
       const ids = Array.from({ length: paintings.length }, (_, day) => getDailyPainting(dayInShanghai(start, offset + day)).id)
@@ -23,12 +23,19 @@ describe('daily painting', () => {
 })
 
 describe('physical and website edition mapping', () => {
-  it('uses K for all twenty existing cards and E only for the new secret', () => {
-    expect(paintings).toHaveLength(21)
+  it('uses K for all nineteen unique regular cards and E only for the new secret', () => {
+    expect(paintings).toHaveLength(20)
     expect(paintings.filter(card => card.edition === 'hidden').map(card => card.id)).toEqual(['9549'])
-    expect(paintings.filter(card => card.edition === 'regular')).toHaveLength(20)
+    expect(paintings.filter(card => card.edition === 'regular')).toHaveLength(19)
     for (const card of paintings) expect(card.back).toContain(card.id === '9549' ? 'back-e.webp' : 'back-k.webp')
     expect(getPainting('5695')?.edition).toBe('regular')
     expect(getPainting('5702')?.edition).toBe('regular')
+  })
+})
+
+describe('duplicate painting compatibility', () => {
+  it('lists the Marshal Shi painting once and resolves its old link to the retained work', () => {
+    expect(paintings.filter(card => card.identity.name.zh === '神雷石元帅').map(card => card.id)).toEqual(['5697 2'])
+    expect(getPainting('5699')).toBe(getPainting('5697 2'))
   })
 })

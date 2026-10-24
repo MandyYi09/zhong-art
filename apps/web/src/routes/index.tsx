@@ -15,7 +15,7 @@ function HomePage() {
       <h1>{en ? <>Draw a card.<br/><em>Follow its clues.</em></> : <>先遇见一张卡，<br/><em>再发现画里的线索。</em></>}</h1>
       <div className="opening-intro">
         <div>
-          <p className="opening-purpose">{en ? 'New to old paintings? Draw one of twenty illustrated characters, find its detail among fragments of the original paintings, then follow that clue back to its source. A small discovery opens a way to understand the image and connect it to today.' : '不了解古画，也可以从这里开始。先抽一张由水陆画转绘的角色卡，在原画局部中找出它的线索，再回到画里认识这个细节。从一个小发现，走近古画，也连接今天的生活。'}</p>
+          <p className="opening-purpose">{en ? 'New to old paintings? Draw an illustrated character, find its detail among fragments of the original paintings, then follow that clue back to its source. A small discovery opens a way to understand the image and connect it to today.' : '不了解古画，也可以从这里开始。先抽一张由水陆画转绘的角色卡，在原画局部中找出它的线索，再回到画里认识这个细节。从一个小发现，走近古画，也连接今天的生活。'}</p>
           <div className="opening-actions"><Link className="paper-button" to="/draw">{en ? 'Draw a card & begin exploring' : '抽一张卡，开启探索'} <ArrowRight size={16}/></Link><Link to="/collection">{en ? 'Explore the atlas →' : '自己逛逛画册 →'}</Link></div>
           <p className="opening-promise">{en ? 'Three small stages · no prior knowledge needed · discover by looking' : '三个小关卡 · 无需古画知识 · 跟着线索慢慢发现'}</p>
         </div>

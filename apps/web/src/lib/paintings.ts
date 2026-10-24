@@ -2,12 +2,16 @@ import { paintingBlessings } from './paintingBlessings'
 import cardEditions from './card-editions.json'
 import identities from './painting-identities.json'
 import { readStoredValue } from './localCollectionStorage'
-export const paintingFiles = [
+const sourcePaintingFiles = [
   '5683', '5685', '5686', '5687', '5688', '5689', '5690', '5691', '5692', '5693',
   '5694', '5695', '5696 2', '5697 2', '5698', '5699', '5702', '5703', '5704', '5705', '9549',
 ] as const
 
-export type PaintingId = (typeof paintingFiles)[number]
+export type PaintingId = (typeof sourcePaintingFiles)[number]
+
+// 5699 is another photograph of the same painting as 5697 2.
+// Keep the source assets and accept old links, but display/draw the work only once.
+export const paintingFiles: PaintingId[] = sourcePaintingFiles.filter(id => id !== '5699')
 
 export interface Painting {
   id: PaintingId
@@ -33,9 +37,9 @@ export const paintings: Painting[] = paintingFiles.map((id, index) => ({
   blessing: paintingBlessings[id],
 }))
 
-export function getPainting(id: string) { return paintings.find((painting) => painting.id === id) }
+export function getPainting(id: string) { return paintings.find((painting) => painting.id === (id === '5699' ? '5697 2' : id)) }
 
-// A shuffled 21-day cycle includes the 20 regular cards and the single hidden card.
+// Each unique painting appears once per shuffled cycle, including the hidden card.
 const dailyOrder = (() => {
   const order = paintings.map((_, index) => index)
   let seed = 4
@@ -60,7 +64,7 @@ export function getDailyPainting(date = new Date()) {
 
 const discoveredKey = 'shuilu-discovered-v1'
 export function getDiscovered(): string[] {
-  try { return JSON.parse(readStoredValue(discoveredKey, 'collection') || '[]') as string[] } catch { return [] }
+  try { return [...new Set((JSON.parse(readStoredValue(discoveredKey, 'collection') || '[]') as string[]).map(id => id === '5699' ? '5697 2' : id))] } catch { return [] }
 }
 export function discover(id: string) {
   localStorage.setItem(discoveredKey, JSON.stringify([...new Set([...getDiscovered(), id])]))
