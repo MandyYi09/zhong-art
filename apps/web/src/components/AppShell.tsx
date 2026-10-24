@@ -50,7 +50,7 @@ function SiteIntroduction({ en, onClose }: { en: boolean; onClose: () => void })
     <button type="button" className="intro-close" onClick={onClose} aria-label={en ? 'Close introduction' : '关闭介绍'}>×</button>
     <span className="overline">MODERN SHUILU</span>
     <h2 id="site-introduction-title">{en ? 'A small discovery in an old painting.' : '从一张卡，走近一幅画。'}</h2>
-    <p>{en ? 'Modern Shuilu is a place to explore Shuilu paintings through illustrated characters and details. You do not need any art history knowledge to begin.' : '这里用插画角色和画中细节，带你轻松认识水陆画。不需要古画知识，从喜欢的形象开始就好。'}</p>
+    <p>{en ? 'Shuilu paintings are used in Buddhist Shuilu rituals and depict deities and people from many walks of life. Here, illustrated characters and small details offer an easy way into these paintings—no art history knowledge needed.' : '水陆画是寺庙举行水陆法会时使用的绘画，画中既有神佛，也有世间百态。这里用插画角色和画中细节，带你轻松走近这些古画，无需古画知识。'}</p>
     <ul>
       <li><strong>{en ? 'Draw a card' : '抽一张卡'}</strong><span>{en ? 'Meet today’s character and follow a clue back to its source.' : '遇见今天的角色，跟着线索找到它来自的原画。'}</span></li>
       <li><strong>{en ? 'Browse the atlas' : '逛逛图集'}</strong><span>{en ? 'Look closer at the paintings and save details to your path.' : '细看原画，把喜欢的细节留在「我的路径」。'}</span></li>
