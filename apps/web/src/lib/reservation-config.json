@@ -1,0 +1,7 @@
+{
+  "enabled": false,
+  "recipientEmail": "",
+  "formToken": "",
+  "currency": "CNY",
+  "prices": { "card": null, "gift": null }
+}

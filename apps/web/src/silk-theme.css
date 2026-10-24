@@ -141,3 +141,7 @@ body { background: #f0f1e8; }
   .daily-card { width:min(58vw,270px); }
   .draw-stages { margin:24px auto; }
 }
+
+.reservation-unavailable { padding:12px 16px; border:1px solid #9aab9a66; color:#52665f; font-size:13px; line-height:1.7; }
+.reservation-reference { overflow-wrap:anywhere; }
+.blessing-form-actions button:disabled { opacity:.5; cursor:not-allowed; }

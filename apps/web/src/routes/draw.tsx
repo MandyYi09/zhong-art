@@ -52,7 +52,7 @@ function DrawPage() {
         </div>}
         {phase === 'original' && <div className="daily-card-original"><img decoding="async" src={daily.original} alt={en ? `Original Shuilu painting ${daily.id}` : `水陆画原画 ${daily.id}`}/><span>{en ? 'ORIGINAL PAINTING' : '原始图像'} · {daily.id}</span></div>}
       </button>
-      {phase !== 'sealed' && <div className="blessing-card-entry"><span>{en ? 'A DIGITAL ENCOUNTER, A PHYSICAL KEEPSAKE' : '把今日相遇，变成一份珍藏'}</span><button className="paper-button" type="button" onClick={() => setBlessingOpen(true)}><Sparkles size={17}/>{en ? 'Temple blessing' : '寺庙祈福加持'}<ArrowRight size={16}/></button><small>{en ? 'Explore the physical card · Preview only' : '体验实体收藏卡方案 · 暂未开放下单'}</small></div>}
+      {phase !== 'sealed' && <div className="blessing-card-entry"><span>{en ? 'A DIGITAL ENCOUNTER, A PHYSICAL KEEPSAKE' : '把今日相遇，变成一份珍藏'}</span><button className="paper-button" type="button" onClick={() => setBlessingOpen(true)}><Sparkles size={17}/>{en ? 'Reserve a blessing card' : '预约祈福收藏卡'}<ArrowRight size={16}/></button><small>{en ? 'Reservation only · No payment now' : '提交预约意向 · 暂不收款'}</small></div>}
       </div>
       <div className="draw-side">
         {phase !== 'sealed' && <PaintingIdentity painting={daily} en={en}/>}
