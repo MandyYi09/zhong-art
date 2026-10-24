@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { ArrowLeft, ArrowRight, X } from 'lucide-react'
+import { ArrowRight, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DetailCrop } from '@/components/DetailCrop'
@@ -17,8 +17,7 @@ function ViewingPathPage() {
   useEffect(() => { setEntries(readViewingPath()) }, [])
 
   return <section className="viewing-path-page">
-    <div className="path-topline"><Link to="/collection" className="return-link"><ArrowLeft size={15}/>{en ? 'Back to the atlas' : '回到画册'}</Link><span>{en ? 'YOUR WAY OF SEEING' : '你的观看方式'}</span></div>
-    <header className="path-heading"><span className="overline">{en ? 'A PATH THROUGH THE PAINTINGS' : '从一处细节，走向另一处'}</span><h1>{en ? <>The details<br/><em>you followed.</em></> : <>你留下的<br/><em>观看路径。</em></>}</h1><p>{en ? 'Every detail you kept is one turn in your journey through these paintings. Return to an image, compare it with another, or carry it into a new composition.' : '每次留住一个细节，画与画之间就多了一条属于你的线索。你可以回到原画，也可以带着它进入重新构图。'}</p></header>
+    <header className="feature-heading"><h1>{en ? 'Saved details' : '我的收藏'}</h1></header>
     {entries.length === 0 ? <div className="path-empty"><span>✧</span><h2>{en ? 'Your path begins with a detail.' : '从一个细节开始。'}</h2><p>{en ? 'Open any source painting, choose headwear, an object or a garment, then keep the detail that stays with you.' : '打开任意一张原画，看看头冠、持物或衣纹，把你想继续追看的细节留在这里。'}</p><Link to="/collection" className="paper-button">{en ? 'Explore the atlas' : '去原画画册看看'} <ArrowRight size={15}/></Link></div> : <>
       <div className="path-count"><span>{String(entries.length).padStart(2, '0')}</span>{en ? 'details kept · arranged in the order you found them' : '处细节 · 按你发现的顺序排列'}</div>
       <div className="path-trail">{entries.map((entry, index) => {
