@@ -3,6 +3,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowLeft, ArrowRight, RotateCcw, Plus } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { CollectibleEntry } from '@/components/BlessingExperience'
 import { PaintingIdentity } from '@/components/PaintingIdentity'
 import { DetailCrop } from '@/components/DetailCrop'
 import { PaintingGuide } from '@/components/PaintingGuide'
@@ -112,5 +113,6 @@ function PaintingPage() {
         </>}
       </div>
     </div>
+    <CollectibleEntry key={painting.id} painting={painting} en={en}/>
   </section>
 }

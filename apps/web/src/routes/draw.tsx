@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { ArrowRight, RotateCcw, Sparkles } from 'lucide-react'
+import { ArrowRight, RotateCcw } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { BlessingExperience, BlessingIntroduction } from '@/components/BlessingExperience'
 import { PaintingIdentity } from '@/components/PaintingIdentity'
 import { DetailCrop } from '@/components/DetailCrop'
 import { getDetailComparisons } from '@/lib/detailComparisons'
@@ -17,7 +16,6 @@ type CardPhase = 'sealed' | 'character' | 'original'
 function DrawPage() {
   const { i18n } = useTranslation()
   const en = i18n.language === 'en'
-  const [blessingOpen, setBlessingOpen] = useState(false)
   const [phase, setPhase] = useState<CardPhase>('sealed')
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const daily = getDailyPainting()
@@ -52,7 +50,6 @@ function DrawPage() {
         </div>}
         {phase === 'original' && <div className="daily-card-original"><img decoding="async" src={daily.original} alt={en ? `Original Shuilu painting ${daily.id}` : `水陆画原画 ${daily.id}`}/><span>{en ? 'ORIGINAL PAINTING' : '原始图像'} · {daily.id}</span></div>}
       </button>
-      {phase !== 'sealed' && <div className="blessing-card-entry"><span>{en ? 'A DIGITAL ENCOUNTER, A PHYSICAL KEEPSAKE' : '把今日相遇，变成一份珍藏'}</span><button className="paper-button" type="button" onClick={() => setBlessingOpen(true)}><Sparkles size={17}/>{en ? 'Reserve a blessing card' : '预约祈福收藏卡'}<ArrowRight size={16}/></button><small>{en ? 'Reservation only · No payment now' : '提交预约意向 · 暂不收款'}</small></div>}
       </div>
       <div className="draw-side">
         {phase !== 'sealed' && <PaintingIdentity painting={daily} en={en}/>}
@@ -68,7 +65,5 @@ function DrawPage() {
       </div>
     </div>
 
-    <BlessingIntroduction en={en}/>
-    {blessingOpen && <BlessingExperience painting={daily} en={en} onClose={() => setBlessingOpen(false)}/>}
   </section>
 }

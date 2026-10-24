@@ -11,6 +11,7 @@ beforeEach(() => {
 })
 afterEach(() => { cleanup(); vi.restoreAllMocks(); reservationConfig.enabled = false; reservationConfig.recipientEmail = '' })
 function fill() {
+  fireEvent.click(screen.getByRole('button', { name: '继续 · 填写预约' }))
   fireEvent.change(screen.getByLabelText('称呼'), { target: { value: '预约用户' } })
   fireEvent.change(screen.getByLabelText('联系方式（邮箱、手机或微信）'), { target: { value: 'visitor@example.com' } })
   fireEvent.click(screen.getByRole('button', { name: '下一步 · 核对预约' }))
@@ -18,9 +19,9 @@ function fill() {
 describe('blessing reservations', () => {
   it('blocks submission when delivery is unconfigured and preserves choices for editing', () => {
     render(<BlessingExperience painting={paintings[0]} en={false} onClose={() => {}}/> )
-    fireEvent.change(screen.getByLabelText('收藏数量'), { target: { value: '3' } }); fill()
+    fill()
     expect((screen.getByRole('button', { name: '提交预约（不付款）' }) as HTMLButtonElement).disabled).toBe(true)
-    expect(screen.getByText('实体收藏卡 × 3')).toBeTruthy()
+    expect(screen.getByText('实体收藏卡 × 1')).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: '返回修改' }))
     expect((screen.getByLabelText('称呼') as HTMLInputElement).value).toBe('预约用户')
   })
@@ -40,6 +41,7 @@ describe('blessing reservations', () => {
     expect(data.get('预约编号 / Reference')).toMatch(/^SL-/)
     expect(data.has('_captcha')).toBe(false)
     expect(data.has('address')).toBe(false)
+    expect(data.get('寺庙祈福 / Temple blessing')).toContain('card only')
   })
   it('restores scroll and calls close on escape', () => {
     document.body.style.overflow = 'auto'; const close = vi.fn()

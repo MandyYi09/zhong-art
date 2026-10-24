@@ -166,3 +166,13 @@ body { background: #f0f1e8; }
   .site-introduction { padding:30px 24px; }
   .site-introduction h2 { font-size:23px; }
 }
+
+.collectible-entry { max-width:1000px; margin:52px auto 0; padding:24px 0; border-top:1px solid #9aab9a55; display:flex; align-items:center; gap:28px; }
+.collectible-entry>img { width:100px; max-height:155px; object-fit:contain; padding:5px; background:#f2eee3; box-shadow:3px 6px 14px #294b3d20; transform:rotate(-3deg); }
+.collectible-entry h2 { font-size:22px; margin:0 0 10px; }
+.collectible-entry p,.collectible-temple-note p { font-size:13px; line-height:1.8; color:#52665f; }
+.collectible-link { padding:0; border:0; background:none; color:#49635a; font-size:inherit; text-align:left; }
+.collectible-link:hover { text-decoration:underline; }
+.path-stop-actions { flex-wrap:wrap; }
+.collectible-temple-note { padding:12px 16px; background:#dce7d955; border-radius:8px; }
+@media(max-width:600px) { .collectible-entry { gap:18px; margin-top:30px; } .collectible-entry>img { width:76px; } .collectible-entry h2 { font-size:19px; } }

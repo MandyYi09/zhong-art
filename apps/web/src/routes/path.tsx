@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowRight, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { CollectibleEntry } from '@/components/BlessingExperience'
 import { DetailCrop } from '@/components/DetailCrop'
 import { clueReadings, paintingClues } from '@/lib/paintingClues'
 import { getPainting } from '@/lib/paintings'
@@ -29,7 +30,7 @@ function ViewingPathPage() {
         return <article className="path-stop" key={`${entry.paintingId}-${entry.clue}`}>
           <div className="path-stop-number">{String(index + 1).padStart(2, '0')}<i/></div>
           <DetailCrop painting={painting} clue={entry.clue} label={en ? `Detail from image ${painting.index}` : `第 ${painting.index} 幅的细节`}/>
-          <div className="path-stop-copy"><span className="overline">{en ? `IMAGE ${String(painting.index).padStart(2, '0')} · ${entry.clue.toUpperCase()}` : `第 ${String(painting.index).padStart(2, '0')} 幅 · ${entry.clue === 'head' ? '头冠' : entry.clue === 'hands' ? '持物' : '衣纹'}`}</span><h2>{reading.title[en ? 'en' : 'zh']}</h2><p>{detail.observed[en ? 'en' : 'zh']}</p>{note && <blockquote>“{note}”</blockquote>}<div className="path-stop-actions"><Link to="/card/$cardId" params={{ cardId: painting.id }} search={{ detail: entry.clue }}>{en ? 'View source' : '看原画'} ↗</Link><Link to="/create" search={{ from: painting.id, focus: entry.clue }}>{en ? 'Compose from here' : '带入重新构图'} →</Link></div></div>
+          <div className="path-stop-copy"><span className="overline">{en ? `IMAGE ${String(painting.index).padStart(2, '0')} · ${entry.clue.toUpperCase()}` : `第 ${String(painting.index).padStart(2, '0')} 幅 · ${entry.clue === 'head' ? '头冠' : entry.clue === 'hands' ? '持物' : '衣纹'}`}</span><h2>{reading.title[en ? 'en' : 'zh']}</h2><p>{detail.observed[en ? 'en' : 'zh']}</p>{note && <blockquote>“{note}”</blockquote>}<div className="path-stop-actions"><Link to="/card/$cardId" params={{ cardId: painting.id }} search={{ detail: entry.clue }}>{en ? 'View source' : '看原画'} ↗</Link><Link to="/create" search={{ from: painting.id, focus: entry.clue }}>{en ? 'Compose from here' : '带入重新构图'} →</Link><CollectibleEntry painting={painting} en={en} compact/></div></div>
           <button className="path-remove" type="button" onClick={() => setEntries(removeFromViewingPath(entry))} aria-label={en ? `Remove image ${painting.index} detail from path` : `从路径移除第 ${painting.index} 幅的细节`}><X size={14}/></button>
         </article>
       })}</div>
