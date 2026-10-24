@@ -81,3 +81,13 @@ body { background: #f0f1e8; }
 .gallery-mobile .cloud-frame-top { top: 35px; left: -10px; }
 .gallery-mobile .cloud-frame-bottom { bottom: -8px; right: -10px; }
 @media(max-width:1050px) and (min-width:768px) { .cloud-court-scene { height: 500px; } }
+
+/* Place navigation above page content at every screen size. */
+.app-shell { padding-top:85px; }
+.page-dock { top:20px; bottom:auto; }
+.site-footer { padding-bottom:23px; }
+@media(max-width:700px) {
+  .app-shell { padding-top:120px; }
+  .page-dock { top:calc(58px + env(safe-area-inset-top)); bottom:auto; }
+  .site-footer { padding-bottom:calc(23px + env(safe-area-inset-bottom)); }
+}

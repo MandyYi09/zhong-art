@@ -28,7 +28,7 @@ export function GuardianGallery() {
     <div className="cloud-frame cloud-frame-top" aria-hidden="true"><CloudEdge/><GarmentOrnament/></div>
     <div className="cloud-frame cloud-frame-bottom" aria-hidden="true"><CloudEdge/><GarmentOrnament/></div>
     {mobile === true && <Suspense fallback={<div className="guardian-stage"/>}><GuardianCarousel/></Suspense>}
-    {mobile === false && <iframe ref={frame} onLoad={notifyVisibility} className="cloud-court-scene" src={publicAsset('artwork/cloud-court/scene.html', { lang: i18n.language === 'en' ? 'en' : 'zh-TW', v: '20261023-cloud-frame' })} title={i18n.language === 'en' ? 'The Cloud Court: three animated figures among painted clouds' : '雲庭：三位畫中人物與流動的彩雲'} allow="fullscreen" />}
+    {mobile === false && <iframe ref={frame} onLoad={notifyVisibility} className="cloud-court-scene" src={publicAsset('artwork/cloud-court/scene.html', { lang: i18n.language === 'en' ? 'en' : 'zh-TW', v: '20261024-clean-carousel' })} title={i18n.language === 'en' ? 'The Cloud Court: three animated figures among painted clouds' : '雲庭：三位畫中人物與流動的彩雲'} allow="fullscreen" />}
   </div>
 }
 

@@ -123,11 +123,10 @@ export function GuardianCarousel() {
     onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)}
     onFocusCapture={() => setInteracting(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setInteracting(false) }}
     onKeyDown={event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1) } }}>
-    <div className="carousel-heading"><span className="carousel-dot" />{copy.title}<span className="carousel-edition">STUDY 001 — 003</span></div>
     <div className="guardian-stage"
       onTouchStart={event => { touch.current = { x: event.touches[0].clientX, y: event.touches[0].clientY } }}
       onTouchEnd={event => { if (touch.current) { const x = event.changedTouches[0].clientX - touch.current.x; const y = event.changedTouches[0].clientY - touch.current.y; if (Math.abs(x) > 40 && Math.abs(x) > Math.abs(y)) move(x < 0 ? 1 : -1) } touch.current = null }}>
-      <div className="guardian-orbit orbit-outer"/><div className="guardian-orbit orbit-inner"/><span className={`stage-inscription${i18n.language === 'en' ? ' is-english' : ''}`}>{copy.inscription}</span>
+      <div className="guardian-orbit orbit-outer"/><div className="guardian-orbit orbit-inner"/>
       {guardians.map((guardian, index) => {
         const offset = (index - active + guardians.length) % guardians.length
         return <div key={guardian.file} role="group" className={`guardian-slide ${offset === 0 ? 'is-active' : offset === 1 ? 'is-next' : 'is-previous'}`} aria-hidden={index !== active} aria-roledescription="slide" aria-label={`${index + 1} / ${guardians.length}: ${copy.names[index]}`}>
@@ -141,7 +140,6 @@ export function GuardianCarousel() {
       <button className="carousel-arrow" onClick={() => move(-1)} aria-label={copy.previous}><ChevronLeft size={19}/></button>
       <div className="carousel-pagination">{guardians.map((guardian, index) => <button key={guardian.file} aria-label={copy.names[index]} aria-current={index === active ? 'true' : undefined} onClick={() => setActive(index)}><span/></button>)}</div>
       <button className="carousel-arrow" onClick={() => move(1)} aria-label={copy.next}><ChevronRight size={19}/></button>
-      <span className="carousel-count">0{active + 1}<span> / 03</span></span>
       <button className="carousel-play" aria-label={playing ? copy.pause : copy.play} aria-pressed={!playing} onClick={() => setPlaying(value => !value)}>{playing ? <Pause size={14}/> : <Play size={14}/>}</button>
     </div>
 
