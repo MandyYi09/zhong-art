@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modern Shuilu — Redirecting</title>
+<link rel="canonical" href="https://mandyyi09.github.io/modern-shuilu/">
+<script>
+(() => {
+  const oldBase = '/zhong-art';
+  const suffix = location.pathname === oldBase ? '/' :
+    location.pathname.startsWith(oldBase + '/') ? location.pathname.slice(oldBase.length) : '/';
+  const destination = new URL('https://mandyyi09.github.io/modern-shuilu/');
+  destination.pathname = '/modern-shuilu' + suffix;
+  destination.search = location.search;
+  destination.hash = location.hash;
+  location.replace(destination.href);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0;url=https://mandyyi09.github.io/modern-shuilu/"></noscript>
+</head>
+<body><p>Modern Shuilu has moved. <a href="https://mandyyi09.github.io/modern-shuilu/">Open Modern Shuilu</a>.</p></body>
+</html>
